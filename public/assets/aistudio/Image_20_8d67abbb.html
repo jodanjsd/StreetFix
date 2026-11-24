@@ -1,0 +1,724 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix | Civic Operations &amp; Incident Telemetry Hub</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-primary-dark": "#1A1D1A",
+            "on-secondary-fixed": "#171e00",
+            "surface-container-low": "#f3f4ef",
+            "tertiary-container": "#501400",
+            "surface-variant": "#e1e3de",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb59d",
+            "primary-container": "#132e20",
+            "background": "#f8faf5",
+            "outline": "#727973",
+            "on-surface": "#191c19",
+            "tertiary-fixed": "#ffdbd0",
+            "on-primary-container": "#799784",
+            "tertiary": "#2d0700",
+            "accent-lime": "#D8FA64",
+            "surface-container-high": "#e7e9e3",
+            "on-primary-fixed-variant": "#314d3d",
+            "on-surface-variant": "#424843",
+            "surface-bright": "#f8faf5",
+            "secondary-fixed": "#cef05b",
+            "on-error": "#ffffff",
+            "on-background": "#191c19",
+            "surface-canvas-pure": "#FFFFFF",
+            "on-tertiary-fixed": "#390b00",
+            "accent-terracotta-hover": "#D35400",
+            "surface-tint": "#496554",
+            "surface": "#f8faf5",
+            "text-secondary-dark": "#4A5568",
+            "border-subtle-light": "#E2E8F0",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "surface-evergreen-deep": "#0B231A",
+            "error-container": "#ffdad6",
+            "on-primary-fixed": "#052013",
+            "on-tertiary-fixed-variant": "#832600",
+            "primary-fixed": "#cbead5",
+            "inverse-surface": "#2e312e",
+            "error": "#ba1a1a",
+            "text-on-dark-muted": "#A3B899",
+            "surface-container-highest": "#e1e3de",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#cef05b",
+            "surface-evergreen-base": "#132E20",
+            "accent-lime-muted": "#C8E665",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#afceb9",
+            "accent-terracotta": "#E06236",
+            "on-secondary-container": "#576c00",
+            "surface-container": "#edeee9",
+            "on-secondary-fixed-variant": "#3d4c00",
+            "primary": "#00190d",
+            "on-tertiary-container": "#ea693c",
+            "text-on-dark": "#FFFFFF",
+            "primary-fixed-dim": "#afceb9",
+            "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+            "surface-dim": "#d9dbd5",
+            "surface-canvas-light": "#F9FAF9",
+            "secondary-fixed-dim": "#b3d341",
+            "inverse-on-surface": "#f0f1ec",
+            "secondary": "#526600",
+            "surface-evergreen-light": "#183D2A",
+            "outline-variant": "#c2c8c2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-3xl": "4.5rem",
+            "space-xs": "0.5rem",
+            "gutter-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "margin": "2.5rem"
+          },
+          "fontFamily": {
+            "label-nav": ["Manrope", "sans-serif"],
+            "body-md": ["DM Sans", "sans-serif"],
+            "display-hero": ["DM Sans", "sans-serif"],
+            "display-hero-mobile": ["DM Sans", "sans-serif"],
+            "headline-md": ["DM Sans", "sans-serif"],
+            "body-sm": ["DM Sans", "sans-serif"],
+            "label-cta": ["Manrope", "sans-serif"],
+            "label-badge": ["Manrope", "sans-serif"],
+            "label-eyebrow": ["Manrope", "sans-serif"],
+            "headline-lg": ["DM Sans", "sans-serif"],
+            "headline-xl": ["DM Sans", "sans-serif"],
+            "body-lg": ["DM Sans", "sans-serif"],
+            "headline-sm": ["DM Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "label-nav": ["0.875rem", { "lineHeight": "1.2", "fontWeight": "600" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }],
+            "display-hero": ["3.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-hero-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "label-cta": ["0.875rem", { "lineHeight": "1", "fontWeight": "600" }],
+            "label-badge": ["0.75rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+            "label-eyebrow": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.4", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .cadastre-grid {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    .perspective-plane {
+      transform: perspective(600px) rotateX(16deg);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TOP APP BAR -->
+<header class="bg-surface-evergreen-deep dark:bg-surface-evergreen-deep docked full-width top-0 z-50 border-b border-border-subtle-dark flat no shadows">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex items-center justify-between py-space-sm">
+<!-- Brand & Status -->
+<div class="flex items-center gap-space-lg">
+
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-evergreen-light/70 border border-border-subtle-dark">
+<span class="w-2 h-2 rounded-full bg-accent-lime animate-pulse"></span>
+<span class="text-xs font-label-badge text-text-on-dark-muted font-semibold tracking-wide uppercase">Ops Command Telemetry v4.2</span>
+</div>
+</div>
+<!-- Center / Actions -->
+<div class="flex items-center gap-space-md">
+<!-- Direct Helpline Link -->
+<a class="hidden sm:flex items-center gap-space-xs text-text-on-dark-muted hover:opacity-90 transition-opacity duration-150 text-label-nav font-label-nav py-1 px-3 rounded-full hover:bg-surface-evergreen-light" href="tel:+23412270000">
+<span class="material-symbols-outlined text-sm text-accent-lime" data-icon="call">call</span>
+<span>Call office: <span class="text-text-on-dark font-semibold">01 227 0000</span></span>
+</a>
+<!-- Portal Link -->
+<a class="hidden md:flex items-center gap-space-2xs text-text-on-dark-muted hover:opacity-90 transition-opacity duration-150 text-label-nav font-label-nav" href="/admin">
+<span class="material-symbols-outlined text-sm" data-icon="shield_person">shield_person</span>
+<span>Admin portal</span>
+</a>
+<!-- Auth Actions from JSON -->
+<div class="flex items-center gap-space-xs">
+<a class="text-text-on-dark-muted font-medium hover:opacity-90 transition-opacity duration-150 px-3 py-2 text-label-cta font-label-cta" href="/login">
+            Log in
+          </a>
+<a class="bg-accent-lime text-primary-container hover:opacity-90 active:scale-95 transition-all duration-150 px-4 py-2 rounded-full text-label-cta font-label-cta font-bold flex items-center gap-1 shadow-sm" href="/signup">
+<span>Sign up</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CIVIC TELEMETRY CANVAS -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-space-lg space-y-space-xl">
+<!-- SUB-HEADER COMMAND BAR -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md border-b border-border-subtle-light pb-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-label-eyebrow font-label-eyebrow bg-surface-evergreen-base text-accent-lime uppercase tracking-wider">Lagos State Works Hub</span>
+<span class="text-text-secondary-dark text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">pin_drop</span> Mainland &amp; Island Sectors
+          </span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-text-primary-dark tracking-tight">Civic Operations &amp; Incident Telemetry Hub</h1>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="flex items-center gap-2 px-3 py-2 bg-surface-canvas-pure border border-border-subtle-light rounded-lg text-body-sm font-body-sm text-text-primary-dark hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>Filter LGA Zones</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 bg-surface-canvas-pure border border-border-subtle-light rounded-lg text-body-sm font-body-sm text-text-primary-dark hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Export Cadastre (.GeoJSON)</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-accent-terracotta hover:bg-accent-terracotta-hover text-on-primary rounded-full text-label-cta font-label-cta transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">add_alert</span>
+<span>Deploy Quick Action</span>
+</button>
+</div>
+</div>
+<!-- 4 KPI SUMMARY CARDS -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-canvas-pure p-space-md rounded-xl border border-border-subtle-light shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-eyebrow font-label-eyebrow text-text-secondary-dark uppercase tracking-wider">Total Incidents Unassigned</p>
+<h2 class="text-headline-xl font-headline-xl text-text-primary-dark mt-1 font-bold">48</h2>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-text-secondary-dark">
+<span class="material-symbols-outlined">pending_actions</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-border-subtle-light flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-accent-terracotta font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +8 from yesterday
+          </span>
+<span class="text-text-secondary-dark text-xs">Yaba, Ikeja high</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-canvas-pure p-space-md rounded-xl border border-border-subtle-light shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-eyebrow font-label-eyebrow text-accent-terracotta uppercase tracking-wider">Critical SLA at Risk</p>
+<h2 class="text-headline-xl font-headline-xl text-text-primary-dark mt-1 font-bold">12</h2>
+</div>
+<span class="w-10 h-10 rounded-full bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-border-subtle-light flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">timer</span> &lt;4h remaining
+          </span>
+<span class="text-text-secondary-dark text-xs">Drainage arterial</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-canvas-pure p-space-md rounded-xl border border-border-subtle-light shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-eyebrow font-label-eyebrow text-text-secondary-dark uppercase tracking-wider">Pending Evidence Audit</p>
+<h2 class="text-headline-xl font-headline-xl text-text-primary-dark mt-1 font-bold">35</h2>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-surface-tint">
+<span class="material-symbols-outlined">verified</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-border-subtle-light flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-secondary-container font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">attach_file</span> 19 citizen videos
+          </span>
+<span class="text-text-secondary-dark text-xs">Awaiting QA</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-canvas-pure p-space-md rounded-xl border border-border-subtle-light shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-eyebrow font-label-eyebrow text-text-secondary-dark uppercase tracking-wider">Active Crews Deployed</p>
+<h2 class="text-headline-xl font-headline-xl text-text-primary-dark mt-1 font-bold">28</h2>
+</div>
+<span class="w-10 h-10 rounded-full bg-secondary-fixed/30 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</span>
+</div>
+<div class="mt-4 pt-3 border-t border-border-subtle-light flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-primary-container font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">engineering</span> 6 LSPWC teams
+          </span>
+<span class="text-text-secondary-dark text-xs">Surulere / Agege</span>
+</div>
+</div>
+</section>
+<!-- INTEGRATED TELEMETRY DASHBOARD GRID (RAIL + CADASTRE + DISPATCH) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- LEFT RAIL: COMMAND OPERATIONS -->
+<div class="lg:col-span-3 space-y-space-md">
+<!-- Rail Menu -->
+<div class="bg-surface-evergreen-base text-text-on-dark rounded-2xl p-space-md border border-border-subtle-dark shadow-sm">
+<div class="flex items-center justify-between mb-4 pb-2 border-b border-border-subtle-dark">
+<span class="text-label-eyebrow font-label-eyebrow text-text-on-dark-muted uppercase">Dispatch Modules</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-accent-lime text-primary-container font-bold">LIVE</span>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-surface-evergreen-light text-accent-lime font-label-nav font-label-nav font-bold" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span>Incident Grid</span>
+</div>
+<span class="text-xs bg-accent-lime text-primary-container font-bold px-2 py-0.5 rounded-full">48</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-text-on-dark-muted hover:bg-surface-evergreen-light hover:text-text-on-dark transition-colors font-label-nav font-label-nav font-medium" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span>Live Dispatch</span>
+</div>
+<span class="text-xs bg-surface-evergreen-light text-text-on-dark-muted px-2 py-0.5 rounded-full">14 Active</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-text-on-dark-muted hover:bg-surface-evergreen-light hover:text-text-on-dark transition-colors font-label-nav font-label-nav font-medium" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">satellite_alt</span>
+<span>GIS Telemetry</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-accent-lime animate-ping"></span>
+</a>
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-text-on-dark-muted hover:bg-surface-evergreen-light hover:text-text-on-dark transition-colors font-label-nav font-label-nav font-medium" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">assignment</span>
+<span>Work Orders</span>
+</div>
+<span class="text-xs text-text-on-dark-muted">118</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-text-on-dark-muted hover:bg-surface-evergreen-light hover:text-text-on-dark transition-colors font-label-nav font-label-nav font-medium" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+<span>Audit Trails</span>
+</div>
+</a>
+</nav>
+</div>
+<!-- AUTHENTICATION ACTION CARD (From Style Guidance) -->
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-[1.25rem] p-space-lg shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<p class="text-label-eyebrow font-label-eyebrow text-accent-terracotta uppercase tracking-wider mb-2">New report</p>
+<h2 class="text-headline-md font-headline-md text-text-primary-dark font-bold mb-2">Tell us what’s wrong</h2>
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary-container my-3">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add_photo_alternate</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mb-4">
+            Sign in to report safely. Create an account to submit evidence and track your street reports across devices.
+          </p>
+<a class="w-full bg-accent-terracotta hover:bg-accent-terracotta-hover text-on-primary py-3 rounded-full font-label-cta text-label-cta font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-sm text-center" href="/signup">
+<span>Create free account</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<div class="mt-3 text-center">
+<a class="text-body-sm font-body-sm text-primary-container font-semibold hover:underline" href="/login">
+              I already have an account
+            </a>
+</div>
+</div>
+<!-- Field Work Photo Inspection Card -->
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-2xl overflow-hidden shadow-sm">
+<div class="relative h-44 bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Civil engineering road rehabilitation crew working on an asphalt patch in a bustling African city street. Heavy yellow road roller machine and workers in high-visibility neon yellow vests and orange jackets smoothing steaming tarmac. Bright sunny day with vibrant urban storefronts and yellow transport buses in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh9IsBsIzn7plzgftduanXqHD0Z2-VQItJWBMAOxnTAaTLQBM21Wd2ggsJkEcGmwhMh-UV6-3tcMx-wEQVsXsNjg5-e1YH0yuSyiCP5zrSYi47dUyGzcRz907Pn0VFn1llj2YO5FCr2svHEp3MwCoDljurAODjUvn27zm2S5UmIhW-FoeuvyR2a-OjXE_zhrvxiQnx8zOhHPIu1k5naUUkX1N_X2Po7bVUun_G1w">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-3 right-3 flex items-center justify-between text-on-primary">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider bg-accent-lime text-primary-container px-1.5 py-0.5 rounded">Active Worksite</span>
+<p class="text-xs font-semibold mt-0.5 truncate">Ikorodu Expressway Km 14</p>
+</div>
+<span class="text-xs bg-black/40 backdrop-blur-sm px-2 py-1 rounded text-accent-lime font-mono">LSPWC Squad 04</span>
+</div>
+</div>
+<div class="p-3 text-body-sm font-body-sm text-text-secondary-dark flex items-center justify-between bg-surface-container-low/50">
+<span class="text-xs">Surfacing completed: 78%</span>
+<span class="text-xs font-semibold text-text-primary-dark">EST: 16:30 today</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: GIS CADASTRE VIEWPORT & DETAILED CADASTRE TABLE -->
+<div class="lg:col-span-9 space-y-space-lg">
+<!-- GIS INFRASTRUCTURE CADASTRE VIEWPORT -->
+<div class="bg-surface-evergreen-deep rounded-2xl border border-border-subtle-dark overflow-hidden relative shadow-lg">
+<!-- Viewport Header -->
+<div class="p-space-md flex flex-wrap items-center justify-between border-b border-border-subtle-dark bg-surface-evergreen-base/90 gap-space-sm z-10 relative">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-accent-lime"></span>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-text-on-dark font-bold leading-tight">Interactive GIS Infrastructure Cadastre</h3>
+<p class="text-xs text-text-on-dark-muted font-mono">Centroid: 6°30'03.2"N 3°21'41.5"E (Lagos Metropolis)</p>
+</div>
+</div>
+<!-- GIS Controls -->
+<div class="flex items-center gap-2">
+<span class="text-xs px-2.5 py-1 rounded-full bg-surface-evergreen-light text-text-on-dark border border-border-subtle-dark font-mono">
+                Zoom: 14.5x
+              </span>
+<button class="px-2.5 py-1 rounded bg-surface-evergreen-light text-accent-lime text-xs font-label-badge flex items-center gap-1 hover:bg-surface-evergreen-light/80">
+<span class="material-symbols-outlined text-xs">layers</span> Layer: Drainage + Roads
+              </button>
+<button class="w-7 h-7 rounded bg-surface-evergreen-light text-text-on-dark flex items-center justify-center hover:bg-surface-evergreen-base">
+<span class="material-symbols-outlined text-sm">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- The Cadastre Graphic Map Layer -->
+<div class="h-80 w-full cadastre-grid relative overflow-hidden flex items-center justify-center bg-[#071912]">
+<!-- Isometric Highway Projection Layer -->
+<div class="absolute inset-0 opacity-40">
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<path d="M -50 320 L 400 120 L 950 150 L 1400 40" fill="none" stroke="rgba(216, 250, 100, 0.4)" stroke-dasharray="10 10" stroke-width="4"></path>
+<path d="M 0 350 L 420 140 L 970 170 L 1420 60" fill="none" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"></path>
+<path d="M 300 -50 L 400 120 L 480 350" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"></path>
+<path d="M 850 400 L 950 150 L 1100 -50" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Coordinate overlay pins -->
+<div class="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-8 h-8 rounded-full bg-error/30 animate-ping"></span>
+<span class="w-6 h-6 rounded-full bg-error text-white flex items-center justify-center shadow-lg border-2 border-white text-xs">
+<span class="material-symbols-outlined text-[13px]">priority_high</span>
+</span>
+</div>
+<div class="absolute top-8 left-1/2 -translate-x-1/2 bg-surface-evergreen-deep/95 border border-border-subtle-dark text-text-on-dark px-2.5 py-1.5 rounded-lg text-xs whitespace-nowrap shadow-xl backdrop-blur-sm pointer-events-none">
+<div class="font-bold text-accent-terracotta">STF-2026-004892</div>
+<div class="text-[10px] text-text-on-dark-muted">Arterial Pothole Cluster (SLA: 2h left)</div>
+</div>
+</div>
+<!-- Pin 2: In Progress -->
+<div class="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-7 h-7 rounded-full bg-accent-lime/30 animate-ping"></span>
+<span class="w-6 h-6 rounded-full bg-accent-lime text-primary-container flex items-center justify-center shadow-lg border-2 border-primary-container text-xs font-bold">
+<span class="material-symbols-outlined text-[13px]">engineering</span>
+</span>
+</div>
+<div class="absolute top-8 left-1/2 -translate-x-1/2 bg-surface-evergreen-deep/95 border border-border-subtle-dark text-text-on-dark px-2.5 py-1.5 rounded-lg text-xs whitespace-nowrap shadow-xl backdrop-blur-sm pointer-events-none">
+<div class="font-bold text-accent-lime">Crew #04 On Site</div>
+<div class="text-[10px] text-text-on-dark-muted">Ojuelegba Flyover Inflow</div>
+</div>
+</div>
+<!-- Pin 3: Fixed -->
+<div class="absolute bottom-1/4 right-1/4 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<span class="w-5 h-5 rounded-full bg-secondary-fixed text-primary-container flex items-center justify-center shadow-md border border-white text-xs">
+<span class="material-symbols-outlined text-[12px]">done</span>
+</span>
+</div>
+<!-- Floating Centroid HUD Info -->
+<div class="absolute bottom-4 left-4 bg-surface-evergreen-deep/90 border border-border-subtle-dark p-3 rounded-xl backdrop-blur-md max-w-xs text-xs">
+<div class="flex items-center justify-between text-text-on-dark-muted mb-1">
+<span>Active Telemetry Radar</span>
+<span class="text-accent-lime font-mono">100% Synced</span>
+</div>
+<p class="text-text-on-dark font-medium">Lagos Central Corridor: Surulere &amp; Yaba Ward</p>
+<div class="flex items-center gap-3 mt-2 text-[11px] text-text-on-dark-muted">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> 12 Critical</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-accent-lime"></span> 28 In Repair</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary-fixed"></span> 84 Cleared</span>
+</div>
+</div>
+</div>
+</div>
+<!-- UNIFIED INCIDENT TELEMETRY GRID & REPORT TRACKER -->
+<div class="bg-surface-canvas-pure rounded-2xl border border-border-subtle-light overflow-hidden shadow-sm">
+<!-- Tracker Filter Tabs (From Style Guidance) -->
+<div class="px-space-md pt-space-md border-b border-border-subtle-light flex items-center justify-between flex-wrap gap-space-sm bg-surface-canvas-light">
+<div>
+<p class="text-label-eyebrow font-label-eyebrow text-accent-terracotta uppercase tracking-wider">Community tracker</p>
+<h2 class="text-headline-md font-headline-md text-text-primary-dark font-bold">Recent street reports</h2>
+<p class="text-body-sm font-body-sm text-text-secondary-dark">Follow what’s happening across the neighbourhood with live incident statuses.</p>
+</div>
+<!-- Tab strip with counter pills -->
+<div class="flex items-center gap-1 overflow-x-auto pb-1 text-sm font-label-nav">
+<button class="px-3 py-2 text-text-primary-dark border-b-2 border-accent-terracotta font-bold flex items-center gap-1.5 whitespace-nowrap">
+<span>All</span>
+<span class="bg-surface-container-high text-text-secondary-dark text-xs px-2 py-0.5 rounded-full font-semibold">48</span>
+</button>
+<button class="px-3 py-2 text-text-secondary-dark hover:text-text-primary-dark transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span>Pending</span>
+<span class="bg-surface-container-high text-text-secondary-dark text-xs px-2 py-0.5 rounded-full font-semibold">18</span>
+</button>
+<button class="px-3 py-2 text-text-secondary-dark hover:text-text-primary-dark transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span>In Progress</span>
+<span class="bg-secondary-fixed/40 text-primary-container text-xs px-2 py-0.5 rounded-full font-bold">22</span>
+</button>
+<button class="px-3 py-2 text-text-secondary-dark hover:text-text-primary-dark transition-colors flex items-center gap-1.5 whitespace-nowrap">
+<span>Fixed</span>
+<span class="bg-surface-container-high text-text-secondary-dark text-xs px-2 py-0.5 rounded-full font-semibold">8</span>
+</button>
+</div>
+</div>
+<!-- Incidents Telemetry Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-text-secondary-dark text-xs font-semibold uppercase tracking-wider border-b border-border-subtle-light">
+<th class="py-3.5 px-4">Ref Code</th>
+<th class="py-3.5 px-4">Category &amp; Subject</th>
+<th class="py-3.5 px-4">Location &amp; LGA</th>
+<th class="py-3.5 px-4">Reported</th>
+<th class="py-3.5 px-4">SLA Countdown</th>
+<th class="py-3.5 px-4">Assigned Crew</th>
+<th class="py-3.5 px-4 text-right">Inspect</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle-light font-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-semibold text-text-primary-dark text-xs">
+                    STF-2026-004892
+                  </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary-container flex-shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+</span>
+<div>
+<div class="font-bold text-text-primary-dark">Severe Deep Pothole</div>
+<div class="text-xs text-text-secondary-dark">Traffic hazard &amp; damaged axle</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="text-text-primary-dark font-medium">Herbert Macaulay Way</div>
+<div class="text-xs text-text-secondary-dark">Yaba LGA</div>
+</td>
+<td class="py-3.5 px-4 text-text-secondary-dark text-xs whitespace-nowrap">
+                    Today, 08:14
+                  </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-error-container text-on-error-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span> 1h 45m (Risk)
+                      </span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="text-xs font-semibold text-primary-container bg-primary-fixed px-2 py-1 rounded-full">
+                      LSPWC Team A-3
+                    </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-3 py-1 bg-surface-canvas-pure border border-border-subtle-light hover:border-accent-lime text-text-primary-dark rounded-full text-xs font-semibold hover:bg-surface-container-high transition-colors">
+                      Review
+                    </button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-semibold text-text-primary-dark text-xs">
+                    STF-2026-004889
+                  </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container flex-shrink-0">
+<span class="material-symbols-outlined text-sm">water_damage</span>
+</span>
+<div>
+<div class="font-bold text-text-primary-dark">Blocked Stormwater Culvert</div>
+<div class="text-xs text-text-secondary-dark">Flooding after downpour</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="text-text-primary-dark font-medium">Bode Thomas Junction</div>
+<div class="text-xs text-text-secondary-dark">Surulere LGA</div>
+</td>
+<td class="py-3.5 px-4 text-text-secondary-dark text-xs whitespace-nowrap">
+                    Today, 07:42
+                  </td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-secondary-container text-on-secondary-container flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[12px]">build</span> In Progress
+                    </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="text-xs font-semibold text-primary-container bg-primary-fixed px-2 py-1 rounded-full">
+                      Drainage Squad 2
+                    </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-3 py-1 bg-surface-canvas-pure border border-border-subtle-light hover:border-accent-lime text-text-primary-dark rounded-full text-xs font-semibold hover:bg-surface-container-high transition-colors">
+                      Review
+                    </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-semibold text-text-primary-dark text-xs">
+                    STF-2026-004875
+                  </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center text-text-secondary-dark flex-shrink-0">
+<span class="material-symbols-outlined text-sm">traffic</span>
+</span>
+<div>
+<div class="font-bold text-text-primary-dark">Malfunctioning Traffic Beacon</div>
+<div class="text-xs text-text-secondary-dark">Intermittent red signal phase</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="text-text-primary-dark font-medium">Allen Avenue / Toyin Roundabout</div>
+<div class="text-xs text-text-secondary-dark">Ikeja LGA</div>
+</td>
+<td class="py-3.5 px-4 text-text-secondary-dark text-xs whitespace-nowrap">
+                    Yesterday, 18:20
+                  </td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container-high text-text-secondary-dark flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[12px]">hourglass_top</span> Queued (6h)
+                    </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="text-xs text-text-secondary-dark italic">Unassigned</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-3 py-1 bg-surface-canvas-pure border border-border-subtle-light hover:border-accent-lime text-text-primary-dark rounded-full text-xs font-semibold hover:bg-surface-container-high transition-colors">
+                      Review
+                    </button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-4 font-mono font-semibold text-text-primary-dark text-xs">
+                    STF-2026-004860
+                  </td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-primary-container flex-shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</span>
+<div>
+<div class="font-bold text-text-primary-dark">Asphalt Resurfacing &amp; Seal</div>
+<div class="text-xs text-text-secondary-dark">240m section cured &amp; audited</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="text-text-primary-dark font-medium">Adeola Odeku Street</div>
+<div class="text-xs text-text-secondary-dark">Victoria Island</div>
+</td>
+<td class="py-3.5 px-4 text-text-secondary-dark text-xs whitespace-nowrap">
+                    Yesterday, 14:10
+                  </td>
+<td class="py-3.5 px-4">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-primary-fixed text-on-primary-fixed flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[12px]">verified</span> Completed
+                    </span>
+</td>
+<td class="py-3.5 px-4">
+<span class="text-xs font-semibold text-primary-container bg-primary-fixed px-2 py-1 rounded-full">
+                      Contractor C-8
+                    </span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="px-3 py-1 bg-surface-canvas-pure border border-border-subtle-light hover:border-accent-lime text-text-primary-dark rounded-full text-xs font-semibold hover:bg-surface-container-high transition-colors">
+                      Review
+                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State Container Demonstration (From Design Specs) -->
+<div class="m-space-md border-[1.5px] border-dashed border-[#CBD5E1] bg-surface-canvas-pure rounded-2xl p-space-xl text-center flex flex-col items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-[#E6F4EA] flex items-center justify-center text-primary-container mb-3">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-text-primary-dark mb-1">No pending escalations in Alimosho Ward</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark max-w-md mx-auto mb-4">
+              All resident reports for this localized municipal quadrant have been dispatched or validated by the zone inspector.
+            </p>
+<a class="inline-flex items-center gap-2 px-4 py-2 border border-border-subtle-light rounded-full text-xs font-label-cta text-text-primary-dark hover:bg-surface-container-low transition-colors" href="tel:+23412270000">
+<span class="material-symbols-outlined text-xs">call</span>
+<span>Contact Sector Engineer: 01 227 0000</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BOTTOM SIGNATURE HELPLINE BANNER (Mandated in Style Guidance & Component Prompt) -->
+<aside class="w-full bg-accent-lime text-primary-container py-space-lg px-margin-mobile md:px-margin mt-space-2xl">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Left side info -->
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-accent-lime flex items-center justify-center flex-shrink-0 shadow-md">
+<span class="material-symbols-outlined text-2xl" data-icon="call">call</span>
+</div>
+<div>
+<p class="text-xs uppercase font-label-eyebrow tracking-wider text-on-secondary-container">Prefer to speak to someone?</p>
+<h3 class="text-headline-lg font-headline-lg font-bold text-primary-container tracking-tight">Call the StreetFix office directly</h3>
+</div>
+</div>
+<!-- Right side telephone & timing -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-sm text-left md:text-right">
+<a class="text-headline-xl font-headline-xl font-extrabold text-primary-container tracking-tight hover:opacity-85 transition-opacity flex items-center gap-2" href="tel:+23412270000">
+<span>01 227 0000</span>
+<span class="material-symbols-outlined text-xl">phone_in_talk</span>
+</a>
+<div class="text-body-sm font-body-sm text-on-secondary-container border-l-0 sm:border-l sm:border-primary-container/20 sm:pl-3">
+<p class="font-semibold">Toll-free municipal dispatch</p>
+<p class="text-xs">Available Monday–Friday, 8am–5pm</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- FOOTER (From Shared Components JSON) -->
+<footer class="bg-surface-evergreen-deep dark:bg-surface-evergreen-deep docked full-width bottom border-t border-border-subtle-dark flat no shadows">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-space-lg gap-space-md">
+<div class="flex items-center gap-space-md">
+
+<span class="text-body-sm font-body-sm text-text-on-dark-muted hidden sm:inline">|</span>
+<p class="text-body-sm font-body-sm text-text-on-dark-muted">
+          Making every street safer, one report at a time.
+        </p>
+</div>
+<!-- Links & State Attribution -->
+<div class="flex items-center gap-space-lg text-body-sm font-body-sm text-text-on-dark-muted">
+<span>Lagos State Ministry of Works &amp; Infrastructure</span>
+<a class="text-text-on-dark font-medium hover:text-accent-lime transition-colors duration-150" href="/">StreetFix</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

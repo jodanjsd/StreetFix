@@ -1,0 +1,518 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 2197px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix — Civic Incident Tracker &amp; Resident Portal</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Fonts: DM Sans & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#afceb9",
+            "primary": "#00190d",
+            "surface-tint": "#496554",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#afceb9",
+            "tertiary-fixed-dim": "#ffb59d",
+            "on-secondary-fixed": "#171e00",
+            "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+            "on-surface-variant": "#424843",
+            "surface-evergreen-light": "#183D2A",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#3d4c00",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "on-primary-container": "#799784",
+            "on-primary": "#ffffff",
+            "surface-evergreen-deep": "#0B231A",
+            "accent-lime": "#D8FA64",
+            "surface-bright": "#f8faf5",
+            "surface-variant": "#e1e3de",
+            "primary-container": "#132e20",
+            "on-tertiary-container": "#ea693c",
+            "secondary-fixed-dim": "#b3d341",
+            "tertiary-fixed": "#ffdbd0",
+            "surface-canvas-light": "#F9FAF9",
+            "on-secondary-container": "#576c00",
+            "accent-terracotta": "#E06236",
+            "text-on-dark": "#FFFFFF",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#cbead5",
+            "outline-variant": "#c2c8c2",
+            "surface-evergreen-base": "#132E20",
+            "outline": "#727973",
+            "surface-dim": "#d9dbd5",
+            "on-surface": "#191c19",
+            "secondary": "#526600",
+            "background": "#f8faf5",
+            "on-tertiary-fixed-variant": "#832600",
+            "secondary-fixed": "#cef05b",
+            "inverse-surface": "#2e312e",
+            "text-on-dark-muted": "#A3B899",
+            "surface-canvas-pure": "#FFFFFF",
+            "accent-lime-muted": "#C8E665",
+            "inverse-on-surface": "#f0f1ec",
+            "error": "#ba1a1a",
+            "tertiary": "#2d0700",
+            "surface-container": "#edeee9",
+            "on-primary-fixed": "#052013",
+            "on-error-container": "#93000a",
+            "surface": "#f8faf5",
+            "tertiary-container": "#501400",
+            "text-primary-dark": "#1A1D1A",
+            "on-primary-fixed-variant": "#314d3d",
+            "surface-container-high": "#e7e9e3",
+            "secondary-container": "#cef05b",
+            "border-subtle-light": "#E2E8F0",
+            "surface-container-low": "#f3f4ef",
+            "surface-container-highest": "#e1e3de",
+            "accent-terracotta-hover": "#D35400",
+            "on-background": "#191c19",
+            "on-tertiary-fixed": "#390b00",
+            "text-secondary-dark": "#4A5568"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-2xs": "0.25rem",
+            "margin-mobile": "1rem",
+            "margin": "2.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "space-md": "1rem",
+            "gutter-mobile": "1rem",
+            "space-3xl": "4.5rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["DM Sans"],
+            "label-eyebrow": ["Manrope"],
+            "headline-md": ["DM Sans"],
+            "headline-lg": ["DM Sans"],
+            "headline-xl": ["DM Sans"],
+            "display-hero": ["DM Sans"],
+            "label-nav": ["Manrope"],
+            "label-badge": ["Manrope"],
+            "body-sm": ["DM Sans"],
+            "display-hero-mobile": ["DM Sans"],
+            "label-cta": ["Manrope"],
+            "headline-sm": ["DM Sans"],
+            "body-md": ["DM Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "label-eyebrow": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-hero": ["3.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-nav": ["0.875rem", { "lineHeight": "1.2", "fontWeight": "600" }],
+            "label-badge": ["0.75rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "display-hero-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-cta": ["0.875rem", { "lineHeight": "1", "fontWeight": "600" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .civic-perspective-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas-light text-on-surface antialiased font-body-md min-h-screen flex flex-col selection:bg-accent-lime selection:text-surface-evergreen-deep">
+<!-- TopNavBar (Shared Component from JSON) -->
+<header class="w-full bg-surface-evergreen-deep docked full-width top-0 border-b border-border-subtle-dark sticky z-50">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex items-center justify-between py-space-sm">
+<!-- Brand Logo Anchor -->
+<a class="text-headline-md font-headline-md font-bold text-text-on-dark flex items-center gap-space-xs tracking-tight hover:opacity-90 transition-opacity" href="/"></a>
+<!-- Quick Trailing Links & Actions -->
+<div class="flex items-center gap-4 md:gap-6">
+<!-- Call Office Contact Link -->
+<a class="hidden sm:inline-flex items-center gap-1.5 text-text-on-dark-muted font-label-nav text-label-nav hover:text-accent-lime transition-colors" href="tel:+23412270000">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>Call office</span>
+</a>
+<!-- Admin Portal Link -->
+<a class="hidden md:inline-flex text-text-on-dark-muted font-label-nav text-label-nav hover:text-accent-lime transition-colors" href="/admin">
+          Admin portal
+        </a>
+<div class="h-4 w-[1px] bg-border-subtle-dark hidden sm:block"></div>
+<!-- Authentication CTAs -->
+<div class="flex items-center gap-3">
+<a class="text-label-cta font-label-cta text-text-on-dark hover:opacity-90 transition-opacity px-2 py-1.5" href="/login">
+            Log in
+          </a>
+<a class="text-label-cta font-label-cta bg-accent-lime text-surface-evergreen-deep px-4 py-2 rounded-full font-bold flex items-center gap-1 hover:scale-95 transition-all shadow-sm" href="/signup">
+<span>Sign up</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section: Modern Civic Functionalism -->
+<section class="bg-surface-evergreen-deep text-text-on-dark relative overflow-hidden pt-10 pb-16 md:py-20">
+<!-- Perspective Ambient Grid Overlay -->
+<div class="absolute inset-0 civic-perspective-grid opacity-60 pointer-events-none"></div>
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Hero Narrative Copy (Col 1-7) -->
+<div class="lg:col-span-7 flex flex-col items-start">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-evergreen-light/80 border border-border-subtle-dark text-accent-lime font-label-eyebrow text-label-eyebrow mb-6 uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-accent-lime animate-pulse"></span>
+              Better streets start here
+            </div>
+<h1 class="text-display-hero-mobile md:text-display-hero font-display-hero text-text-on-dark leading-tight tracking-tight mb-5">
+              See a problem.<br>
+<span class="text-accent-lime">Help fix your street.</span>
+</h1>
+<p class="text-body-lg font-body-lg text-text-on-dark-muted max-w-xl mb-8 leading-relaxed">
+              Report road and neighbourhood issues with photo, video, or voice evidence, then follow their progress in real time across municipal public works.
+            </p>
+<!-- Hero Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-2 bg-accent-terracotta hover:bg-accent-terracotta-hover text-on-tertiary font-label-cta text-label-cta px-6 py-3.5 rounded-full shadow-lg transition-transform active:scale-95" href="#new-report">
+<span class="material-symbols-outlined text-[20px]">add_location_alt</span>
+<span>Report an issue</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 bg-surface-evergreen-base border border-border-subtle-dark hover:border-accent-lime text-text-on-dark hover:text-accent-lime font-label-cta text-label-cta px-6 py-3.5 rounded-full transition-all" href="tel:+23412270000">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>Call the office (01 227 0000)</span>
+</a>
+</div>
+<!-- Municipal Transparency Trust Metric -->
+<div class="mt-10 pt-6 border-t border-border-subtle-dark/60 flex items-center gap-6">
+<div>
+<span class="block text-headline-sm font-headline-sm font-bold text-accent-lime">14 hrs</span>
+<span class="text-body-sm font-body-sm text-text-on-dark-muted">Avg first-response</span>
+</div>
+<div class="w-[1px] h-8 bg-border-subtle-dark"></div>
+<div>
+<span class="block text-headline-sm font-headline-sm font-bold text-text-on-dark">84.2%</span>
+<span class="text-body-sm font-body-sm text-text-on-dark-muted">Resolution rate</span>
+</div>
+<div class="w-[1px] h-8 bg-border-subtle-dark"></div>
+<div>
+<span class="block text-headline-sm font-headline-sm font-bold text-text-on-dark">20 LGA</span>
+<span class="text-body-sm font-body-sm text-text-on-dark-muted">Verified coverage</span>
+</div>
+</div>
+</div>
+<!-- Hero Supporting Civic Visual (Col 8-12) -->
+<div class="lg:col-span-5 relative">
+<div class="relative rounded-2xl overflow-hidden border border-border-subtle-dark shadow-2xl bg-surface-evergreen-base">
+<img class="w-full h-80 md:h-[400px] object-cover" data-alt="A vivid municipal public works crew in high-visibility orange vests and protective hardhats resurfacing an urban street with fresh black asphalt and a yellow steam roller in bright daylight. The scene showcases structured civic modernization, concrete curbs, and energetic community infrastructure work." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6UlUf7yFbJNSlY-oOW5DtAfSZLRKDOOycgf_lEbsf1WxznqYkcDvLWb8iqt5TcG53eYeoG24VY3O7ThtIKVSFOSTruzQArT0C-Tne3_xge1VFeXMELDdyR-4V2FT3qMzp6DHwhO4NGMNfqXTAkMoOb40r9cnTLkr8BnoVdMkXHbbUd81Z_0mpfVXsSDcp8b9Fby-LofeXVNLxY_CXi8L1gSoKwdqhVeD-AH5JZw">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-evergreen-deep via-transparent to-transparent"></div>
+<!-- Floating Live Verification Overlay Badge -->
+<div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface-evergreen-deep/90 backdrop-blur border border-border-subtle-dark flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-accent-lime/10 border border-accent-lime/30 flex items-center justify-center text-accent-lime">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">engineering</span>
+</div>
+<div>
+<p class="text-body-sm font-headline-sm font-bold text-text-on-dark">Active Resurfacing Unit</p>
+<p class="text-body-sm font-body-sm text-text-on-dark-muted">Ikeja Central Corridor, Zone 4</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-accent-lime text-surface-evergreen-deep font-label-badge text-label-badge">LIVE DISPATCH</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fast Reporting Entry Section + Community Tracker (Asymmetric Split Dashboard) -->
+<section class="py-12 md:py-16 bg-surface-canvas-light" id="new-report">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Fast Reporting Entry Card (4 cols) -->
+<div class="lg:col-span-4 sticky top-20">
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<span class="text-accent-terracotta font-label-eyebrow text-label-eyebrow uppercase tracking-wider block mb-2">New report</span>
+<h2 class="text-headline-lg font-headline-lg text-text-primary-dark mb-4">Tell us what’s wrong</h2>
+<!-- Category Pills Quick Select -->
+<p class="text-body-sm font-body-sm text-text-secondary-dark mb-3">Popular incident types:</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1.5 rounded-full text-body-sm bg-surface-container-low text-text-primary-dark font-medium border border-border-subtle-light">🚧 Potholes</span>
+<span class="px-3 py-1.5 rounded-full text-body-sm bg-surface-container-low text-text-primary-dark font-medium border border-border-subtle-light">🌊 Drainage Block</span>
+<span class="px-3 py-1.5 rounded-full text-body-sm bg-surface-container-low text-text-primary-dark font-medium border border-border-subtle-light">💡 Broken Light</span>
+<span class="px-3 py-1.5 rounded-full text-body-sm bg-surface-container-low text-text-primary-dark font-medium border border-border-subtle-light">🚰 Water Burst</span>
+</div>
+<!-- Auth Card Box -->
+<div class="p-5 rounded-xl bg-surface-canvas-light border border-border-subtle-light mb-6">
+<div class="flex items-start gap-3 mb-3">
+<span class="material-symbols-outlined text-accent-terracotta text-[22px]">verified_user</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-text-primary-dark">Sign in to report safely</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mt-1 leading-normal">
+                      Create an account to submit evidence and track your street reports across devices.
+                    </p>
+</div>
+</div>
+<div class="flex flex-col gap-2.5 mt-4">
+<a class="w-full text-center py-3 px-4 rounded-full bg-accent-terracotta hover:bg-accent-terracotta-hover text-on-tertiary font-label-cta text-label-cta transition-colors shadow-sm" href="/signup">
+                    Create free account
+                  </a>
+<a class="w-full text-center py-2.5 px-4 rounded-full bg-surface-canvas-pure border border-border-subtle-light hover:border-text-secondary-dark text-text-primary-dark font-label-cta text-label-cta transition-all" href="/login">
+                    I already have an account
+                  </a>
+</div>
+</div>
+<!-- Instant Geolocation Helper Tip -->
+<div class="flex items-center gap-3 text-text-secondary-dark text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-surface-tint">my_location</span>
+<span>Automatic GPS tagging supported on phone cameras.</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Community Incident Tracker (8 cols) -->
+<div class="lg:col-span-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-6 pb-4 border-b border-border-subtle-light gap-4">
+<div>
+<span class="text-surface-tint font-label-eyebrow text-label-eyebrow uppercase tracking-wider block mb-1">Community tracker</span>
+<h2 class="text-headline-xl font-headline-xl text-text-primary-dark tracking-tight">Recent street reports</h2>
+<p class="text-body-md font-body-md text-text-secondary-dark mt-1">
+                  Follow what’s happening across the neighbourhood.
+                </p>
+</div>
+<!-- Total Reports Badge -->
+<div class="inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full self-start md:self-auto">
+<span class="font-headline-sm font-bold text-text-primary-dark">1,482</span>
+<span class="text-body-sm text-text-secondary-dark">Total reports</span>
+</div>
+</div>
+<!-- Filter Tabs with Embedded Counters -->
+<div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none border-b border-border-subtle-light">
+<button class="inline-flex items-center gap-2 px-4 py-2 border-b-2 border-accent-terracotta text-text-primary-dark font-label-nav text-label-nav font-bold whitespace-nowrap">
+<span>All</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-secondary-dark font-label-badge text-label-badge">1,482</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-label-nav text-label-nav whitespace-nowrap transition-colors">
+<span>Pending</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-secondary-dark font-label-badge text-label-badge">43</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-label-nav text-label-nav whitespace-nowrap transition-colors">
+<span>In Progress</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-secondary-dark font-label-badge text-label-badge">118</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-label-nav text-label-nav whitespace-nowrap transition-colors">
+<span>Fixed</span>
+<span class="px-2 py-0.5 rounded-full bg-accent-lime/20 text-surface-evergreen-deep font-label-badge text-label-badge">1,321</span>
+</button>
+</div>
+<!-- Incident Bento / Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+<!-- Report Card 1: Fixed Road Work -->
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="relative h-48 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" data-alt="An open urban roadway under active paving and grading operations with road repair equipment, fresh asphalt patching, and yellow safety markers under bright daylight. Surrounding street shows commercial town architecture and organized traffic diversion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzb7HnYLx7Nsfem8XHDftBCqUNwQ5nKMZXDBZf1f8VgRH1XIy_K7a7YAuVTMdz7sFStoZ9wrEE9R1HoNzq7q4_0JQKzyB1wXmlMBvqZMK2v22TMSKBAFP2778N2s5RdTXHNYhETq5FpP0D7X2bLd66rfuMDI2ynnXiny6JTR2iJnpWSl0sISsF8vwA1fBSpvOFw0ZbKoPAlVWYGs43sEt5slta8mY-NROxmjydzw">
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-evergreen-deep text-accent-lime text-label-badge font-label-badge flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-lime"></span>
+                        Fixed
+                      </span>
+</div>
+<span class="absolute bottom-3 right-3 text-body-sm font-label-badge bg-surface-evergreen-deep/80 text-text-on-dark px-2.5 py-1 rounded backdrop-blur">
+                      Resolved in 36h
+                    </span>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-text-secondary-dark text-body-sm mb-2">
+<span class="material-symbols-outlined text-[16px] text-surface-tint">location_on</span>
+<span>Herbert Macaulay Way, Yaba</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-text-primary-dark font-bold mb-2">Deep crater pothole along central lane</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark line-clamp-2">
+                      Causing severe traffic slowdown and tire blowouts for morning commuters heading towards the bridge.
+                    </p>
+</div>
+</div>
+<div class="px-5 py-3.5 bg-surface-container-low border-t border-border-subtle-light flex items-center justify-between text-body-sm">
+<span class="text-text-secondary-dark">Assigned to: <strong>Lagos Public Works</strong></span>
+<a class="text-accent-terracotta font-semibold hover:underline flex items-center gap-1" href="/report/1082">
+                    Details
+                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Report Card 2: In Progress Drainage Clearance -->
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="relative h-48 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" data-alt="Sanitation crew and environmental drainage workers wearing protective high-vis vests cleaning out a reinforced urban concrete canal and storm water drain, removing accumulated silt and street debris to restore water flow under clear sunny conditions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIe5uUqcCX5qzGpOYwZ56C9hWCA0wpyNN2u3PUh8_K9NF6C4zHUK4zEjwbw0uQFP0Yv-1pU-fVY-dqiX6jBhQULBtTcdq7GTcQbS7loCn4iP_AFv0cYz1pR0lghYSBLyTg1sgAGujQxMlvcs0HEt9MNn8Z44aeVZ3Sa7_VzZcOCSv_9y0SLO8E6MNI6UQg58NC1QOt7EvovFrq8MzoZ27Bii9lrx8bYtGom-m7dw">
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 rounded-full bg-accent-terracotta text-on-tertiary text-label-badge font-label-badge flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary animate-pulse"></span>
+                        In Progress
+                      </span>
+</div>
+<span class="absolute bottom-3 right-3 text-body-sm font-label-badge bg-surface-evergreen-deep/80 text-text-on-dark px-2.5 py-1 rounded backdrop-blur">
+                      Day 2 of Work
+                    </span>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-text-secondary-dark text-body-sm mb-2">
+<span class="material-symbols-outlined text-[16px] text-surface-tint">location_on</span>
+<span>Adeniran Ogunsanya, Surulere</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-text-primary-dark font-bold mb-2">Blockage in roadside storm gutter</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark line-clamp-2">
+                      Overflowing during heavy rainfall causing stagnant water pools across the primary pedestrian walkway.
+                    </p>
+</div>
+</div>
+<div class="px-5 py-3.5 bg-surface-container-low border-t border-border-subtle-light flex items-center justify-between text-body-sm">
+<span class="text-text-secondary-dark">Assigned to: <strong>Drain Doctor Team</strong></span>
+<a class="text-accent-terracotta font-semibold hover:underline flex items-center gap-1" href="/report/1083">
+                    Details
+                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Report Card 3: Complete Highway Street Striping -->
+<div class="bg-surface-canvas-pure border border-border-subtle-light rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="relative h-48 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" data-alt="A freshly finished broad city avenue with pristine dark black asphalt, crisp double yellow center road markings, and clear white lane dividers flanked by modern commercial buildings and green city trees." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIyCXfDksTnF33Ell7IzwIIVJ67Rjgjxazdul2NVpWX21YK21rYHSiLCK7XN4PEkoAoMzPYVm_jVMjA6X3FfkIqRNQp-MF1ZgMZUqqkU93Mraa7awmzh32F3sm5m3HkUs_8lpi1LdDP05op7j10MVBpBrxiN4SKwdBq5q9dk4X-oAYVSWj169IGyjFYQZZxsNDmdrhFjzz3H1LtXJ1A0up1PBY_iqymALUYe67dA">
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-evergreen-deep text-accent-lime text-label-badge font-label-badge flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-lime"></span>
+                        Fixed
+                      </span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 text-text-secondary-dark text-body-sm mb-2">
+<span class="material-symbols-outlined text-[16px] text-surface-tint">location_on</span>
+<span>Ozumba Mbadiwe Ave, Victoria Island</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-text-primary-dark font-bold mb-2">Faded road markings &amp; zebra crossing</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark line-clamp-2">
+                      Complete thermo-plastic reflective striping applied across all 4 traffic lanes and school crosswalks.
+                    </p>
+</div>
+</div>
+<div class="px-5 py-3.5 bg-surface-container-low border-t border-border-subtle-light flex items-center justify-between text-body-sm">
+<span class="text-text-secondary-dark">Assigned to: <strong>Traffic Management Auth</strong></span>
+<a class="text-accent-terracotta font-semibold hover:underline flex items-center gap-1" href="/report/1084">
+                    Details
+                    <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Report Card 4: Interactive Empty Drop State placeholder (Design Token Demonstration) -->
+<div class="border-[1.5px] border-dashed border-[#CBD5E1] bg-surface-canvas-pure rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+<div class="w-14 h-14 rounded-full bg-[#E6F4EA] flex items-center justify-center text-surface-evergreen-base mb-4">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-text-primary-dark font-bold mb-1">No reports yet in your block?</h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark max-w-xs mb-5">
+                  Be the first to help improve your street. Submit quick geo-tagged snapshots.
+                </p>
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-evergreen-base text-text-on-dark font-label-cta text-label-cta hover:bg-surface-evergreen-light transition-colors" href="#new-report">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+<span>Log first report</span>
+</a>
+</div>
+</div>
+<!-- View Full Register Action -->
+<div class="text-center pt-2">
+<a class="inline-flex items-center gap-2 text-headline-sm font-label-cta font-bold text-surface-evergreen-base hover:text-accent-terracotta transition-colors" href="/tracker">
+<span>Browse all 1,482 reports in the open civic registry</span>
+<span class="material-symbols-outlined text-[20px]">east</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Full-Width Lime Helpline Banner -->
+<section class="bg-accent-lime text-surface-evergreen-deep py-12 md:py-14 border-y border-accent-lime-muted">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="flex items-center gap-5 text-center lg:text-left">
+<div class="w-14 h-14 rounded-full bg-surface-evergreen-deep text-accent-lime hidden sm:flex items-center justify-center shrink-0 shadow-md">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+</div>
+<div>
+<span class="text-label-eyebrow font-label-eyebrow uppercase tracking-wider text-surface-evergreen-base block mb-1 opacity-90">Prefer to speak to someone?</span>
+<h2 class="text-headline-xl font-headline-xl font-bold tracking-tight text-surface-evergreen-deep">Call the StreetFix office directly</h2>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<a class="group flex flex-col items-center sm:items-end text-right" href="tel:+23412270000">
+<span class="text-display-hero-mobile md:text-headline-xl font-bold tracking-tight font-headline-xl text-surface-evergreen-deep group-hover:text-accent-terracotta transition-colors">
+              01 227 0000
+            </span>
+<span class="text-body-sm font-medium text-surface-evergreen-base opacity-80">
+              Available Monday–Friday, 8am–5pm
+            </span>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-surface-evergreen-deep text-accent-lime font-label-cta text-label-cta font-bold hover:scale-105 active:scale-95 transition-all shadow-lg" href="tel:+23412270000">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Call office</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component from JSON) -->
+<footer class="w-full bg-surface-evergreen-deep docked full-width bottom border-t border-border-subtle-dark">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-space-lg gap-space-md">
+<!-- Left: Brand Anchor & Core Slogan -->
+<div class="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
+<a class="text-headline-sm font-headline-sm font-bold text-text-on-dark hover:text-accent-lime transition-colors" href="/"></a>
+<span class="hidden md:inline text-border-subtle-dark">|</span>
+<p class="text-body-sm font-body-sm text-text-on-dark-muted">
+          Making every street safer, one report at a time.
+        </p>
+</div>
+<!-- Right: Direct Municipal Transparency Links -->
+<nav class="flex flex-wrap items-center justify-center gap-6 text-body-sm font-body-sm text-text-on-dark-muted">
+<a class="hover:text-accent-lime transition-colors" href="/public-dashboard">Public Dashboard</a>
+<a class="hover:text-accent-lime transition-colors" href="/sla">Service Level Agreements</a>
+<a class="hover:text-accent-lime transition-colors" href="/gis">Lagos GIS Hub</a>
+<a class="hover:text-accent-lime transition-colors" href="/privacy">Privacy Notice</a>
+</nav>
+</div>
+</footer>
+
+
+
+
+
+
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

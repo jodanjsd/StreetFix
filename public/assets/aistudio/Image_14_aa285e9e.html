@@ -1,0 +1,782 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 2172px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix 2.0 - Civic Infrastructure Analytics &amp; Executive SLA Dashboard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: DM Sans & Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-evergreen-base": "#132E20",
+            "surface-evergreen-deep": "#0B231A",
+            "surface-evergreen-light": "#183D2A",
+            "accent-lime": "#D8FA64",
+            "accent-lime-muted": "#C8E665",
+            "accent-terracotta": "#E06236",
+            "accent-terracotta-hover": "#D35400",
+            "background": "#F8FAF5",
+            "surface-canvas-pure": "#FFFFFF",
+            "surface-canvas-light": "#F9FAF9",
+            "text-primary-dark": "#1A1D1A",
+            "text-secondary-dark": "#4A5568",
+            "border-subtle-light": "#E2E8F0",
+            "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+            "text-on-dark": "#FFFFFF",
+            "text-on-dark-muted": "#A3B899",
+            "primary": "#132E20",
+            "secondary": "#4A5568",
+            "on-surface": "#1A1D1A",
+            "surface": "#F8FAF5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.375rem",
+            "lg": "0.625rem",
+            "xl": "1rem",
+            "2xl": "1.25rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "sans": ["DM Sans", "sans-serif"],
+            "heading": ["DM Sans", "sans-serif"],
+            "mono": ["Geist Mono", "monospace"],
+            "display": ["DM Sans", "sans-serif"],
+            "nav": ["Manrope", "sans-serif"],
+            "badge": ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .ops-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px 0 rgba(19, 46, 32, 0.04), 0 1px 2px -1px rgba(19, 46, 32, 0.02);
+    }
+    .ops-card-hover {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ops-card-hover:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px -2px rgba(19, 46, 32, 0.08);
+      border-color: #CBD5E1;
+    }
+  </style>
+</head>
+<body class="bg-background text-text-primary-dark font-sans antialiased min-h-screen flex flex-col selection:bg-accent-lime selection:text-surface-evergreen-base">
+<!-- 1. Header: Dark evergreen (#132E20) top navigation bar -->
+<header class="w-full h-16 sticky top-0 z-50 bg-surface-evergreen-base text-text-on-dark border-b border-border-subtle-dark shadow-md flex items-center justify-between px-4 sm:px-6 lg:px-8">
+<!-- Left: Brand & Search -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2.5">
+
+<div class="flex flex-col">
+
+
+</div>
+</div>
+<!-- Quick Command Search -->
+<div class="hidden lg:flex items-center bg-surface-evergreen-deep/70 px-3 py-1.5 rounded-lg border border-border-subtle-dark w-72 focus-within:border-accent-lime transition-colors">
+<span class="material-symbols-outlined text-text-on-dark-muted mr-2 text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none text-xs text-text-on-dark placeholder:text-text-on-dark-muted/70 focus:outline-none w-full p-0" placeholder="Search ward, SLA code, LGA..." type="text">
+<kbd class="text-[10px] font-mono text-text-on-dark-muted bg-surface-evergreen-light px-1.5 py-0.5 rounded border border-border-subtle-dark">⌘K</kbd>
+</div>
+</div>
+<!-- Center: Navigation Links -->
+<nav class="hidden md:flex items-center gap-1 font-nav text-sm">
+<a class="text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light px-3 py-1.5 rounded-md transition-colors" href="#">Resident Portal</a>
+<a class="text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light px-3 py-1.5 rounded-md transition-colors" href="#">Ops Command</a>
+<a class="text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light px-3 py-1.5 rounded-md transition-colors" href="#">Field Dispatch</a>
+<a class="text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light px-3 py-1.5 rounded-md transition-colors" href="#">Incident Map</a>
+<a class="text-accent-lime bg-surface-evergreen-light font-bold px-3 py-1.5 rounded-md flex items-center gap-1.5 border border-accent-lime/20" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-lime"></span>
+        Analytics
+      </a>
+</nav>
+<!-- Right: Action Buttons & Actions -->
+<div class="flex items-center gap-3">
+<!-- 'Call office' pill -->
+<a aria-label="Call office: 01 227 0000" class="w-9 h-9 rounded-lg flex items-center justify-center bg-surface-evergreen-light hover:bg-surface-evergreen-deep text-accent-lime border border-border-subtle-dark transition-all ml-3" href="tel:012270000" title="Call office: 01 227 0000"><span class="material-symbols-outlined text-lg" data-icon="call">call</span></a>
+<!-- Lime CTA Button -->
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-accent-lime hover:bg-accent-lime-muted text-surface-evergreen-base font-nav font-bold text-xs uppercase tracking-wider transition-all shadow hover:shadow-accent-lime/20 active:scale-95">
+<span class="material-symbols-outlined text-base font-bold" data-icon="add_circle">add_circle</span>
+<span>Report Incident</span>
+</button>
+<div class="flex items-center gap-1 border-l border-border-subtle-dark pl-2 ml-1">
+<button class="p-1.5 text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light rounded-lg transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-lg" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-accent-terracotta ring-2 ring-surface-evergreen-base"></span>
+</button>
+<button class="p-1.5 text-text-on-dark-muted hover:text-text-on-dark hover:bg-surface-evergreen-light rounded-lg transition-colors" title="Settings">
+<span class="material-symbols-outlined text-lg" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Avatar -->
+<div class="flex items-center pl-1">
+<img alt="Municipal Command Officer profile avatar" class="w-8 h-8 rounded-full border border-accent-lime/40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFrPMRHybPd44IUJmZot7OQ1FXgjpzq1uZJkVK4Bk_ZD5lyjDaRmyKbl3-OxXYr-CyaiN__tAumeBJoqqm5h3pFEAT0v7CxX_8E-URWCoGib-_3AhuMY0Pbv94dMUkx1KjcJyAhqyUi1kiVjOZ91JSjqlAage9P5KQAHd2WZqMQbzW0WSBRvOaZZMeULxBffJsUq7Fvuqd9x7Y_o45NsrX-1g9W7nd6RqdnZJchw">
+</div>
+</div>
+</header>
+<!-- Shell Layout: Fixed SideNavBar + Main Viewport Canvas -->
+<div class="flex flex-1 relative min-h-[calc(100vh-4rem)]">
+<!-- SideNavBar (Civic Vanguard Evergreen Palette) -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 z-40 flex flex-col justify-between p-4 bg-surface-canvas-pure border-r border-border-subtle-light shadow-sm">
+<div class="flex flex-col gap-4">
+<!-- Identity Header -->
+<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-evergreen-deep text-text-on-dark">
+<div class="w-9 h-9 rounded-lg bg-surface-evergreen-light border border-accent-lime/30 flex items-center justify-center text-accent-lime shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="shield" style="font-variation-settings: &quot;FILL&quot; 1;">shield</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-xs font-heading font-bold text-text-on-dark truncate">HQ Command Hub</span>
+<span class="text-[11px] font-nav text-text-on-dark-muted truncate">Lagos Works Ministry</span>
+</div>
+</div>
+<!-- 6 Main Tabs -->
+<nav class="flex flex-col gap-1">
+<a class="text-text-secondary-dark hover:bg-background hover:text-surface-evergreen-base font-nav text-xs font-semibold rounded-lg px-3 py-2 flex items-center gap-2.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span>Incident Grid</span>
+</a>
+<a class="text-text-secondary-dark hover:bg-background hover:text-surface-evergreen-base font-nav text-xs font-semibold rounded-lg px-3 py-2 flex items-center gap-2.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="local_shipping">local_shipping</span>
+<span>Live Dispatch</span>
+</a>
+<a class="text-text-secondary-dark hover:bg-background hover:text-surface-evergreen-base font-nav text-xs font-semibold rounded-lg px-3 py-2 flex items-center gap-2.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="map">map</span>
+<span>Map Telemetry</span>
+</a>
+<a class="text-text-secondary-dark hover:bg-background hover:text-surface-evergreen-base font-nav text-xs font-semibold rounded-lg px-3 py-2 flex items-center gap-2.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="assignment">assignment</span>
+<span>Work Orders</span>
+</a>
+<!-- Active Tab: Audit Trails / SLA Analytics -->
+<a class="bg-surface-evergreen-base text-accent-lime font-nav text-xs font-bold rounded-lg px-3 py-2 flex items-center gap-2.5 shadow-sm" href="#">
+<span class="material-symbols-outlined text-lg text-accent-lime" data-icon="history">history</span>
+<span>Audit Trails</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-accent-lime"></span>
+</a>
+<a class="text-text-secondary-dark hover:bg-background hover:text-surface-evergreen-base font-nav text-xs font-semibold rounded-lg px-3 py-2 flex items-center gap-2.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>System Config</span>
+</a>
+</nav>
+<!-- CTA deploy unit button -->
+<button class="w-full py-2.5 px-3 rounded-lg bg-surface-evergreen-deep text-accent-lime font-nav font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-surface-evergreen-base border border-accent-lime/20 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="crisis_alert">crisis_alert</span>
+<span>Deploy Response Unit</span>
+</button>
+</div>
+<!-- Footer Tabs & Status indicator -->
+<div class="flex flex-col gap-2 pt-3 border-t border-border-subtle-light">
+<a class="text-text-secondary-dark hover:text-surface-evergreen-base font-nav text-xs px-2 py-1 flex items-center gap-2 rounded hover:bg-background transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="help">help</span>
+<span>Help Desk</span>
+</a>
+<a class="text-text-secondary-dark hover:text-surface-evergreen-base font-nav text-xs px-2 py-1 flex items-center gap-2 rounded hover:bg-background transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="sync">sync</span>
+<span>Offline Sync</span>
+<span class="ml-auto w-2 h-2 rounded-full bg-emerald-500"></span>
+</a>
+<div class="px-2 py-1 mt-1 text-[10px] font-mono text-text-secondary-dark flex items-center justify-between border-t border-border-subtle-light pt-2">
+<span>SLA ENGINE v2.4.1</span>
+<span class="text-surface-evergreen-base font-semibold font-mono">99.98% LIVE</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas (Offset for fixed 64px SideNav) -->
+<main class="ml-64 flex-1 p-6 lg:p-8 min-w-0 bg-background">
+<!-- Top Title & Filter Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-border-subtle-light">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full text-[11px] font-badge font-bold bg-surface-evergreen-base text-accent-lime tracking-wider uppercase">Executive Portal</span>
+<span class="text-text-secondary-dark text-xs flex items-center gap-1 font-nav">
+<span class="material-symbols-outlined text-sm text-emerald-600" data-icon="check_circle">check_circle</span>
+              Ministry Verification Active
+            </span>
+</div>
+<h1 class="text-2xl lg:text-3xl font-heading font-extrabold text-surface-evergreen-base tracking-tight leading-tight">
+            Lagos State Municipal Infrastructure Intelligence &amp; SLA Compliance Hub
+          </h1>
+<p class="text-sm font-sans text-text-secondary-dark mt-1">
+            Real-time civic fault telemetry, contractor resolution velocity, and spatial auditing
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<!-- Date Filter Selector -->
+<div class="flex items-center bg-surface-canvas-pure border border-border-subtle-light rounded-xl px-3.5 py-2 shadow-sm">
+<span class="material-symbols-outlined text-surface-evergreen-base mr-2.5 text-lg" data-icon="calendar_month">calendar_month</span>
+<div class="flex flex-col">
+<span class="text-[9px] font-badge uppercase font-bold tracking-wider text-text-secondary-dark">Reporting Cycle</span>
+<span class="text-xs font-nav font-bold text-surface-evergreen-base">Q1 2026 / Year-to-Date</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark ml-3 text-base" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<!-- Export Action -->
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-evergreen-base text-text-on-dark hover:bg-surface-evergreen-deep font-nav font-bold text-xs uppercase tracking-wider transition-all shadow">
+<span class="material-symbols-outlined text-accent-lime text-base" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span>Export Briefing</span>
+</button>
+</div>
+</div>
+<!-- Early Warning Advisory Banner (Monsoon Pre-Emptive) with warm terracotta critical indicators -->
+<div class="mb-6 rounded-2xl bg-white border-2 border-accent-terracotta/30 p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-terracotta"></div>
+<div class="flex items-start gap-3.5 pl-2">
+<div class="w-11 h-11 rounded-xl bg-accent-terracotta text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-2xl" data-icon="flood" style="font-variation-settings: &quot;FILL&quot; 1;">flood</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-badge font-extrabold px-2 py-0.5 rounded-full bg-accent-terracotta text-white tracking-wider uppercase">CRITICAL ADVISORY</span>
+<span class="text-xs font-mono font-semibold text-accent-terracotta-hover">EARLY WARNING RADAR • DRAINAGE COMMISSION</span>
+</div>
+<p class="text-sm font-sans font-bold text-surface-evergreen-base mt-1">
+              Pre-Monsoon Flood Prevention Priority: 14 drainage choke points identified in Surulere &amp; Kosofe requiring preventive desilting before heavy rainfall
+            </p>
+<p class="text-xs font-sans text-text-secondary-dark mt-0.5">
+              Telemetry shows silt obstruction levels exceeding 78% in canal feeder lines <span class="font-mono font-semibold text-surface-evergreen-base">SF-DRAIN-409</span> &amp; <span class="font-mono font-semibold text-surface-evergreen-base">SF-DRAIN-412</span>.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto pl-2 md:pl-0">
+<button class="px-4 py-2 rounded-lg bg-accent-terracotta text-white text-xs font-nav font-bold hover:bg-accent-terracotta-hover transition-colors flex items-center gap-1.5 w-full md:w-auto justify-center shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="emergency_share">emergency_share</span>
+<span>Dispatch Desilting Unit</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-canvas-pure border border-border-subtle-light text-surface-evergreen-base hover:bg-background text-xs font-nav font-semibold transition-colors">
+            View Telemetry
+          </button>
+</div>
+</div>
+<!-- Section 1: Executive KPI Cards (Civic Vanguard Bento) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
+<!-- KPI 1: Total Incidents -->
+<div class="ops-card ops-card-hover rounded-2xl p-5 flex flex-col justify-between border-t-4 border-t-accent-terracotta">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-badge font-bold uppercase tracking-wider text-text-secondary-dark">Total Incidents Reported YTD</span>
+<span class="w-8 h-8 rounded-lg bg-accent-terracotta/10 text-accent-terracotta flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="report_problem">report_problem</span>
+</span>
+</div>
+<div class="my-4">
+<div class="text-3xl font-heading font-extrabold text-surface-evergreen-base tracking-tight font-mono">14,892</div>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="inline-flex items-center text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+<span class="material-symbols-outlined text-xs mr-0.5" data-icon="trending_up">trending_up</span>
+                +18.4%
+              </span>
+<span class="text-xs font-sans text-text-secondary-dark">resident civic engagement vs 2025</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-accent-terracotta h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- KPI 2: MTTR -->
+<div class="ops-card ops-card-hover rounded-2xl p-5 flex flex-col justify-between border-t-4 border-t-surface-evergreen-base">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-badge font-bold uppercase tracking-wider text-text-secondary-dark">Mean Time to Resolution (MTTR)</span>
+<span class="w-8 h-8 rounded-lg bg-surface-evergreen-base/10 text-surface-evergreen-base flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+</span>
+</div>
+<div class="my-4">
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-heading font-extrabold text-surface-evergreen-base tracking-tight font-mono">3.8 Days</span>
+<span class="text-xs font-mono text-text-secondary-dark">/ 5.0d benchmark</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="inline-flex items-center text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+<span class="material-symbols-outlined text-xs mr-0.5" data-icon="arrow_downward">arrow_downward</span>
+                -1.2 Days
+              </span>
+<span class="text-xs font-sans text-text-secondary-dark">velocity improvement speed</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-surface-evergreen-base h-full rounded-full" style="width: 76%"></div>
+</div>
+</div>
+<!-- KPI 3: SLA Compliance Rate -->
+<div class="ops-card ops-card-hover rounded-2xl p-5 flex flex-col justify-between border-t-4 border-t-accent-lime bg-gradient-to-b from-white to-accent-lime/5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-badge font-bold uppercase tracking-wider text-text-secondary-dark">Overall SLA Compliance Rate</span>
+<span class="w-8 h-8 rounded-lg bg-surface-evergreen-base text-accent-lime flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-lg font-bold" data-icon="verified">verified</span>
+</span>
+</div>
+<div class="my-4">
+<div class="text-3xl font-heading font-extrabold text-surface-evergreen-base tracking-tight font-mono">94.6%</div>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="inline-flex items-center text-surface-evergreen-base bg-accent-lime px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+                Target: 90.0%
+              </span>
+<span class="text-xs font-sans text-text-secondary-dark">resolved in regulatory window</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-surface-evergreen-base h-full rounded-full" style="width: 94.6%"></div>
+</div>
+</div>
+<!-- KPI 4: Verified Fixes -->
+<div class="ops-card ops-card-hover rounded-2xl p-5 flex flex-col justify-between border-t-4 border-t-teal-700">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-badge font-bold uppercase tracking-wider text-text-secondary-dark">Verified Fixes Audited</span>
+<span class="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="fact_check">fact_check</span>
+</span>
+</div>
+<div class="my-4">
+<div class="text-3xl font-heading font-extrabold text-surface-evergreen-base tracking-tight font-mono">11,420</div>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="inline-flex items-center text-teal-800 bg-teal-100 px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+                100% PHOTO PROOF
+              </span>
+<span class="text-xs font-sans text-text-secondary-dark">geotagged AI before/after check</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-teal-700 h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+</section>
+<!-- Center Split: Section 2 (Heatmap & LGA Matrix) + Section 3 (Category SLA Breakdown) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+<!-- Left: Interactive Geographic Heatmap & LGA Breakdown (7 Cols) -->
+<div class="lg:col-span-7 ops-card rounded-2xl p-5 flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-border-subtle-light gap-2">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-evergreen-base text-xl" data-icon="location_city">location_city</span>
+<h2 class="text-base font-heading font-bold text-surface-evergreen-base">Lagos 20 Local Government Areas (LGA) Fault Matrix</h2>
+</div>
+<p class="text-xs font-sans text-text-secondary-dark">Real-time geospatial concentration and infrastructure density heatmap</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-badge font-bold text-text-secondary-dark uppercase">Severity:</span>
+<div class="flex items-center gap-1 text-[10px] font-mono">
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">Low</span>
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold">Moderate</span>
+<span class="px-2 py-0.5 rounded bg-orange-100 text-orange-800 font-semibold">High</span>
+<span class="px-2 py-0.5 rounded bg-accent-terracotta text-white font-bold">Critical</span>
+</div>
+</div>
+</div>
+<!-- Heatmap Canvas Simulation -->
+<div class="my-4 relative rounded-xl overflow-hidden border border-border-subtle-light bg-slate-100 h-72">
+<img alt="Lagos Municipal Spatial GIS Map" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpqm3ntDKWAgVnAmo9b3KYmpChXe-z4cw4VE1_HiB4m7tcCXf78rEN8OE5WuzQeHdf7SnUjh6TIGSZKS3FGC9wGxt9nb3FtQJdDA3A7vn_5QamHS_TP7E-92Ps1-ax_DPcaT9pGW8e60MdMocoJ7fUYYw8Qnkz03g5Fa8vlwwVLMLlIJqz0XPMBRwvpFUpGzHRn2ncWFJ4IYwN0yDRcpWls365c7L1m22R_zVVJw">
+<!-- Floating Hotspot Indicators in Civic Vanguard Styling -->
+<div class="absolute top-10 left-1/3 bg-surface-evergreen-base/95 text-white backdrop-blur px-3 py-1.5 rounded-lg shadow-lg border border-accent-terracotta flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-accent-terracotta animate-pulse"></span>
+<div>
+<p class="text-xs font-heading font-bold text-white leading-tight">Ikeja Central Corridor</p>
+<p class="text-[10px] font-mono text-accent-lime">3,420 Active Incidents (Hotspot)</p>
+</div>
+</div>
+<div class="absolute bottom-12 left-1/4 bg-surface-evergreen-base/95 text-white backdrop-blur px-3 py-1.5 rounded-lg shadow-lg border border-border-subtle-dark flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<div>
+<p class="text-xs font-heading font-bold text-white leading-tight">Oshodi-Isolo Express</p>
+<p class="text-[10px] font-mono text-text-on-dark-muted">2,150 Reports • 92% SLA</p>
+</div>
+</div>
+<div class="absolute top-16 right-1/4 bg-surface-evergreen-base/95 text-white backdrop-blur px-3 py-1.5 rounded-lg shadow-lg border border-border-subtle-dark flex items-center gap-2.5">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+<div>
+<p class="text-xs font-heading font-bold text-white leading-tight">Alimosho Sector IV</p>
+<p class="text-[10px] font-mono text-text-on-dark-muted">1,980 Reports • Drainage choke</p>
+</div>
+</div>
+<!-- Map Controls overlay -->
+<div class="absolute bottom-3 right-3 flex flex-col gap-1 bg-surface-evergreen-base/90 backdrop-blur rounded-lg p-1 border border-border-subtle-dark shadow-md text-text-on-dark">
+<button class="w-7 h-7 flex items-center justify-center hover:bg-surface-evergreen-light rounded text-text-on-dark transition-colors" title="Zoom In">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center hover:bg-surface-evergreen-light rounded text-text-on-dark transition-colors" title="Zoom Out">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center hover:bg-surface-evergreen-light rounded text-accent-lime transition-colors" title="Layers">
+<span class="material-symbols-outlined text-sm" data-icon="layers">layers</span>
+</button>
+</div>
+</div>
+<!-- Top 4 LGA Breakdown Table Matrix -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs font-sans">
+<thead>
+<tr class="border-b border-border-subtle-light text-text-secondary-dark text-[10px] font-badge font-bold uppercase tracking-wider bg-background/50">
+<th class="py-2.5 px-2">Local Government Area</th>
+<th class="py-2.5 px-2">Report Volume</th>
+<th class="py-2.5 px-2">Primary Fault Type</th>
+<th class="py-2.5 px-2">MTTR Avg</th>
+<th class="py-2.5 px-2 text-right">SLA Compliance</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle-light">
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-2.5 px-2 font-nav font-bold text-surface-evergreen-base flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-accent-terracotta"></span>
+                    Ikeja LGA
+                  </td>
+<td class="py-2.5 px-2 font-mono font-semibold text-text-primary-dark">3,420</td>
+<td class="py-2.5 px-2 text-text-secondary-dark">Potholes &amp; Asphalt Fractures</td>
+<td class="py-2.5 px-2 font-mono">3.1 days</td>
+<td class="py-2.5 px-2 text-right font-mono text-emerald-800 font-bold">96.2%</td>
+</tr>
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-2.5 px-2 font-nav font-bold text-surface-evergreen-base flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Oshodi-Isolo LGA
+                  </td>
+<td class="py-2.5 px-2 font-mono font-semibold text-text-primary-dark">2,150</td>
+<td class="py-2.5 px-2 text-text-secondary-dark">Drainage &amp; Canal Silt</td>
+<td class="py-2.5 px-2 font-mono">4.0 days</td>
+<td class="py-2.5 px-2 text-right font-mono text-emerald-800 font-bold">93.8%</td>
+</tr>
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-2.5 px-2 font-nav font-bold text-surface-evergreen-base flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Alimosho LGA
+                  </td>
+<td class="py-2.5 px-2 font-mono font-semibold text-text-primary-dark">1,980</td>
+<td class="py-2.5 px-2 text-text-secondary-dark">Road Erosion &amp; Culverts</td>
+<td class="py-2.5 px-2 font-mono">4.4 days</td>
+<td class="py-2.5 px-2 text-right font-mono text-amber-700 font-bold">89.4%</td>
+</tr>
+<tr class="hover:bg-background/80 transition-colors">
+<td class="py-2.5 px-2 font-nav font-bold text-surface-evergreen-base flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    Lagos Island LGA
+                  </td>
+<td class="py-2.5 px-2 font-mono font-semibold text-text-primary-dark">1,410</td>
+<td class="py-2.5 px-2 text-text-secondary-dark">Streetlights &amp; Grid Cables</td>
+<td class="py-2.5 px-2 font-mono">2.6 days</td>
+<td class="py-2.5 px-2 text-right font-mono text-emerald-800 font-bold">97.8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right: Resolution Performance & Category Breakdown (5 Cols) -->
+<div class="lg:col-span-5 ops-card rounded-2xl p-5 flex flex-col justify-between">
+<div class="pb-4 border-b border-border-subtle-light">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-evergreen-base text-xl" data-icon="bar_chart">bar_chart</span>
+<h2 class="text-base font-heading font-bold text-surface-evergreen-base">Category SLA Breakdown</h2>
+</div>
+<span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-surface-evergreen-base text-accent-lime uppercase tracking-wider">TARGET: ≤ 5.0 DAYS</span>
+</div>
+<p class="text-xs font-sans text-text-secondary-dark mt-1">Volume handled vs target SLA conformance across major civil departments</p>
+</div>
+<!-- Progress Bars per Sector with Vanguard Evergreen & Lime accents -->
+<div class="flex flex-col gap-3.5 my-4">
+<!-- Category 1: Potholes -->
+<div class="bg-background p-3 rounded-xl border border-border-subtle-light">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-evergreen-base text-base" data-icon="traffic">traffic</span>
+<span class="text-xs font-nav font-bold text-surface-evergreen-base">Potholes &amp; Road Hazards</span>
+</div>
+<span class="text-xs font-mono font-bold text-surface-evergreen-base">6,240 / 6,500 (96.0%)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-1.5">
+<div class="bg-surface-evergreen-base h-full rounded-full" style="width: 96%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-sans text-text-secondary-dark">
+<span>Avg Resolution: <strong class="text-surface-evergreen-base font-mono">3.2 Days</strong></span>
+<span class="text-emerald-800 font-bold flex items-center gap-0.5 text-xs">
+<span class="material-symbols-outlined text-xs" data-icon="check">check</span> SLA Compliant
+                </span>
+</div>
+</div>
+<!-- Category 2: Canals / Drainage -->
+<div class="bg-background p-3 rounded-xl border border-border-subtle-light">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-terracotta text-base" data-icon="water_damage">water_damage</span>
+<span class="text-xs font-nav font-bold text-surface-evergreen-base">Canals &amp; Drainage Networks</span>
+</div>
+<span class="text-xs font-mono font-bold text-surface-evergreen-base">3,890 / 4,200 (92.6%)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-1.5">
+<div class="bg-accent-terracotta h-full rounded-full" style="width: 92.6%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-sans text-text-secondary-dark">
+<span>Avg Resolution: <strong class="text-surface-evergreen-base font-mono">4.1 Days</strong></span>
+<span class="text-emerald-800 font-bold flex items-center gap-0.5 text-xs">
+<span class="material-symbols-outlined text-xs" data-icon="check">check</span> SLA Compliant
+                </span>
+</div>
+</div>
+<!-- Category 3: Waste Disposal -->
+<div class="bg-background p-3 rounded-xl border border-border-subtle-light">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-700 text-base" data-icon="delete">delete</span>
+<span class="text-xs font-nav font-bold text-surface-evergreen-base">Waste Disposal &amp; Blackspots</span>
+</div>
+<span class="text-xs font-mono font-bold text-surface-evergreen-base">2,610 / 2,750 (94.9%)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-1.5">
+<div class="bg-amber-600 h-full rounded-full" style="width: 94.9%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-sans text-text-secondary-dark">
+<span>Avg Resolution: <strong class="text-surface-evergreen-base font-mono">2.1 Days</strong></span>
+<span class="text-emerald-800 font-bold flex items-center gap-0.5 text-xs">
+<span class="material-symbols-outlined text-xs text-amber-600" data-icon="bolt">bolt</span> High Velocity
+                </span>
+</div>
+</div>
+<!-- Category 4: Streetlights & Electrical -->
+<div class="bg-background p-3 rounded-xl border border-border-subtle-light">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-700 text-base" data-icon="lightbulb">lightbulb</span>
+<span class="text-xs font-nav font-bold text-surface-evergreen-base">Streetlights &amp; Grid Cables</span>
+</div>
+<span class="text-xs font-mono font-bold text-surface-evergreen-base">1,680 / 1,742 (96.4%)</span>
+</div>
+<div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-1.5">
+<div class="bg-teal-700 h-full rounded-full" style="width: 96.4%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-sans text-text-secondary-dark">
+<span>Avg Resolution: <strong class="text-surface-evergreen-base font-mono">2.4 Days</strong></span>
+<span class="text-emerald-800 font-bold flex items-center gap-0.5 text-xs">
+<span class="material-symbols-outlined text-xs" data-icon="check">check</span> SLA Compliant
+                </span>
+</div>
+</div>
+</div>
+<!-- Summary Metric Footer -->
+<div class="pt-3 border-t border-border-subtle-light flex items-center justify-between text-xs">
+<span class="text-text-secondary-dark font-sans">Aggregate Work Orders Closed:</span>
+<span class="font-mono font-bold text-surface-evergreen-base bg-accent-lime/30 px-2 py-0.5 rounded border border-accent-lime/40">14,420 / 15,192 (94.9%)</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Department & Contractor SLA Performance Scorecard -->
+<section class="ops-card rounded-2xl p-5 mb-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-border-subtle-light gap-3">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-evergreen-base text-xl" data-icon="engineering">engineering</span>
+<h2 class="text-base font-heading font-bold text-surface-evergreen-base">Department &amp; Contractor SLA Performance Scorecard</h2>
+</div>
+<p class="text-xs font-sans text-text-secondary-dark">Ranked municipal response squads &amp; private public-works contractors by repair speed and resident verification rating</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 text-xs font-nav font-bold rounded-lg bg-surface-evergreen-base text-accent-lime hover:bg-surface-evergreen-deep transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+              All Zones
+            </button>
+<button class="px-3 py-1.5 text-xs font-nav font-semibold rounded-lg border border-border-subtle-light text-text-secondary-dark hover:text-surface-evergreen-base hover:bg-background transition-colors">
+              Q1 Benchmarks
+            </button>
+</div>
+</div>
+<!-- High-density Scorecard Table -->
+<div class="overflow-x-auto mt-4">
+<table class="w-full text-left text-xs font-sans">
+<thead>
+<tr class="border-b border-border-subtle-light text-text-secondary-dark text-[10px] font-badge font-bold uppercase tracking-wider bg-background">
+<th class="py-3 px-3">Rank &amp; Entity Name</th>
+<th class="py-3 px-3">Operations Sector</th>
+<th class="py-3 px-3">Work Orders Completed</th>
+<th class="py-3 px-3">Average Turnaround</th>
+<th class="py-3 px-3">Resident CSAT (5.0)</th>
+<th class="py-3 px-3">AI Photo Audit</th>
+<th class="py-3 px-3 text-right">Status Tier</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle-light">
+<!-- Row 1: Rapid Asphalt Taskforce -->
+<tr class="hover:bg-background transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-accent-lime text-surface-evergreen-base flex items-center justify-center font-mono text-xs font-extrabold shadow-sm">1</span>
+<div>
+<p class="font-nav font-bold text-surface-evergreen-base">Lagos State Rapid Asphalt Taskforce</p>
+<p class="text-[11px] font-mono text-text-secondary-dark">Municipal Squad #04 • Zone 1</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-badge font-semibold bg-surface-evergreen-base/5 text-surface-evergreen-base border border-surface-evergreen-base/15">Arterial Roads</span>
+</td>
+<td class="py-3 px-3 font-mono font-bold text-surface-evergreen-base">4,120 Orders</td>
+<td class="py-3 px-3 font-mono text-emerald-800 font-bold">2.8 Days <span class="text-[10px] text-emerald-600 font-normal">(Fastest)</span></td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-1 font-mono font-bold text-surface-evergreen-base">
+<span class="material-symbols-outlined text-amber-500 text-sm" data-icon="star" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span>4.9</span>
+<span class="text-text-secondary-dark text-[10px] font-normal">(8,940 votes)</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center text-emerald-800 font-mono font-semibold text-xs">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="verified_user">verified_user</span> 99.1% Pass
+                  </span>
+</td>
+<td class="py-3 px-3 text-right">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-badge font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300">EXCELLENCE</span>
+</td>
+</tr>
+<!-- Row 2: JB Corp -->
+<tr class="hover:bg-background transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-mono text-xs font-extrabold">2</span>
+<div>
+<p class="font-nav font-bold text-surface-evergreen-base">JB Infrastructure Maintenance Corp</p>
+<p class="text-[11px] font-mono text-text-secondary-dark">Contractor Code: JB-LAG-902</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-badge font-semibold bg-surface-evergreen-base/5 text-surface-evergreen-base border border-surface-evergreen-base/15">Highways &amp; Bridges</span>
+</td>
+<td class="py-3 px-3 font-mono font-bold text-surface-evergreen-base">3,250 Orders</td>
+<td class="py-3 px-3 font-mono text-emerald-800 font-bold">3.2 Days</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-1 font-mono font-bold text-surface-evergreen-base">
+<span class="material-symbols-outlined text-amber-500 text-sm" data-icon="star" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span>4.8</span>
+<span class="text-text-secondary-dark text-[10px] font-normal">(6,120 votes)</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center text-emerald-800 font-mono font-semibold text-xs">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="verified_user">verified_user</span> 98.4% Pass
+                  </span>
+</td>
+<td class="py-3 px-3 text-right">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-badge font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300">EXCELLENCE</span>
+</td>
+</tr>
+<!-- Row 3: LAWMA -->
+<tr class="hover:bg-background transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-mono text-xs font-extrabold">3</span>
+<div>
+<p class="font-nav font-bold text-surface-evergreen-base">LAWMA Swift Emergency Squad</p>
+<p class="text-[11px] font-mono text-text-secondary-dark">Municipal Squad #09 • Waste</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-badge font-semibold bg-surface-evergreen-base/5 text-surface-evergreen-base border border-surface-evergreen-base/15">Refuse &amp; Canals</span>
+</td>
+<td class="py-3 px-3 font-mono font-bold text-surface-evergreen-base">2,780 Orders</td>
+<td class="py-3 px-3 font-mono text-emerald-800 font-bold">2.1 Days</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-1 font-mono font-bold text-surface-evergreen-base">
+<span class="material-symbols-outlined text-amber-500 text-sm" data-icon="star" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span>4.7</span>
+<span class="text-text-secondary-dark text-[10px] font-normal">(4,300 votes)</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center text-emerald-800 font-mono font-semibold text-xs">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="verified_user">verified_user</span> 97.2% Pass
+                  </span>
+</td>
+<td class="py-3 px-3 text-right">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-badge font-extrabold bg-blue-100 text-blue-800 border border-blue-300">HIGH COMPLIANCE</span>
+</td>
+</tr>
+<!-- Row 4: Lekki Drainage Works -->
+<tr class="hover:bg-background transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-mono text-xs font-extrabold">4</span>
+<div>
+<p class="font-nav font-bold text-surface-evergreen-base">Eti-Osa Hydrological Engineers</p>
+<p class="text-[11px] font-mono text-text-secondary-dark">Contractor Code: ETI-DRAIN-11</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-badge font-semibold bg-surface-evergreen-base/5 text-surface-evergreen-base border border-surface-evergreen-base/15">Hydraulic Desilting</span>
+</td>
+<td class="py-3 px-3 font-mono font-bold text-surface-evergreen-base">1,270 Orders</td>
+<td class="py-3 px-3 font-mono text-accent-terracotta font-bold">4.6 Days</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-1 font-mono font-bold text-surface-evergreen-base">
+<span class="material-symbols-outlined text-amber-500 text-sm" data-icon="star" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span>4.4</span>
+<span class="text-text-secondary-dark text-[10px] font-normal">(1,890 votes)</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center text-accent-terracotta font-mono font-semibold text-xs">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="warning">warning</span> 91.0% Pass
+                  </span>
+</td>
+<td class="py-3 px-3 text-right">
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-badge font-extrabold bg-amber-100 text-amber-900 border border-amber-300">AUDIT REVIEW</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+<!-- 4. Bottom: Vibrant Chartreuse / Lime Callout Strip -->
+<section class="w-full bg-accent-lime text-surface-evergreen-base py-3.5 px-4 sm:px-6 lg:px-8 border-y border-accent-lime-muted/50 shadow-inner">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-evergreen-base text-accent-lime flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span>
+</div>
+<p class="text-xs sm:text-sm font-sans font-bold text-surface-evergreen-base">
+          Call the StreetFix office directly:
+          <a class="underline underline-offset-2 hover:text-black font-mono font-extrabold text-sm ml-1" href="tel:012270000">01 227 0000</a>
+<span class="font-normal font-sans ml-1 text-surface-evergreen-base/90">(Available Monday–Friday, 8am–5pm)</span>
+</p>
+</div>
+<div class="flex items-center gap-2">
+<a class="px-3.5 py-1.5 rounded-full bg-surface-evergreen-base text-accent-lime hover:bg-surface-evergreen-deep text-xs font-nav font-bold tracking-wide uppercase transition-all shadow-sm" href="tel:012270000">
+          Call Now
+        </a>
+</div>
+</div>
+</section>
+<!-- 4. Footer: Minimalist Dark Evergreen (#132E20) -->
+<footer class="w-full py-5 px-6 lg:px-8 bg-surface-evergreen-base text-text-on-dark border-t border-border-subtle-dark flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans">
+<div class="flex items-center gap-2.5 text-text-on-dark-muted">
+<span class="material-symbols-outlined text-accent-lime text-base" data-icon="account_balance">account_balance</span>
+<span>© 2026 StreetFix Lagos Civic Infrastructure Operations. All rights reserved.</span>
+</div>
+<div class="flex flex-wrap items-center gap-4 text-text-on-dark-muted font-nav">
+<a class="hover:text-accent-lime transition-colors" href="#">Public Accountability Dashboard</a>
+<a class="hover:text-accent-lime transition-colors" href="#">Service Level Agreements</a>
+<a class="hover:text-accent-lime transition-colors" href="#">Report Vulnerability</a>
+<a class="hover:text-accent-lime transition-colors" href="#">Lagos GIS Hub</a>
+<a class="hover:text-accent-lime transition-colors" href="#">Privacy Notice</a>
+</div>
+</footer>
+
+
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

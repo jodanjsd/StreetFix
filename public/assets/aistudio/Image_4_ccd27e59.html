@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Report Civic Fault &amp; Infrastructure Incident - StreetFix 2.0</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary": "#2d0700",
+          "surface-container-high": "#e7e9e3",
+          "on-error-container": "#93000a",
+          "surface-evergreen-light": "#183D2A",
+          "inverse-surface": "#2e312e",
+          "surface-variant": "#e1e3de",
+          "on-secondary": "#ffffff",
+          "on-secondary-fixed": "#171e00",
+          "on-primary-container": "#799784",
+          "surface-dim": "#d9dbd5",
+          "on-primary-fixed-variant": "#314d3d",
+          "on-background": "#191c19",
+          "surface-container-highest": "#e1e3de",
+          "text-secondary-dark": "#4A5568",
+          "error": "#ba1a1a",
+          "primary": "#00190d",
+          "tertiary-container": "#501400",
+          "on-tertiary-fixed-variant": "#832600",
+          "outline": "#727973",
+          "on-primary": "#ffffff",
+          "text-on-dark-muted": "#A3B899",
+          "surface-container": "#edeee9",
+          "background": "#f8faf5",
+          "on-tertiary-container": "#ea693c",
+          "surface-bright": "#f8faf5",
+          "accent-terracotta-hover": "#D35400",
+          "tertiary-fixed": "#ffdbd0",
+          "tertiary-fixed-dim": "#ffb59d",
+          "on-primary-fixed": "#052013",
+          "text-primary-dark": "#1A1D1A",
+          "surface-container-low": "#f3f4ef",
+          "secondary": "#526600",
+          "error-container": "#ffdad6",
+          "on-tertiary": "#ffffff",
+          "accent-lime": "#D8FA64",
+          "surface-evergreen-deep": "#0B231A",
+          "on-secondary-container": "#576c00",
+          "surface-evergreen-base": "#132E20",
+          "on-error": "#ffffff",
+          "text-on-dark": "#FFFFFF",
+          "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+          "border-subtle-light": "#E2E8F0",
+          "accent-terracotta": "#E06236",
+          "on-secondary-fixed-variant": "#3d4c00",
+          "on-surface-variant": "#424843",
+          "inverse-primary": "#afceb9",
+          "inverse-on-surface": "#f0f1ec",
+          "primary-fixed-dim": "#afceb9",
+          "primary-container": "#132e20",
+          "surface-tint": "#496554",
+          "primary-fixed": "#cbead5",
+          "surface": "#f8faf5",
+          "secondary-fixed": "#cef05b",
+          "secondary-container": "#cef05b",
+          "on-surface": "#191c19",
+          "surface-canvas-light": "#F9FAF9",
+          "on-tertiary-fixed": "#390b00",
+          "outline-variant": "#c2c8c2",
+          "accent-lime-muted": "#C8E665",
+          "surface-canvas-pure": "#FFFFFF",
+          "secondary-fixed-dim": "#b3d341",
+          "surface-container-lowest": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "fontFamily": {
+          "sans": ["DM Sans", "sans-serif"],
+          "manrope": ["Manrope", "sans-serif"]
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined[data-weight="fill"] {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-[#F9FAF9] text-on-surface antialiased min-h-screen flex flex-col font-sans">
+<!-- ================= TOP NAVIGATION (Dark Evergreen #132E20) ================= -->
+<header class="w-full bg-[#132E20] border-b border-[#183D2A] sticky top-0 z-50 text-white shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Brand Logo -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5" href="#"></a>
+<!-- Left Utility: Lagos State Geotag Hub indicator -->
+<div class="hidden xl:flex items-center gap-2 pl-4 border-l border-white/10 text-xs text-[#A3B899]">
+<span class="w-2 h-2 rounded-full bg-[#D8FA64] animate-pulse"></span>
+<span>Lagos Cadastral Telemetry: 99.4% Live</span>
+</div>
+</div>
+<!-- Navigation Right Links & Actions -->
+<div class="flex items-center gap-3 sm:gap-6 font-manrope text-sm">
+<a class="hidden md:flex items-center gap-1.5 text-[#A3B899] hover:text-[#D8FA64] transition-colors" href="tel:012270000">
+<span class="material-symbols-outlined text-base">call</span>
+<span>Call office (01 227 0000)</span>
+</a>
+<a class="hidden sm:inline-block text-[#A3B899] hover:text-white transition-colors" href="#">Admin portal</a>
+<a class="text-[#A3B899] hover:text-white transition-colors" href="#">Log in</a>
+<!-- Primary Action: Chartreuse Lime CTA -->
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D8FA64] text-[#132E20] hover:bg-[#C8E665] font-semibold text-sm shadow-sm transition-all duration-150 active:scale-95" href="#report-section">
+<span class="material-symbols-outlined text-lg" data-icon="add_location_alt">add_location_alt</span>
+<span>Report Incident</span>
+</a>
+</div>
+</div>
+</header>
+<!-- ================= SUB-HEADER / BANNER ================= -->
+<section class="bg-white border-b border-[#E2E8F0] py-6 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 text-xs font-manrope font-medium text-gray-500 mb-1.5">
+<span class="hover:text-[#132E20] cursor-pointer">Lagos State Infrastructure Desk</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="hover:text-[#132E20] cursor-pointer">Resident Submissions</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-[#132E20] font-semibold">GPS Geotag Studio</span>
+</div>
+<h1 class="text-2xl sm:text-3xl font-bold font-sans text-[#1A1D1A] tracking-tight">
+        Citizen Incident Reporting &amp; GPS Geotag Studio
+      </h1>
+<p class="text-sm text-gray-600 mt-1">Submit high-precision civic infrastructure defects directly to the Lagos Works Dispatch system.</p>
+</div>
+<!-- Live Badge -->
+<div class="inline-flex items-center gap-2 bg-[#F3F4EF] border border-[#E2E8F0] px-3.5 py-1.5 rounded-full text-xs font-manrope self-start md:self-auto">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-bold text-[#132E20] tracking-wide uppercase text-[11px]">Civic Vanguard System Online</span>
+</div>
+</div>
+</section>
+<!-- ================= 4-STEP WIZARD INDICATOR ================= -->
+<div class="bg-[#F8FAF5] border-b border-[#E2E8F0] px-4 sm:px-6 lg:px-8 py-3.5">
+<div class="max-w-7xl mx-auto">
+<nav aria-label="Step progress" class="py-1">
+<ol class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<!-- Step 1 (Active) -->
+<li class="flex items-center gap-3 bg-white border-2 border-[#132E20] px-4 py-2.5 rounded-xl shadow-xs">
+<div class="w-7 h-7 rounded-full bg-[#132E20] text-[#D8FA64] flex items-center justify-center font-bold text-xs">
+            1
+          </div>
+<div class="min-w-0">
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-[#132E20] block">Step 1 (Active)</span>
+<span class="text-xs sm:text-sm font-bold text-[#132E20] truncate block">Location &amp; Coordinates</span>
+</div>
+</li>
+<!-- Step 2 -->
+<li class="flex items-center gap-3 bg-white/70 border border-[#E2E8F0] px-4 py-2.5 rounded-xl opacity-90">
+<div class="w-7 h-7 rounded-full bg-[#E2E8F0] text-gray-600 flex items-center justify-center font-bold text-xs">
+            2
+          </div>
+<div class="min-w-0">
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-gray-500 block">Step 2</span>
+<span class="text-xs sm:text-sm font-medium text-gray-700 truncate block">Fault &amp; Severity</span>
+</div>
+</li>
+<!-- Step 3 -->
+<li class="flex items-center gap-3 bg-white/70 border border-[#E2E8F0] px-4 py-2.5 rounded-xl opacity-90">
+<div class="w-7 h-7 rounded-full bg-[#E2E8F0] text-gray-600 flex items-center justify-center font-bold text-xs">
+            3
+          </div>
+<div class="min-w-0">
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-gray-500 block">Step 3</span>
+<span class="text-xs sm:text-sm font-medium text-gray-700 truncate block">Evidence &amp; Verification</span>
+</div>
+</li>
+<!-- Step 4 -->
+<li class="flex items-center gap-3 bg-white/70 border border-[#E2E8F0] px-4 py-2.5 rounded-xl opacity-90">
+<div class="w-7 h-7 rounded-full bg-[#E2E8F0] text-gray-600 flex items-center justify-center font-bold text-xs">
+            4
+          </div>
+<div class="min-w-0">
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-gray-500 block">Step 4</span>
+<span class="text-xs sm:text-sm font-medium text-gray-700 truncate block">Tracking Ticket</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<!-- ================= MAIN TWO-COLUMN LAYOUT ================= -->
+<main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8" id="report-section">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT MAIN PANEL: 8 Columns -->
+<div class="lg:col-span-8 space-y-6">
+<!-- ================= SECTION 1: GEOLOCATION & CADASTRAL SURVEY ================= -->
+<section class="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-6 space-y-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E2E8F0]">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#F3F4EF] text-[#132E20] flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="pin_drop">pin_drop</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#1A1D1A]">1. Pinpoint Fault Geolocation</h2>
+<p class="text-xs text-gray-500">Calibrate pinpoint on Lagos Metropolitan Cadastral Grid</p>
+</div>
+</div>
+<!-- Precision Coordinates Tag -->
+<div class="inline-flex items-center gap-2 bg-[#F3F4EF] border border-[#c2c8c2] px-3 py-1.5 rounded-lg text-[#132E20] text-xs font-mono">
+<span class="material-symbols-outlined text-sm text-[#526600]" data-icon="satellite_alt">satellite_alt</span>
+<span class="font-semibold">6.6018° N, 3.3515° E</span>
+<span class="font-manrope font-bold text-[10px] bg-[#D8FA64] text-[#132E20] px-1.5 py-0.5 rounded">±2m Precision</span>
+</div>
+</div>
+<!-- Interactive Cadastral Map -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden border border-[#E2E8F0] bg-slate-900 group">
+<img class="w-full h-full object-cover opacity-85" data-alt="A clean modern municipal GIS satellite map interface of Lagos Nigeria featuring street grid lines, LGA administrative borders, water body outlines around Lagos Lagoon, and a prominent high-contrast civic orange geotag pin marker with radar ping rings in bright crisp light mode colors." data-location="Lagos, Nigeria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBedC-C0PYZzew5wFdTuq8CpwFtj31xHDkghdT8F6euMPji44njPCVMMoPMksifA9WgVTxA8jgFwDyESUz2hPErFRTWBCrrIgUVLpl3v6HEjGP6cipQrMyNJDtnWMZxbKGHVMzlk3VJWQd7BQQoOnkRDNE3CpawgbSPUAbNbB57hhXeMS-e455d85olYosqoO1yDdEtarhJ1Yh1otlHE7ckvcREHvPMFUgvsr1W5A">
+<!-- Location Filter Pills -->
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+<button class="bg-white/95 backdrop-blur text-[#132E20] text-[11px] font-manrope font-bold px-2.5 py-1 rounded-md shadow border border-[#E2E8F0] hover:bg-[#F3F4EF]" type="button">
+              Ikeja Central
+            </button>
+<button class="bg-white/95 backdrop-blur text-gray-700 text-[11px] font-manrope font-semibold px-2.5 py-1 rounded-md shadow border border-[#E2E8F0] hover:bg-[#F3F4EF]" type="button">
+              Surulere
+            </button>
+<button class="bg-white/95 backdrop-blur text-gray-700 text-[11px] font-manrope font-semibold px-2.5 py-1 rounded-md shadow border border-[#E2E8F0] hover:bg-[#F3F4EF]" type="button">
+              Lekki Phase 1
+            </button>
+<button class="bg-white/95 backdrop-blur text-gray-700 text-[11px] font-manrope font-semibold px-2.5 py-1 rounded-md shadow border border-[#E2E8F0] hover:bg-[#F3F4EF]" type="button">
+              Alimosho
+            </button>
+</div>
+<!-- Lagos Grid Center Pin Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="relative flex flex-col items-center">
+<span class="material-symbols-outlined text-[#E06236] text-4xl drop-shadow-md animate-bounce" data-icon="location_on" data-weight="fill">location_on</span>
+<span class="w-4 h-1.5 bg-[#E06236]/40 rounded-full blur-[1px]"></span>
+<div class="mt-1 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-[11px] font-mono font-bold text-[#132E20] shadow-md border border-[#E2E8F0]">
+                Selected: Mobolaji Bank Anthony Way
+              </div>
+</div>
+</div>
+<!-- Map HUD Layer -->
+<div class="absolute bottom-3 right-3 flex items-center gap-1.5 z-10">
+<button class="w-8 h-8 bg-white rounded-md shadow border border-[#E2E8F0] text-gray-800 flex items-center justify-center hover:bg-gray-50" title="Zoom in" type="button">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+<button class="w-8 h-8 bg-white rounded-md shadow border border-[#E2E8F0] text-gray-800 flex items-center justify-center hover:bg-gray-50" title="Zoom out" type="button">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<button class="w-8 h-8 bg-white rounded-md shadow border border-[#E2E8F0] text-[#132E20] flex items-center justify-center hover:bg-gray-50" title="Center view" type="button">
+<span class="material-symbols-outlined text-base">my_location</span>
+</button>
+</div>
+<!-- GPS Floating Action Button -->
+<div class="absolute bottom-3 left-3 z-10">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 bg-[#132E20] text-[#D8FA64] rounded-lg text-xs font-manrope font-bold shadow-md hover:bg-[#183D2A] transition-all active:scale-95" type="button">
+<span class="material-symbols-outlined text-base">near_me</span>
+<span>Use Current GPS Location</span>
+</button>
+</div>
+</div>
+<!-- Administrative & Street Address Grid -->
+<div class="space-y-4 pt-1">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="state-select">
+                Federation State (36 States + FCT) <span class="text-[#BA1A1A]">*</span>
+</label>
+<select class="w-full h-10 px-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20] cursor-pointer" id="state-select">
+<option selected="">Lagos State (Active Cadastre)</option>
+<option>Abuja (FCT)</option>
+<option>Abia</option>
+<option>Adamawa</option>
+<option>Akwa Ibom</option>
+<option>Anambra</option>
+<option>Bauchi</option>
+<option>Bayelsa</option>
+<option>Benue</option>
+<option>Borno</option>
+<option>Cross River</option>
+<option>Delta</option>
+<option>Ebonyi</option>
+<option>Edo</option>
+<option>Ekiti</option>
+<option>Enugu</option>
+<option>Gombe</option>
+<option>Imo</option>
+<option>Jigawa</option>
+<option>Kaduna</option>
+<option>Kano</option>
+<option>Katsina</option>
+<option>Kebbi</option>
+<option>Kogi</option>
+<option>Kwara</option>
+<option>Nasarawa</option>
+<option>Niger</option>
+<option>Ogun</option>
+<option>Ondo</option>
+<option>Osun</option>
+<option>Oyo</option>
+<option>Plateau</option>
+<option>Rivers</option>
+<option>Sokoto</option>
+<option>Taraba</option>
+<option>Yobe</option>
+<option>Zamfara</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="lga-select">
+                Local Government Area (LGA) <span class="text-[#BA1A1A]">*</span>
+</label>
+<select class="w-full h-10 px-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20] cursor-pointer" id="lga-select">
+<option selected="">Ikeja LGA (State Capital)</option>
+<option>Alimosho LGA</option>
+<option>Surulere LGA</option>
+<option>Eti-Osa LGA</option>
+<option>Lagos Island LGA</option>
+<option>Lagos Mainland LGA</option>
+<option>Kosofe LGA</option>
+<option>Oshodi-Isolo LGA</option>
+<option>Ikorodu Central LGA</option>
+<option>Somolu LGA</option>
+<option>Agege LGA</option>
+<option>Mushin LGA</option>
+<option>Amuwo-Odofin LGA</option>
+<option>Apapa LGA</option>
+<option>Ojo LGA</option>
+<option>Badagry LGA</option>
+<option>Ifako-Ijaiye LGA</option>
+<option>Epe LGA</option>
+<option>Ibeju-Lekki LGA</option>
+<option>Ajeromi-Ifelodun LGA</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="lcda-select">
+                LCDA / Ward / Zone <span class="text-[#BA1A1A]">*</span>
+</label>
+<select class="w-full h-10 px-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20] cursor-pointer" id="lcda-select">
+<option selected="">Onigbongbo LCDA / Ward 04 (Bank Anthony)</option>
+<option>Ikeja Central LCDA / Ward 01 (Alausa)</option>
+<option>Ojodu LCDA / Ward 02 (Agidingbi)</option>
+<option>Ojodu LCDA / Ward 03 (Omole Phase 1)</option>
+<option>Onigbongbo LCDA / Ward 05 (Opebi-Allen)</option>
+<option>Ikeja Central LCDA / Ward 06 (GRA Ikeja)</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-7">
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="street-address">
+                Primary Street / Thoroughfare <span class="text-[#BA1A1A]">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-base">route</span>
+<input class="w-full h-10 pl-9 pr-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="street-address" list="lagos-streets-list" type="text" value="Plot 14, Mobolaji Bank Anthony Way">
+<datalist id="lagos-streets-list">
+<option value="Mobolaji Bank Anthony Way"></option>
+<option value="Allen Avenue"></option>
+<option value="Ozumba Mbadiwe Avenue"></option>
+<option value="Herbert Macaulay Way"></option>
+<option value="Awolowo Way, Ikeja"></option>
+<option value="Ikorodu Road Expressway"></option>
+<option value="Ahmadu Bello Way, Victoria Island"></option>
+<option value="Admiralty Way, Lekki Phase 1"></option>
+<option value="Broad Street, Lagos Island"></option>
+<option value="Agege Motor Road"></option>
+</datalist>
+</div>
+</div>
+<div class="md:col-span-5">
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="house-num">
+                House / Parcel Number or Pole ID
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-base">tag</span>
+<input class="w-full h-10 pl-9 pr-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="house-num" placeholder="e.g. Plot 14 or Pole #IKJ-409" type="text" value="Plot 14 / Opposite Block B">
+</div>
+</div>
+<div class="md:col-span-12">
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="landmark">
+                Recognized Civic Landmark / Junction / Cross-Street
+              </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-base">store</span>
+<input class="w-full h-10 pl-9 pr-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="landmark" placeholder="e.g. Directly opposite General Hospital Ikeja, near Maryland Underpass" type="text" value="Opposite General Hospital Ikeja, 120m North of Maryland Underpass flyover">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= SECTION 2: DEFECT CATEGORIZATION & SEVERITY GRID ================= -->
+<section class="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-6 space-y-6">
+<div class="flex items-center gap-3 pb-4 border-b border-[#E2E8F0]">
+<div class="w-9 h-9 rounded-lg bg-[#F3F4EF] text-[#132E20] flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="category">category</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#1A1D1A]">2. Defect Categorization &amp; Severity</h2>
+<p class="text-xs text-gray-500">Classify the infrastructure defect to dispatch the appropriate municipal crew</p>
+</div>
+</div>
+<!-- 6 Selectable Defect Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Card 1: Pothole / Road Failure (Active) -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border-2 border-[#132E20] bg-[#F8FAF5] shadow-xs hover:border-[#132E20] transition-all">
+<input checked="" class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#132E20] text-[#D8FA64] flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Pothole / Road Failure</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">Asphalt craters, edge decay, structural subsidence</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-[#132E20] bg-[#D8FA64]/40 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              Public Works Bureau
+            </span>
+</label>
+<!-- Card 2: Blocked Drainage -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border border-[#E2E8F0] bg-white hover:bg-[#F9FAF9] hover:border-[#132E20]/40 transition-all">
+<input class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#F3F4EF] text-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">water_damage</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Blocked Drainage</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">Silted gutters, flash flood overflow, culvert clogging</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              Drainage Enforcement
+            </span>
+</label>
+<!-- Card 3: Waste Heap / LAWMA -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border border-[#E2E8F0] bg-white hover:bg-[#F9FAF9] hover:border-[#132E20]/40 transition-all">
+<input class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#F3F4EF] text-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">delete_sweep</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Waste Heap / Sanitation</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">Illegal dump sites, median trash spill, commercial refuse</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              LAWMA Waste Authority
+            </span>
+</label>
+<!-- Card 4: Streetlight Failure -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border border-[#E2E8F0] bg-white hover:bg-[#F9FAF9] hover:border-[#132E20]/40 transition-all">
+<input class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#F3F4EF] text-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">light</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Streetlight Failure</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">Dark arterial spans, pole collisions, transformer faults</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              Lagos Electricity Board
+            </span>
+</label>
+<!-- Card 5: Pipe Burst / Water Leak -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border border-[#E2E8F0] bg-white hover:bg-[#F9FAF9] hover:border-[#132E20]/40 transition-all">
+<input class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#F3F4EF] text-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">water</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Pipe Burst / Water Leak</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">LWC main water supply fissure, sidewalk flooding</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              Water Corporation (LWC)
+            </span>
+</label>
+<!-- Card 6: Traffic Signal Defect -->
+<label class="cursor-pointer relative flex flex-col p-4 rounded-xl border border-[#E2E8F0] bg-white hover:bg-[#F9FAF9] hover:border-[#132E20]/40 transition-all">
+<input class="absolute top-3 right-3 text-[#132E20] focus:ring-[#132E20]" name="fault_category" type="radio">
+<div class="w-10 h-10 rounded-lg bg-[#F3F4EF] text-gray-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-xl">traffic</span>
+</div>
+<span class="font-bold text-sm text-[#1A1D1A]">Traffic Signal Defect</span>
+<span class="text-xs text-gray-600 mt-1 flex-1">Non-functional traffic lights, damaged bollards</span>
+<span class="mt-3 inline-block font-manrope text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded w-fit uppercase tracking-wider">
+              LASTMA Signal Eng.
+            </span>
+</label>
+</div>
+<!-- Severity Radio Bar -->
+<div class="p-4 rounded-xl bg-[#F8FAF5] border border-[#E2E8F0] space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold font-manrope text-[#1A1D1A]">Assessment Severity Level</span>
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-gray-500">Triage Impact</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<label class="flex items-center gap-2.5 p-3 rounded-lg border border-[#E2E8F0] bg-white cursor-pointer hover:bg-gray-50">
+<input class="text-[#526600] focus:ring-[#526600]" name="severity" type="radio">
+<div>
+<div class="text-xs font-bold font-manrope text-emerald-800">Low Urgency</div>
+<div class="text-[11px] text-gray-500">Minor surface defect, normal flow</div>
+</div>
+</label>
+<label class="flex items-center gap-2.5 p-3 rounded-lg border border-[#E2E8F0] bg-white cursor-pointer hover:bg-gray-50">
+<input class="text-[#E06236] focus:ring-[#E06236]" name="severity" type="radio">
+<div>
+<div class="text-xs font-bold font-manrope text-amber-800">Moderate Disruption</div>
+<div class="text-[11px] text-gray-500">Vehicles slowing down, lane pinch</div>
+</div>
+</label>
+<label class="flex items-center gap-2.5 p-3 rounded-lg border-2 border-[#ba1a1a] bg-red-50/70 cursor-pointer">
+<input checked="" class="text-[#ba1a1a] focus:ring-[#ba1a1a]" name="severity" type="radio">
+<div>
+<div class="text-xs font-bold font-manrope text-[#ba1a1a]">Critical / Traffic Hazard</div>
+<div class="text-[11px] text-gray-700">Severe bottleneck, vehicle damage</div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- ================= SECTION 3: EVIDENCE VERIFICATION UPLOADER ================= -->
+<section class="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-6 space-y-6">
+<div class="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#F3F4EF] text-[#132E20] flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="photo_camera">photo_camera</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#1A1D1A]">3. Photographic Evidence &amp; Verification</h2>
+<p class="text-xs text-gray-500">Upload clear images; automated EXIF engine validates time &amp; coordinates</p>
+</div>
+</div>
+<span class="text-[11px] font-manrope font-bold bg-[#F3F4EF] text-[#132E20] border border-[#c2c8c2] px-2.5 py-1 rounded">
+            EXIF Engine 2.4
+          </span>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-[#c2c8c2] rounded-xl p-8 bg-[#F8FAF5] hover:bg-[#F3F4EF]/60 transition-all text-center">
+<div class="max-w-md mx-auto flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-[#132E20] text-[#D8FA64] flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-2xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="text-sm font-semibold text-[#1A1D1A]">
+              Drag photographic fault evidence here, or <button class="text-[#E06236] underline hover:text-[#D35400] font-bold" type="button">browse gallery</button>
+</p>
+<p class="text-xs text-gray-500 mt-1">Supports JPG, PNG, HEIC up to 15MB each (Max 4 photos)</p>
+<div class="mt-3 flex items-center gap-1.5 text-[11px] font-mono text-gray-600 bg-white px-3 py-1 rounded-full border border-[#E2E8F0]">
+<span class="material-symbols-outlined text-xs text-emerald-600">check_circle</span>
+<span>Auto-reads GPS geotag &amp; timestamp from device metadata</span>
+</div>
+</div>
+</div>
+<!-- Attached Photo Evidence Chip -->
+<div class="border border-[#E2E8F0] rounded-xl p-3.5 bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-16 h-16 rounded-lg overflow-hidden border border-[#E2E8F0] shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A realistic street-level close-up photograph of a deep, jagged pothole in asphalt road pavement on a busy Lagos highway under harsh tropical midday sunlight, revealing exposed gravel aggregate and street curbing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaWlGL-832CeY91H4zYACvHYJpybP9UINRDICpX0VzEmyz6-B0NhpbsyJyAgB3d45gn8_JFEsNb2kpgbNjmktkXyfUsVKsvx9SWstubXxF-JAYvAXc6zHTIGDI2OcFLXaTBHALwkFw1C95HQg22CYcFwdn9etORFAxDwlED6AfKtYdDZs35laKCsGjRcRIJwRhG7XBqBtCt2O7-6hqhnqi4fsxrU_Bb4NdTgAn9Q">
+<span class="absolute bottom-1 right-1 bg-black/70 text-white font-mono text-[8px] px-1 rounded">IMG_4821</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-[#1A1D1A]">Pothole_MobolajiBank_Hazard.jpg</span>
+<span class="text-xs text-gray-500 font-mono">3.4 MB</span>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">
+<span class="material-symbols-outlined text-xs">verified</span>
+                  GPS Matched: 6.6018° N, 3.3515° E
+                </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 text-slate-700 border border-slate-200">
+<span class="material-symbols-outlined text-xs">schedule</span>
+                  Timestamp: Today, 11:42 AM
+                </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 self-end sm:self-center">
+<button class="p-1.5 text-gray-500 hover:text-[#132E20] hover:bg-[#F3F4EF] rounded-lg" title="Preview Full Quality" type="button">
+<span class="material-symbols-outlined text-lg">zoom_in</span>
+</button>
+<button class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg" title="Remove Attachment" type="button">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Description Notes -->
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="incident-description">
+            Specific Defect Description &amp; Driver Hazard Notes
+          </label>
+<textarea class="w-full p-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="incident-description" placeholder="Describe depth, danger to low-clearance vehicles or okadas, water accumulation, or visible exposed iron rebar..." rows="3"></textarea>
+</div>
+</section>
+<!-- ================= SECTION 4: CITIZEN REPORTER NOTIFICATION CHANNEL ================= -->
+<section class="bg-white rounded-xl border border-[#E2E8F0] shadow-sm p-6 space-y-4">
+<div class="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#F3F4EF] text-[#132E20] flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="contact_page">contact_page</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#1A1D1A]">4. Citizen Reporter Notification Channel</h2>
+<p class="text-xs text-gray-500">Receive real-time WhatsApp &amp; SMS progress alerts when dispatch team mobilizes</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="reporter-name">
+              Full Name
+            </label>
+<input class="w-full h-10 px-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="reporter-name" placeholder="e.g. Babatunde Adeleke" type="text" value="Babatunde Adeleke">
+</div>
+<div>
+<label class="block text-xs font-semibold font-manrope text-[#1A1D1A] mb-1.5" for="reporter-phone">
+              Mobile Number (SMS / WhatsApp) <span class="text-[#BA1A1A]">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 font-mono text-xs text-gray-600 font-semibold">+234</span>
+<input class="w-full h-10 pl-14 pr-3 bg-[#F9FAF9] border border-[#E2E8F0] rounded-lg text-sm text-[#1A1D1A] focus:bg-white focus:border-[#132E20] focus:ring-1 focus:ring-[#132E20]" id="reporter-phone" placeholder="803 000 0000" type="tel" value="0803 892 4110">
+</div>
+</div>
+</div>
+<!-- Anonymous Option Checkbox -->
+<div class="pt-1">
+<label class="inline-flex items-center gap-2.5 cursor-pointer">
+<input class="w-4 h-4 rounded text-[#132E20] focus:ring-[#132E20] border-gray-300" type="checkbox">
+<span class="text-xs text-[#1A1D1A]">Report anonymously (Identity redacted on Lagos Public Civic Transparency Map)</span>
+</label>
+</div>
+</section>
+</div>
+<!-- RIGHT SUMMARY PANEL: 4 Columns (Sticky) -->
+<aside class="lg:col-span-4 space-y-6 sticky top-24">
+<!-- Elevated Ticket Summary Card -->
+<div class="bg-white rounded-xl border border-[#E2E8F0] shadow-md overflow-hidden">
+<!-- Header -->
+<div class="bg-[#132E20] text-white p-4 flex items-center justify-between border-b border-[#183D2A]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#D8FA64]" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-bold text-sm tracking-tight font-manrope">Draft Ticket Summary</span>
+</div>
+<span class="text-[10px] font-bold font-manrope uppercase bg-[#D8FA64]/20 text-[#D8FA64] border border-[#D8FA64]/40 px-2 py-0.5 rounded">
+            Pre-Submission
+          </span>
+</div>
+<div class="p-5 space-y-5">
+<!-- Reference Identifier Box -->
+<div class="bg-[#F8FAF5] p-3.5 rounded-xl border border-[#E2E8F0] text-center">
+<span class="text-[10px] font-bold font-manrope uppercase tracking-wider text-gray-500 block">Generated Tracking Identifier</span>
+<div class="mt-1 flex items-center justify-center gap-2">
+<span class="font-mono text-lg font-bold text-[#132E20] tracking-wider">STF-2026-005118</span>
+<button class="text-gray-400 hover:text-[#132E20]" title="Copy tracking ID" type="button">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+</div>
+<span class="text-[11px] text-gray-500 mt-0.5 block">Universal across Lagos Works &amp; LAWMA CRM</span>
+</div>
+<!-- Metadata Attributes -->
+<div class="space-y-2.5 text-xs border-t border-b border-[#E2E8F0] py-3.5">
+<div class="flex justify-between items-center">
+<span class="text-gray-500">Incident Classification:</span>
+<span class="font-bold text-[#1A1D1A]">Pothole / Road Failure</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-gray-500">Assigned Jurisdiction:</span>
+<span class="font-bold text-[#1A1D1A]">Ikeja Central LGA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-gray-500">Severity Rating:</span>
+<span class="font-bold text-[#ba1a1a] flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#ba1a1a] inline-block"></span> Critical / High Risk
+              </span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-gray-500">Geotag Lock:</span>
+<span class="font-mono text-[11px] text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Verified ±2m</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-gray-500">Public Service SLA:</span>
+<span class="font-manrope font-bold text-[#132E20]">48 Hours Target</span>
+</div>
+</div>
+<!-- District Dispatch Alert -->
+<div class="p-3 bg-[#F8FAF5] rounded-xl border border-[#c2c8c2] flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[#132E20] text-lg shrink-0 mt-0.5">engineering</span>
+<p class="text-xs text-[#1A1D1A] leading-snug">
+<strong>District Dispatch:</strong> Ikeja Central Public Works rapid asphalt patching team operates daily 08:00 – 17:00 WAT.
+            </p>
+</div>
+<!-- Terracotta CTA Button -->
+<button class="w-full py-3.5 px-4 rounded-xl bg-[#E06236] hover:bg-[#D35400] text-white font-manrope font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-lg">send</span>
+<span>Submit Report &amp; Generate Tracking Ticket</span>
+</button>
+<p class="text-[11px] text-center text-gray-500 leading-relaxed">
+            By submitting, this incident enters the public open civic registry for community verification under the Lagos Freedom of Civic Information SLA.
+          </p>
+</div>
+</div>
+<!-- Emergency Hotline Card -->
+<div class="bg-white rounded-xl border border-[#E2E8F0] p-4 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#F3F4EF] text-[#132E20] flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+</div>
+<div>
+<p class="text-xs font-bold text-[#1A1D1A]">Emergency Road Collapse?</p>
+<p class="text-xs text-gray-600">Dial Lagos Toll-Free: <strong>112</strong> / <strong>767</strong></p>
+</div>
+</div>
+<a class="p-2 rounded-lg bg-[#F3F4EF] hover:bg-[#E2E8F0] text-[#132E20]" href="tel:112" title="Call emergency toll-free">
+<span class="material-symbols-outlined text-base">call</span>
+</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- ================= SIGNATURE HELPLINE STRIP (Vibrant Chartreuse Lime #D8FA64) ================= -->
+<section class="w-full bg-[#D8FA64] text-[#132E20] py-4 px-4 sm:px-6 lg:px-8 border-y border-[#C8E665]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl font-bold">headset_mic</span>
+<div>
+<span class="font-manrope font-extrabold text-xs tracking-wider uppercase block">Prefer to speak to someone?</span>
+<span class="text-sm font-semibold">Call the StreetFix office directly: <a class="underline font-bold hover:text-[#00190D]" href="tel:012270000">01 227 0000</a> (Available Monday–Friday, 8am–5pm)</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#132E20] text-white font-manrope font-bold text-xs hover:bg-[#183D2A] transition-all" href="tel:012270000">
+<span class="material-symbols-outlined text-sm">phone_in_talk</span>
+<span>Call Desk Now</span>
+</a>
+</div>
+</section>
+<!-- ================= FOOTER (Dark Evergreen #132E20) ================= -->
+<footer class="w-full bg-[#132E20] text-white py-8 px-4 sm:px-6 lg:px-8 border-t border-[#183D2A] mt-auto">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<div class="flex items-center gap-2"></div>
+<span class="text-xs text-[#A3B899]">
+        © 2026 StreetFix Lagos Civic Infrastructure Operations. All rights reserved.
+      </span>
+</div>
+<!-- Governance Links -->
+<div class="flex flex-wrap items-center justify-center gap-4 text-xs font-manrope text-[#A3B899]">
+<a class="hover:text-[#D8FA64] transition-colors" href="#">Public Accountability Dashboard</a>
+<a class="hover:text-[#D8FA64] transition-colors" href="#">Service Level Agreements</a>
+<a class="hover:text-[#D8FA64] transition-colors" href="#">Report Vulnerability</a>
+<a class="hover:text-[#D8FA64] transition-colors" href="#">Lagos GIS Hub</a>
+<a class="hover:text-[#D8FA64] transition-colors" href="#">Privacy Notice</a>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

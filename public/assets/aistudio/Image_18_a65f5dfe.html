@@ -1,0 +1,598 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix — Fixing Nigeria Together, Street by Street</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-primary-dark": "#1A1D1A",
+            "on-secondary-fixed": "#171e00",
+            "surface-container-low": "#f3f4ef",
+            "tertiary-container": "#501400",
+            "surface-variant": "#e1e3de",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb59d",
+            "primary-container": "#132e20",
+            "background": "#f8faf5",
+            "outline": "#727973",
+            "on-surface": "#191c19",
+            "tertiary-fixed": "#ffdbd0",
+            "on-primary-container": "#799784",
+            "tertiary": "#2d0700",
+            "accent-lime": "#D8FA64",
+            "surface-container-high": "#e7e9e3",
+            "on-primary-fixed-variant": "#314d3d",
+            "on-surface-variant": "#424843",
+            "surface-bright": "#f8faf5",
+            "secondary-fixed": "#cef05b",
+            "on-error": "#ffffff",
+            "on-background": "#191c19",
+            "surface-canvas-pure": "#FFFFFF",
+            "on-tertiary-fixed": "#390b00",
+            "accent-terracotta-hover": "#D35400",
+            "surface-tint": "#496554",
+            "surface": "#f8faf5",
+            "text-secondary-dark": "#4A5568",
+            "border-subtle-light": "#E2E8F0",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "surface-evergreen-deep": "#0B231A",
+            "error-container": "#ffdad6",
+            "on-primary-fixed": "#052013",
+            "on-tertiary-fixed-variant": "#832600",
+            "primary-fixed": "#cbead5",
+            "inverse-surface": "#2e312e",
+            "error": "#ba1a1a",
+            "text-on-dark-muted": "#A3B899",
+            "surface-container-highest": "#e1e3de",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#cef05b",
+            "surface-evergreen-base": "#132E20",
+            "accent-lime-muted": "#C8E665",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#afceb9",
+            "accent-terracotta": "#E06236",
+            "on-secondary-container": "#576c00",
+            "surface-container": "#edeee9",
+            "on-secondary-fixed-variant": "#3d4c00",
+            "primary": "#00190d",
+            "on-tertiary-container": "#ea693c",
+            "text-on-dark": "#FFFFFF",
+            "primary-fixed-dim": "#afceb9",
+            "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+            "surface-dim": "#d9dbd5",
+            "surface-canvas-light": "#F9FAF9",
+            "secondary-fixed-dim": "#b3d341",
+            "inverse-on-surface": "#f0f1ec",
+            "secondary": "#526600",
+            "surface-evergreen-light": "#183D2A",
+            "outline-variant": "#c2c8c2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-3xl": "4.5rem",
+            "space-xs": "0.5rem",
+            "gutter-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.75rem",
+            "space-2xs": "0.25rem",
+            "margin": "2.5rem"
+          },
+          "fontFamily": {
+            "label-nav": ["Manrope"],
+            "body-md": ["DM Sans"],
+            "display-hero": ["DM Sans"],
+            "display-hero-mobile": ["DM Sans"],
+            "headline-md": ["DM Sans"],
+            "body-sm": ["DM Sans"],
+            "label-cta": ["Manrope"],
+            "label-badge": ["Manrope"],
+            "label-eyebrow": ["Manrope"],
+            "headline-lg": ["DM Sans"],
+            "headline-xl": ["DM Sans"],
+            "body-lg": ["DM Sans"],
+            "headline-sm": ["DM Sans"]
+          },
+          "fontSize": {
+            "label-nav": ["0.875rem", { "lineHeight": "1.2", "fontWeight": "600" }],
+            "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }],
+            "display-hero": ["3.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-hero-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+            "label-cta": ["0.875rem", { "lineHeight": "1", "fontWeight": "600" }],
+            "label-badge": ["0.75rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+            "label-eyebrow": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-xl": ["2.5rem", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.4", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-accent-lime selection:text-primary-container font-body-md text-body-md">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="bg-surface-evergreen-deep dark:bg-surface-evergreen-deep docked full-width top-0 border-b border-border-subtle-dark sticky top-0 z-50">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex items-center justify-between py-space-sm">
+<!-- Brand & Municipal Sub-anchor -->
+<div class="flex items-center gap-space-md">
+<a class="text-headline-md font-headline-md font-bold text-text-on-dark flex items-center gap-space-xs tracking-tight" href="/"></a>
+<div class="hidden lg:flex items-center gap-space-xs pl-space-md border-l border-border-subtle-dark">
+<span class="w-2 h-2 rounded-full bg-accent-lime animate-pulse"></span>
+<span class="text-label-badge font-label-badge text-text-on-dark-muted tracking-wider uppercase">Federal &amp; Municipal Gateway</span>
+</div>
+</div>
+<!-- Center & Trailing Action Nav Cluster -->
+<div class="flex items-center gap-space-md">
+<div class="hidden md:flex items-center gap-space-md">
+<a class="text-text-on-dark-muted hover:opacity-90 transition-opacity duration-150 flex items-center gap-1.5 text-label-nav font-label-nav" href="tel:+23412270000">
+<span class="material-symbols-outlined text-accent-lime text-base">call</span>
+<span>Call office: <strong class="text-text-on-dark font-semibold">01 227 0000</strong></span>
+</a>
+<a class="text-text-on-dark-muted hover:opacity-90 transition-opacity duration-150 flex items-center gap-1 text-label-nav font-label-nav" href="/admin">
+<span class="material-symbols-outlined text-base">shield_person</span>
+<span>Admin portal</span>
+</a>
+</div>
+<div class="flex items-center gap-space-xs sm:gap-space-sm pl-space-xs border-l-0 md:border-l md:border-border-subtle-dark">
+<a class="text-text-on-dark-muted hover:opacity-90 transition-opacity duration-150 text-label-cta font-label-cta px-3 py-2 rounded-full active:scale-95 transition-transform" href="/login">
+            Log in
+          </a>
+<a class="bg-accent-lime text-primary-container font-label-cta text-label-cta font-bold px-4 py-2 rounded-full hover:opacity-90 transition-opacity duration-150 active:scale-95 transition-transform duration-150 shadow-sm flex items-center gap-1" href="/signup">
+<span>Sign up</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO SECTION -->
+<section class="bg-surface-evergreen-base text-text-on-dark relative overflow-hidden border-b border-border-subtle-dark">
+<!-- Perspective architectural plane background grid -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin py-space-2xl lg:py-space-3xl relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl lg:gap-space-2xl items-center">
+<!-- Hero Narrative (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col items-start space-y-space-md">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-evergreen-deep border border-border-subtle-dark">
+<span class="w-2 h-2 rounded-full bg-accent-lime"></span>
+<span class="text-label-eyebrow font-label-eyebrow text-accent-lime tracking-wide uppercase">Better streets start here</span>
+</div>
+<h1 class="text-display-hero-mobile md:text-display-hero font-display-hero font-bold tracking-tight text-text-on-dark max-w-2xl">
+              See a problem. <br>
+<span class="text-accent-lime">Help fix your street.</span>
+</h1>
+<p class="text-body-lg font-body-lg text-text-on-dark-muted max-w-xl">
+              Fixing Nigeria together, street by street. Report road and neighbourhood issues with photo, video, or voice evidence, then follow their progress in real-time.
+            </p>
+<div class="pt-space-xs flex flex-wrap items-center gap-space-sm w-full sm:w-auto">
+<a class="bg-accent-lime text-primary-container font-label-cta text-label-cta font-bold px-6 py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all duration-150 flex items-center justify-center gap-2 shadow-lg shadow-accent-lime/10" href="#quick-report-portal">
+<span>Report an issue</span>
+<span class="material-symbols-outlined text-base font-bold">arrow_forward</span>
+</a>
+<a class="border border-border-subtle-dark text-text-on-dark font-label-cta text-label-cta font-semibold px-5 py-3.5 rounded-full hover:border-accent-lime hover:text-accent-lime transition-colors duration-150 flex items-center justify-center gap-2" href="tel:+23412270000">
+<span class="material-symbols-outlined text-accent-lime text-base">phone_in_talk</span>
+<span>Call the office (01 227 0000)</span>
+</a>
+</div>
+<!-- Mini Trust Badges -->
+<div class="pt-space-sm flex items-center gap-space-lg text-text-on-dark-muted border-t border-border-subtle-dark w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-lime text-sm">verified</span>
+<span class="text-body-sm font-body-sm">Federal &amp; State LGA Aligned</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-lime text-sm">lock_clock</span>
+<span class="text-body-sm font-body-sm">4.2h Average First Response</span>
+</div>
+</div>
+</div>
+<!-- Hero Graphic / Road Repair Perspective (5 Cols) -->
+<div class="lg:col-span-5 relative">
+<div class="relative rounded-2xl overflow-hidden border border-border-subtle-dark shadow-2xl bg-surface-evergreen-deep aspect-[4/3] group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="A clean, vibrant high-angle shot of Lagos State Public Works road rehabilitation team actively paving an urban thoroughfare in Nigeria. Road workers in high-visibility neon yellow and orange vests operate a modern yellow roller under bright daylight. Surrounding streets are clean and structured, with smooth fresh asphalt creating an inspiring civic renewal atmosphere matching an authoritative evergreen and chartreuse civic palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbJo9WB0s7zZcOMHjZAaygoXul-9E793omzVN2mbDKnwIoO-TQSdXFPLSi-dpxPoyoo68zpsc4QIZDca_J3boHI8ftLEiTD1ymnNjTuFnZKFjLHfHML-G3Tp4ZeyVD37VJsAeWXrSDA7wobJ5d0y5VEarZZW6JhyenAi3JBQ4VSnfEXwaLdcYwrnR2JkC7h-F1jpy4hr2ullWVWk6doFJnvXZeNJ-_a5q3BuqUew">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-evergreen-deep via-transparent to-transparent opacity-80"></div>
+<!-- Floating Geo-tag Pill -->
+<div class="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-surface-evergreen-deep/90 backdrop-blur-md border border-border-subtle-dark flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-accent-terracotta/20 flex items-center justify-center text-accent-terracotta">
+<span class="material-symbols-outlined text-base">location_on</span>
+</div>
+<div>
+<p class="text-body-sm font-bold text-text-on-dark">Active Public Works Crews</p>
+<p class="text-xs text-text-on-dark-muted font-body-sm">Surulere, Lagos &amp; Abuja Municipal</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-accent-lime text-primary-container">
+                  Live Dispatch
+                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- IMPACT & ACCOUNTABILITY METRICS STRIP -->
+<section class="bg-surface-canvas-pure border-b border-border-subtle-light py-space-lg">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-space-md lg:gap-space-lg">
+<div class="p-space-md rounded-xl bg-surface-canvas-light border border-border-subtle-light flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-evergreen-base text-accent-lime flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">build_circle</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-text-primary-dark">14,829+</div>
+<div class="text-body-sm font-body-sm text-text-secondary-dark">Fixed Hazards to Date</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-canvas-light border border-border-subtle-light flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-evergreen-base text-accent-lime flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">avg_pace</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-text-primary-dark">4.2 Hours</div>
+<div class="text-body-sm font-body-sm text-text-secondary-dark">Mean Triage &amp; SLA</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-canvas-light border border-border-subtle-light flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-evergreen-base text-accent-lime flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">thumb_up</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-text-primary-dark">94.8%</div>
+<div class="text-body-sm font-body-sm text-text-secondary-dark">Resident CSAT Score</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-canvas-light border border-border-subtle-light flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-evergreen-base text-accent-lime flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-text-primary-dark">100%</div>
+<div class="text-body-sm font-body-sm text-text-secondary-dark">Photo-Verified Audits</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DUAL-PANEL CORE DASHBOARD SECTION (Civic Vanguard Inspired) -->
+<section class="py-space-2xl bg-surface-canvas-light" id="quick-report-portal">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT PANEL: "Tell us what’s wrong" (4 Cols Desktop) -->
+<div class="lg:col-span-5 bg-surface-canvas-pure rounded-2xl border border-border-subtle-light p-space-lg lg:p-space-xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] space-y-space-md">
+<div class="border-b border-border-subtle-light pb-space-sm">
+<div class="flex items-center justify-between">
+<span class="text-label-eyebrow font-label-eyebrow text-accent-terracotta uppercase">New report</span>
+<span class="px-2 py-0.5 text-xs font-semibold rounded bg-surface-container text-on-surface-variant">Step 1 of 2</span>
+</div>
+<h2 class="text-headline-lg font-headline-lg font-bold text-text-primary-dark mt-1">Tell us what’s wrong</h2>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mt-1">
+                Pinpoint municipal and road issues for immediate dispatch to your local council.
+              </p>
+</div>
+<!-- Form -->
+<form class="space-y-space-md" onsubmit="event.preventDefault(); alert('Report successfully queued for verification.');">
+<!-- Issue Category Selector -->
+<div>
+<label class="block text-body-sm font-semibold text-text-primary-dark mb-1.5">Issue category</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="cursor-pointer border border-accent-lime-muted/50 bg-accent-lime/10 p-2.5 rounded-xl flex items-center gap-2 hover:border-accent-terracotta transition-colors">
+<input checked="" class="text-accent-terracotta focus:ring-accent-terracotta" name="cat" type="radio">
+<span class="text-body-sm font-medium text-text-primary-dark">Pothole / Road Cave</span>
+</label>
+<label class="cursor-pointer border border-border-subtle-light bg-surface-canvas-light p-2.5 rounded-xl flex items-center gap-2 hover:border-accent-terracotta transition-colors">
+<input class="text-accent-terracotta focus:ring-accent-terracotta" name="cat" type="radio">
+<span class="text-body-sm font-medium text-text-primary-dark">Blocked Drainage</span>
+</label>
+<label class="cursor-pointer border border-border-subtle-light bg-surface-canvas-light p-2.5 rounded-xl flex items-center gap-2 hover:border-accent-terracotta transition-colors">
+<input class="text-accent-terracotta focus:ring-accent-terracotta" name="cat" type="radio">
+<span class="text-body-sm font-medium text-text-primary-dark">Waste Dumps</span>
+</label>
+<label class="cursor-pointer border border-border-subtle-light bg-surface-canvas-light p-2.5 rounded-xl flex items-center gap-2 hover:border-accent-terracotta transition-colors">
+<input class="text-accent-terracotta focus:ring-accent-terracotta" name="cat" type="radio">
+<span class="text-body-sm font-medium text-text-primary-dark">Broken Streetlights</span>
+</label>
+</div>
+</div>
+<!-- State & LGA Cascade -->
+<div class="grid grid-cols-2 gap-space-xs">
+<div>
+<label class="block text-body-sm font-semibold text-text-primary-dark mb-1">State</label>
+<select class="w-full text-body-sm rounded-lg border-border-subtle-light focus:border-surface-evergreen-base focus:ring-surface-evergreen-base">
+<option>Lagos State</option>
+<option>Abuja (FCT)</option>
+<option>Rivers State</option>
+<option>Oyo State</option>
+<option>Kano State</option>
+<option>Edo State</option>
+<option>Delta State</option>
+<option>Anambra State</option>
+</select>
+</div>
+<div>
+<label class="block text-body-sm font-semibold text-text-primary-dark mb-1">Local Govt. Area</label>
+<select class="w-full text-body-sm rounded-lg border-border-subtle-light focus:border-surface-evergreen-base focus:ring-surface-evergreen-base">
+<option>Ikeja LGA</option>
+<option>Surulere LGA</option>
+<option>Eti-Osa LGA</option>
+<option>Alimosho LGA</option>
+<option>Lagos Mainland</option>
+<option>Apapa LGA</option>
+</select>
+</div>
+</div>
+<!-- Street Address Input -->
+<div>
+<label class="block text-body-sm font-semibold text-text-primary-dark mb-1">Street address or landmark</label>
+<div class="relative">
+<input class="w-full text-body-sm rounded-lg border-border-subtle-light pl-9 pr-3 focus:border-surface-evergreen-base focus:ring-surface-evergreen-base" placeholder="e.g. Opposite Sterling Bank, Bode Thomas St." type="text">
+<span class="material-symbols-outlined absolute left-2.5 top-2.5 text-text-secondary-dark text-lg">pin_drop</span>
+</div>
+</div>
+<!-- Evidence Upload Dropzone -->
+<div>
+<label class="block text-body-sm font-semibold text-text-primary-dark mb-1">Photo or video evidence</label>
+<div class="border-[1.5px] border-dashed border-slate-300 rounded-xl p-4 bg-surface-canvas-light text-center hover:bg-slate-50 transition-colors cursor-pointer group">
+<div class="w-10 h-10 mx-auto rounded-full bg-surface-canvas-pure border border-border-subtle-light flex items-center justify-center text-accent-terracotta group-hover:scale-110 transition-transform mb-1.5">
+<span class="material-symbols-outlined text-xl">add_a_photo</span>
+</div>
+<p class="text-body-sm font-semibold text-text-primary-dark">Click to upload or drag &amp; drop</p>
+<p class="text-xs text-text-secondary-dark mt-0.5">EXIF Geotagging automatically locks coordinates</p>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-accent-terracotta hover:bg-accent-terracotta-hover text-on-primary font-label-cta text-label-cta font-bold py-3.5 px-6 rounded-full transition-colors duration-150 flex items-center justify-center gap-2 shadow-md shadow-accent-terracotta/20 active:scale-98" type="submit">
+<span>Submit Report &amp; Track</span>
+<span class="material-symbols-outlined text-base">near_me</span>
+</button>
+</form>
+<!-- Sign in helper card prompt -->
+<div class="rounded-xl p-3.5 bg-surface-container-low border border-border-subtle-light flex items-start gap-3">
+<span class="material-symbols-outlined text-surface-evergreen-base mt-0.5">verified</span>
+<div>
+<h4 class="text-body-sm font-bold text-text-primary-dark">Sign in to report safely</h4>
+<p class="text-xs text-text-secondary-dark mt-0.5">
+                  Create an account to submit evidence and track your street reports across devices.
+                </p>
+<div class="mt-2 flex items-center gap-3">
+<a class="text-xs font-bold text-accent-terracotta hover:underline" href="/signup">Create free account →</a>
+<a class="text-xs font-medium text-text-secondary-dark hover:underline" href="/login">I already have an account</a>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: "Recent street reports" Community Tracker (7 Cols Desktop) -->
+<div class="lg:col-span-7 space-y-space-md">
+<div class="bg-surface-canvas-pure rounded-2xl border border-border-subtle-light p-space-lg shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md border-b border-border-subtle-light gap-2">
+<div>
+<span class="text-label-eyebrow font-label-eyebrow text-surface-evergreen-base uppercase tracking-wider">Community tracker</span>
+<h2 class="text-headline-lg font-headline-lg font-bold text-text-primary-dark mt-0.5">Recent street reports</h2>
+<p class="text-body-sm font-body-sm text-text-secondary-dark">Follow what’s happening across the neighbourhood.</p>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container font-medium text-body-sm text-text-primary-dark self-start sm:self-auto">
+<span class="font-bold text-surface-evergreen-base">3</span>
+<span class="text-text-secondary-dark">Active in your zone</span>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex items-center gap-4 border-b border-border-subtle-light overflow-x-auto py-3">
+<button class="text-body-sm font-bold text-text-primary-dark border-b-2 border-accent-terracotta pb-2 flex items-center gap-1.5 whitespace-nowrap">
+<span>All</span>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full font-semibold">3</span>
+</button>
+<button class="text-body-sm font-medium text-text-secondary-dark hover:text-text-primary-dark pb-2 flex items-center gap-1.5 whitespace-nowrap">
+<span>Pending</span>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full font-semibold">1</span>
+</button>
+<button class="text-body-sm font-medium text-text-secondary-dark hover:text-text-primary-dark pb-2 flex items-center gap-1.5 whitespace-nowrap">
+<span>In Progress</span>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full font-semibold">1</span>
+</button>
+<button class="text-body-sm font-medium text-text-secondary-dark hover:text-text-primary-dark pb-2 flex items-center gap-1.5 whitespace-nowrap">
+<span>Fixed</span>
+<span class="text-xs bg-surface-container-high px-2 py-0.5 rounded-full font-semibold">1</span>
+</button>
+</div>
+<!-- Live Report Feed Cards -->
+<div class="pt-space-md space-y-space-md">
+<!-- Report Card 1 (Fixed) -->
+<div class="border border-border-subtle-light rounded-xl p-4 bg-surface-canvas-light hover:border-surface-evergreen-base/30 transition-all">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-accent-lime text-primary-container inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs font-bold">check_circle</span>
+                        Fixed
+                      </span>
+<span class="text-xs text-text-secondary-dark font-body-sm">Ticket #SF-10492</span>
+</div>
+<span class="text-xs font-medium text-text-secondary-dark">2 hours ago</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-text-primary-dark mt-2">
+                    Bode Thomas &amp; Adeniran Ogunsanya Intersection
+                  </h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mt-1">
+                    Major arterial pothole repaired and repaved with cold-mix asphalt by Surulere Municipal Works. Drainage runoff cleared.
+                  </p>
+<div class="mt-3 flex items-center justify-between pt-3 border-t border-border-subtle-light/60">
+<div class="flex items-center gap-1.5 text-xs text-text-secondary-dark">
+<span class="material-symbols-outlined text-sm text-surface-evergreen-base">location_on</span>
+<span>Surulere, Lagos State</span>
+</div>
+<div class="flex items-center gap-2 text-xs font-semibold text-surface-evergreen-base">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+<span>Before &amp; After Verified</span>
+</div>
+</div>
+</div>
+<!-- Report Card 2 (In Progress) -->
+<div class="border border-border-subtle-light rounded-xl p-4 bg-surface-canvas-light hover:border-surface-evergreen-base/30 transition-all">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-surface-evergreen-base text-accent-lime inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs animate-spin">refresh</span>
+                        In Progress
+                      </span>
+<span class="text-xs text-text-secondary-dark font-body-sm">Ticket #SF-10518</span>
+</div>
+<span class="text-xs font-medium text-text-secondary-dark">Yesterday</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-text-primary-dark mt-2">
+                    Obafemi Awolowo Way — Secretariat Drainage Culvert
+                  </h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mt-1">
+                    Heavy silt accumulation causing flash pool flooding. Excavator deployed for deep clearing operations.
+                  </p>
+<div class="mt-3 flex items-center justify-between pt-3 border-t border-border-subtle-light/60">
+<div class="flex items-center gap-1.5 text-xs text-text-secondary-dark">
+<span class="material-symbols-outlined text-sm text-surface-evergreen-base">location_on</span>
+<span>Ikeja, Lagos State</span>
+</div>
+<div class="flex items-center gap-1 text-xs font-semibold text-accent-terracotta">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>Team on-site</span>
+</div>
+</div>
+</div>
+<!-- Report Card 3 (Pending Triage) -->
+<div class="border border-border-subtle-light rounded-xl p-4 bg-surface-canvas-light hover:border-surface-evergreen-base/30 transition-all">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-surface-container text-on-surface-variant inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">hourglass_empty</span>
+                        Pending Triage
+                      </span>
+<span class="text-xs text-text-secondary-dark font-body-sm">Ticket #SF-10531</span>
+</div>
+<span class="text-xs font-medium text-text-secondary-dark">3 hours ago</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-text-primary-dark mt-2">
+                    Wuse 2, Aminu Kano Crescent Streetlamp Row
+                  </h3>
+<p class="text-body-sm font-body-sm text-text-secondary-dark mt-1">
+                    Four consecutive municipal poles unlit over pedestrian crossing. Awaiting Abuja Municipal Area Council technician schedule.
+                  </p>
+<div class="mt-3 flex items-center justify-between pt-3 border-t border-border-subtle-light/60">
+<div class="flex items-center gap-1.5 text-xs text-text-secondary-dark">
+<span class="material-symbols-outlined text-sm text-surface-evergreen-base">location_on</span>
+<span>AMAC, Abuja FCT</span>
+</div>
+<div class="flex items-center gap-1 text-xs font-semibold text-text-secondary-dark">
+<span class="material-symbols-outlined text-sm">thumb_up</span>
+<span>12 Upvotes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Community Tracker Empty State Fallback -->
+<div class="mt-space-lg border-[1.5px] border-dashed border-slate-300 rounded-xl p-space-lg text-center bg-surface-canvas-pure">
+<div class="w-12 h-12 mx-auto rounded-full bg-surface-container-high text-surface-evergreen-base flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-2xl">pin_invoke</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm font-bold text-text-primary-dark">No reports yet in your specific sub-ward?</h4>
+<p class="text-body-sm font-body-sm text-text-secondary-dark max-w-sm mx-auto mt-1">
+                  Be the first to help improve your street. Submit a quick photo report and rally your neighbours.
+                </p>
+<div class="mt-3">
+<a class="text-label-cta font-label-cta font-bold text-accent-terracotta hover:underline inline-flex items-center gap-1" href="#quick-report-portal">
+<span>Submit new report</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SIGNATURE DIRECT HELPLINE BANNER STRIP -->
+<section class="bg-accent-lime text-primary-container py-space-xl border-y border-surface-evergreen-base/10">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="space-y-1">
+<span class="text-label-eyebrow font-label-eyebrow text-primary-container uppercase opacity-80 tracking-wider">
+              Prefer to speak to someone?
+            </span>
+<h2 class="text-headline-xl font-headline-xl font-bold text-primary-container tracking-tight">
+              Call the StreetFix office directly
+            </h2>
+<p class="text-body-md font-body-md text-primary-container/80 max-w-lg">
+              Citizens without smartphones or immediate data access can report hazardous road issues via our toll-free hotline.
+            </p>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md w-full md:w-auto">
+<a class="p-space-md rounded-2xl bg-primary-container text-text-on-dark flex items-center gap-space-md hover:bg-surface-evergreen-deep transition-all duration-150 group shadow-lg" href="tel:+23412270000">
+<div class="w-12 h-12 rounded-xl bg-accent-lime text-primary-container flex items-center justify-center font-bold group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl font-bold">call</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md font-bold text-accent-lime tracking-tight">
+                  01 227 0000
+                </div>
+<div class="text-xs text-text-on-dark-muted font-body-sm">
+                  Available Monday–Friday, 8am–5pm
+                </div>
+</div>
+</a>
+<a class="px-6 py-3.5 rounded-full border-2 border-primary-container text-primary-container font-label-cta text-label-cta font-bold hover:bg-primary-container hover:text-accent-lime transition-all duration-150 text-center" href="tel:+23412270000">
+              Call office
+            </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Anchor) -->
+<footer class="bg-surface-evergreen-deep dark:bg-surface-evergreen-deep border-t border-border-subtle-dark text-text-on-dark-muted">
+<div class="w-full px-margin-mobile md:px-margin max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-space-lg gap-space-md">
+<!-- Brand & Copyright Text -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm text-center sm:text-left">
+<a class="text-headline-sm font-headline-sm font-bold text-text-on-dark hover:text-accent-lime transition-colors duration-150 flex items-center gap-2" href="/"></a>
+<span class="hidden sm:inline text-border-subtle-dark">•</span>
+<p class="text-body-sm font-body-sm text-text-on-dark-muted">
+          Making every street safer, one report at a time.
+        </p>
+</div>
+<!-- Links & Accountability -->
+<div class="flex items-center gap-space-md text-body-sm font-body-sm">
+<a class="hover:text-accent-lime transition-colors duration-150" href="/admin">Admin portal</a>
+<a class="hover:text-accent-lime transition-colors duration-150" href="tel:+23412270000">Contact helpline</a>
+<a class="hover:text-accent-lime transition-colors duration-150" href="/privacy">Privacy &amp; Data</a>
+<a class="hover:text-accent-lime transition-colors duration-150" href="/terms">Terms</a>
+</div>
+</div>
+</footer>
+
+
+
+
+
+
+</body></html>

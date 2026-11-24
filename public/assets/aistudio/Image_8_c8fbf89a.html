@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 1682px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix 2.0 - Field Officer Work Order &amp; Rapid Dispatch Portal</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#475a7e",
+            "on-secondary-fixed-variant": "#34476a",
+            "tertiary-container": "#207ab3",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#fdfcff",
+            "outline": "#8c7166",
+            "on-surface": "#101c2c",
+            "surface": "#f8f9ff",
+            "inverse-primary": "#ffb595",
+            "primary-fixed": "#ffdbcd",
+            "surface-container": "#e6eeff",
+            "surface-container-low": "#eff3ff",
+            "on-surface-variant": "#594238",
+            "primary-fixed-dim": "#ffb595",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#101c2c",
+            "primary": "#9e3d00",
+            "on-primary-fixed-variant": "#7c2e00",
+            "on-tertiary-fixed": "#001e31",
+            "surface-dim": "#cedbf1",
+            "inverse-surface": "#253142",
+            "on-error": "#ffffff",
+            "surface-variant": "#d7e3fa",
+            "error": "#ba1a1a",
+            "background": "#f8f9ff",
+            "tertiary-fixed": "#cce5ff",
+            "on-primary": "#ffffff",
+            "primary-container": "#c64f00",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#041b3c",
+            "secondary-fixed-dim": "#b4c7f1",
+            "surface-tint": "#a23f00",
+            "secondary-container": "#bfd2fd",
+            "on-primary-fixed": "#351000",
+            "secondary-fixed": "#d7e2ff",
+            "inverse-on-surface": "#ebf1ff",
+            "on-tertiary-fixed-variant": "#004b73",
+            "tertiary-fixed-dim": "#92ccff",
+            "tertiary": "#006193",
+            "surface-bright": "#f8f9ff",
+            "surface-container-high": "#dde9ff",
+            "on-primary-container": "#fffbff",
+            "outline-variant": "#e0c0b2",
+            "secondary": "#4c5e83",
+            "surface-container-highest": "#d7e3fa"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin-mobile": "1rem",
+            "space-2xl": "3rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "action-btn": ["Plus Jakarta Sans"],
+            "label-badge": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "label-code": ["Geist"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "800" }],
+            "action-btn": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-badge": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-code": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Ambient Operations Navy Shadow */
+    .shadow-civic-1 {
+      box-shadow: 0 1px 3px 0 rgba(23, 43, 77, 0.08), 0 1px 2px -1px rgba(23, 43, 77, 0.04);
+    }
+    .shadow-civic-2 {
+      box-shadow: 0 4px 6px -1px rgba(23, 43, 77, 0.10), 0 2px 4px -2px rgba(23, 43, 77, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col font-body-md">
+<!-- TOP NAV BAR (Shared Component Anchor) -->
+<header class="flex justify-between items-center w-full px-margin h-16 sticky top-0 z-50 bg-[#132E20] border-b border-white/10 shadow-md text-white">
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+
+
+</div>
+<nav class="hidden md:flex items-center gap-space-md ml-space-md">
+<a class="text-white/75 hover:text-white font-action-btn text-action-btn pb-1 transition-colors" href="#portal">Resident Portal</a>
+<a class="text-white/75 hover:text-white font-action-btn text-action-btn pb-1 transition-colors" href="#ops">Ops Command</a>
+<a class="border-b-2 border-[#D8FA64] text-[#D8FA64] font-action-btn text-action-btn pb-1 font-semibold" href="#dispatch">Field Dispatch</a>
+<a class="text-white/75 hover:text-white font-action-btn text-action-btn pb-1 transition-colors" href="#map">Incident Map</a>
+<a class="text-white/75 hover:text-white font-action-btn text-action-btn pb-1 transition-colors" href="#analytics">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/15 rounded-full text-white/90">
+<span class="w-2 h-2 rounded-full bg-[#D8FA64] animate-pulse"></span>
+<span class="text-label-badge font-label-badge text-white tracking-wide">ONLINE SYNC (12ms)</span>
+</div>
+<div class="hidden lg:flex items-center gap-space-xs">
+<button class="bg-white/10 text-white hover:bg-white/20 font-action-btn text-action-btn px-space-md py-2 rounded-lg flex items-center gap-1.5 transition-colors border border-white/15">
+<span class="material-symbols-outlined text-[18px] text-[#E06236]">emergency</span>
+        Emergency Callout
+      </button>
+<button class="bg-[#D8FA64] text-[#132E20] hover:bg-[#C8E665] font-action-btn text-action-btn px-space-md py-2 rounded-lg flex items-center gap-1.5 font-bold shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+        Report Incident
+      </button>
+</div>
+<div class="flex items-center gap-space-xs text-white/80 border-l border-white/15 pl-space-md">
+<button class="p-2 rounded-lg hover:bg-white/10 transition-colors text-white" title="Notifications">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-white/10 transition-colors text-white" title="Configure">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<div class="flex items-center gap-space-sm ml-space-xs pl-space-xs">
+<div class="w-9 h-9 rounded-full bg-[#D8FA64] border-2 border-white/20 flex items-center justify-center font-bold text-[#132E20]">
+          BJ
+        </div>
+<div class="hidden xl:block text-left text-white">
+<p class="font-headline-sm font-semibold text-white leading-tight text-xs">Engr. B. Jinadu</p>
+<p class="font-body-sm text-white/60 text-[11px]">Squad 4 Ikeja Central</p>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SECONDARY FIELD SQUAD SUB-HEADER (Utilitarian Telemetry Ribbon) -->
+<section class="bg-[#F9FAF9] border-b border-[#E2E8F0] px-margin py-space-sm">
+<div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-y-3">
+<div class="flex items-center flex-wrap gap-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#183D2A]"></span>
+<span class="text-label-badge font-label-badge bg-[#132E20] text-[#D8FA64] px-2.5 py-0.5 rounded-full font-bold tracking-wide">ACTIVE SHIFT</span>
+</div>
+<div class="h-4 w-px bg-[#E2E8F0] hidden sm:block"></div>
+<div class="flex items-center gap-1.5 text-[#132E20]">
+<span class="material-symbols-outlined text-[#183D2A] text-[18px]">group</span>
+<span class="font-headline-sm font-semibold text-xs text-[#132E20]">Squad 4 (Ikeja Central Engineering Unit)</span>
+</div>
+<div class="h-4 w-px bg-[#E2E8F0] hidden sm:block"></div>
+<div class="flex items-center gap-1.5 text-[#4A5568]">
+<span class="material-symbols-outlined text-[18px] text-[#E06236]">pin_drop</span>
+<span class="font-body-sm text-[#4A5568]">Operating Base: Public Works Yard, Ikeja GR</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-body-sm font-body-sm">
+<span class="text-[#4A5568]">Assigned Work Orders Today: <strong class="text-[#132E20] font-bold">4 Active</strong></span>
+<div class="h-4 w-px bg-[#E2E8F0]"></div>
+<span class="text-[#4A5568]">Depot Distance: <strong class="text-[#E06236] font-bold">1.4 km</strong></span>
+<div class="h-4 w-px bg-[#E2E8F0]"></div>
+<span class="flex items-center gap-1 text-[#132E20] font-medium">
+<span class="material-symbols-outlined text-[16px] text-[#183D2A]">satellite_alt</span>
+        RTK-GPS: High Precision (±0.05m)
+      </span>
+</div>
+</div>
+</section>
+<!-- MAIN OPERATIONAL WORKSPACE (Bento & Split Panel Grid) -->
+<main class="flex-1 w-full max-w-[1600px] mx-auto px-margin py-space-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- LEFT COLUMN: DAILY WORK ORDERS QUEUE (5 cols) -->
+<section class="lg:col-span-5 space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-[#172B4D] tracking-tight">Daily Work Orders Queue</h1>
+<p class="text-body-sm font-body-sm text-secondary">Prioritized civic infrastructure interventions for Squad 4</p>
+</div>
+<span class="bg-[#172B4D] text-on-primary text-label-badge font-label-badge px-2.5 py-1 rounded-full">
+            3 PENDING DISPATCH
+          </span>
+</div>
+<!-- PRIORITY ITEM 1 (Active Focus Card: STF-2026-004892) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl p-space-md shadow-civic-2 relative overflow-hidden transition-all">
+<div class="absolute top-0 right-0 left-0 h-1 bg-primary"></div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm pt-1">
+<div class="flex items-center gap-2">
+<span class="text-label-code font-label-code text-on-surface bg-surface-container-low px-2 py-0.5 rounded border border-surface-container-highest">
+                STF-2026-004892
+              </span>
+<span class="text-label-badge font-label-badge bg-[#FDEDEC] text-[#922B21] border border-[#F5B7B1] px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] material-symbols-fill">warning</span>
+                P1 Critical Emergency
+              </span>
+</div>
+<span class="text-label-badge font-label-badge bg-[#FEF5E7] text-[#B96417] border border-[#FAD7A0] px-2 py-0.5 rounded-full">
+              SLA 4h Remaining
+            </span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1">Deep Crater Pothole on Allen Avenue</h3>
+<p class="text-body-md font-body-md text-secondary mb-space-md">
+            Heavy structural failure across westbound fast lane opposite Alade Market junction. Severe axle damage hazard and traffic blockage.
+          </p>
+<div class="grid grid-cols-2 gap-space-sm bg-surface-container-low p-space-sm rounded-lg mb-space-md border border-surface-container">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">location_on</span>
+<div>
+<p class="text-label-badge font-label-badge text-secondary">COORDINATES</p>
+<p class="text-label-code font-label-code text-on-surface text-xs">6.5982° N, 3.3541° E</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">near_me</span>
+<div>
+<p class="text-label-badge font-label-badge text-secondary">PROXIMITY</p>
+<p class="text-headline-sm font-headline-sm text-xs text-primary">1.4 km from depot</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t border-surface-container-highest">
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-secondary">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+<span>142 Resident Confirmations</span>
+</div>
+<span class="text-action-btn font-action-btn text-xs text-primary flex items-center gap-1">
+              Active Job Site
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</span>
+</div>
+</article>
+<!-- ITEM 2: Scheduled Maintenance -->
+<article class="bg-surface-container-lowest border border-surface-container-highest hover:border-outline-variant rounded-xl p-space-md shadow-civic-1 transition-all">
+<div class="flex items-start justify-between gap-space-sm mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="text-label-code font-label-code text-secondary bg-surface-container-low px-2 py-0.5 rounded border border-surface-container">
+                STF-2026-004888
+              </span>
+<span class="text-label-badge font-label-badge bg-[#EBF5FB] text-[#1B4F72] border border-[#AED6F1] px-2 py-0.5 rounded-full">
+                Scheduled Maintenance
+              </span>
+</div>
+<span class="text-label-badge font-label-badge bg-surface-container text-secondary px-2 py-0.5 rounded-full">
+              SLA 24h
+            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Clogged Stormwater Culvert &amp; Silt Drainage</h3>
+<p class="text-body-md font-body-md text-secondary mb-space-sm">
+            Awolowo Way by Ikeja Underbridge. High stormwater overflow risk during afternoon convective downpours.
+          </p>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary pt-2 border-t border-surface-container-high">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+              3.1 km away
+            </span>
+<button class="text-secondary hover:text-on-surface font-action-btn text-action-btn text-xs">
+              View Specs
+            </button>
+</div>
+</article>
+<!-- ITEM 3: Traffic Light Pole Sensor Fault -->
+<article class="bg-surface-container-lowest border border-surface-container-highest hover:border-outline-variant rounded-xl p-space-md shadow-civic-1 transition-all">
+<div class="flex items-start justify-between gap-space-sm mb-space-xs">
+<div class="flex items-center gap-2">
+<span class="text-label-code font-label-code text-secondary bg-surface-container-low px-2 py-0.5 rounded border border-surface-container">
+                STF-2026-004875
+              </span>
+<span class="text-label-badge font-label-badge bg-[#FEF5E7] text-[#B96417] border border-[#FAD7A0] px-2 py-0.5 rounded-full">
+                P2 High Priority
+              </span>
+</div>
+<span class="text-label-badge font-label-badge bg-[#FEF5E7] text-[#B96417] px-2 py-0.5 rounded-full">
+              SLA 8h
+            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Damaged Median Guardrail &amp; Debris Removal</h3>
+<p class="text-body-md font-body-md text-secondary mb-space-sm">
+            Mobolaji Bank Anthony Way opposite General Hospital. Impact damage from night trailer collision.
+          </p>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-secondary pt-2 border-t border-surface-container-high">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">distance</span>
+              2.8 km away
+            </span>
+<button class="text-secondary hover:text-on-surface font-action-btn text-action-btn text-xs">
+              View Specs
+            </button>
+</div>
+</article>
+</section>
+<!-- RIGHT COLUMN: ROUTE MAP & COMPLETION STUDIO (7 cols) -->
+<div class="lg:col-span-7 space-y-gutter">
+<!-- TURN-BY-TURN ROUTE & GEOFENCE NAVIGATION MAP -->
+<section class="bg-surface-container-lowest border border-surface-container-highest rounded-xl overflow-hidden shadow-civic-1">
+<!-- Card Header -->
+<div class="p-space-md border-b border-surface-container-highest flex items-center justify-between flex-wrap gap-2">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">explore</span>
+<h2 class="text-headline-md font-headline-md text-on-surface">Route Navigation &amp; Geofence Verification</h2>
+</div>
+<p class="text-body-sm font-body-sm text-secondary">Turn-by-turn guidance from Public Works Depot to Allen Avenue Target Zone</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-badge font-label-badge bg-[#EAFAF1] text-[#1E8449] border border-[#A9DFBF] px-2.5 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">my_location</span>
+                GEOFENCE ARMED (50m)
+              </span>
+</div>
+</div>
+<!-- Simulated High-Precision Field Map Graphic -->
+<div class="relative w-full h-72 bg-[#172B4D] overflow-hidden flex flex-col justify-between p-space-md">
+<!-- Ambient Grid Pattern Overlay -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#d7e2ff 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Route Vector Overlay Representation -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none stroke-current" style="color: #ffb595;">
+<path class="animate-pulse" d="M 60 180 Q 220 160 380 120 T 640 80" fill="none" stroke-dasharray="8 6" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="60" cy="180" fill="#ffffff" r="8" stroke="#172B4D" stroke-width="3"></circle>
+<circle cx="640" cy="80" fill="#D35400" r="10" stroke="#ffffff" stroke-width="3"></circle>
+</svg>
+<!-- Map HUD Top Bar -->
+<div class="relative z-10 flex items-center justify-between">
+<div class="bg-inverse-surface/90 backdrop-blur text-inverse-on-surface px-3 py-1.5 rounded-lg border border-outline/30 flex items-center gap-2 shadow">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">turn_sharp_right</span>
+<div>
+<p class="text-body-sm font-body-sm text-[11px] text-surface-variant">NEXT TURN IN 320 METERS</p>
+<p class="text-headline-sm font-headline-sm text-xs text-white">Bear right onto Obafemi Awolowo Way</p>
+</div>
+</div>
+<div class="bg-inverse-surface/90 backdrop-blur text-white px-3 py-1.5 rounded-lg border border-outline/30 text-right">
+<p class="text-label-badge font-label-badge text-surface-variant">ESTIMATED TRANSIT</p>
+<p class="text-headline-sm font-headline-sm text-xs text-emerald-400">4 MIN (1.4 KM)</p>
+</div>
+</div>
+<!-- Landmark Tags Floating -->
+<div class="relative z-10 flex justify-between items-end">
+<div class="bg-[#101c2c]/85 text-white text-xs px-2.5 py-1 rounded border border-surface-container-highest/20">
+<span class="text-secondary-fixed">Start:</span> PW Depot, Yard 2
+              </div>
+<div class="bg-[#9e3d00]/90 text-white text-xs px-2.5 py-1 rounded border border-white/20 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+<span class="font-semibold">Target:</span> Allen Ave Crater #004892
+              </div>
+</div>
+</div>
+<!-- Geofence & Site Check-in Command Bar -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md border-t border-surface-container-highest">
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div>
+<p class="text-headline-sm font-headline-sm text-xs text-on-surface">Officer Proximity: Within 35m of Site</p>
+<p class="text-body-sm font-body-sm text-secondary text-[11px]">Hardware GPS locked. Geofence condition fulfilled.</p>
+</div>
+</div>
+<button class="w-full sm:w-auto bg-[#172B4D] hover:bg-[#091E42] text-white font-action-btn text-action-btn px-space-lg py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-civic-1 transition-all active:scale-[0.98]" id="checkInBtn" onclick="logCheckIn()">
+<span class="material-symbols-outlined text-[18px]">where_to_vote</span>
+<span>Arrived on Site / Check-In</span>
+</button>
+</div>
+<div class="hidden px-space-md py-2 bg-emerald-50 text-emerald-800 border-t border-emerald-200 text-body-sm font-body-sm flex items-center gap-2" id="checkInNotification">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
+<span>Check-in confirmed &amp; recorded: <strong>10:42 AM WAT</strong> at Lat 6.5982°, Long 3.3541°. Audit lock enabled.</span>
+</div>
+</section>
+<!-- LIVE JOB COMPLETION & RESOLUTION STUDIO -->
+<section class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-space-lg shadow-civic-1 space-y-space-lg">
+<div class="border-b border-surface-container-highest pb-space-sm flex items-center justify-between flex-wrap gap-2">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-[#172B4D]">Live Job Completion &amp; Resolution Studio</h2>
+<p class="text-body-sm font-body-sm text-secondary">Document asphalt patch intervention, material log, and upload signed closeout proof</p>
+</div>
+<span class="text-label-code font-label-code bg-surface-container-high text-[#172B4D] px-2.5 py-1 rounded">
+              JOB REF: STF-2026-004892
+            </span>
+</div>
+<!-- BEFORE AND AFTER PHOTO UPLOAD MODULE -->
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<label class="text-headline-sm font-headline-sm text-on-surface">Photographic Evidence (Before &amp; After Patching)</label>
+<span class="text-body-sm font-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                Auto-EXIF Geotag Verification On
+              </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Before Photo Slot -->
+<div class="border border-surface-container-highest rounded-xl overflow-hidden bg-surface-container-low flex flex-col">
+<div class="p-space-xs px-space-sm bg-surface-container flex items-center justify-between">
+<span class="text-label-badge font-label-badge text-secondary">STAGE 01: BEFORE WORK</span>
+<span class="text-label-badge font-label-badge text-[#922B21] bg-[#FDEDEC] px-1.5 py-0.5 rounded">ORIGINAL REPORT</span>
+</div>
+<div class="relative h-44 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up view of a severely damaged road section in a metropolitan Lagos street, featuring a jagged asphalt crater surrounded by loose aggregate under bright direct tropical sunlight with high-contrast sharp civic details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQViX6XaIjiiT3FgfL67g-ZJCq_QtoeRt54SO9AaPpdObqeZz8mpRkvq-GIZlvRmzfDCSUA1aXysqIkhj60rdH9ZHzjRZMCS7SqXeUP-1U7ozSIPqnbAmuSPDSFMxEAaryJAvKEjKXlmXe1I3eNFFZFhoRypy6WA-AUS76cc4zK2syRq3Isd5WNkyEJbMVyj99ZxPRQBsJ0ZabLHBH1YB8lrWA3XMCivvg6l0hHQ">
+<div class="absolute bottom-2 left-2 right-2 bg-inverse-surface/80 backdrop-blur text-white p-1.5 rounded text-[11px] font-label-code flex justify-between">
+<span>EXIF: 2026-03-30 08:14 WAT</span>
+<span>LAT 6.5982° N</span>
+</div>
+</div>
+<div class="p-space-sm text-body-sm font-body-sm text-secondary flex items-center justify-between">
+<span>Pre-repair depth: 14cm</span>
+<span class="text-primary font-medium">Verified by Citizen App</span>
+</div>
+</div>
+<!-- After Photo Upload Dropper Slot -->
+<div class="border-2 border-dashed border-[#B3BAC5] hover:border-primary rounded-xl bg-surface p-space-md flex flex-col justify-center items-center text-center cursor-pointer transition-colors relative min-h-[190px]">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-space-xs">
+<span class="material-symbols-outlined text-[28px]">add_a_photo</span>
+</div>
+<p class="text-headline-sm font-headline-sm text-xs text-on-surface mb-0.5">Upload Completed Patch Proof</p>
+<p class="text-body-sm font-body-sm text-secondary text-[11px] max-w-xs mb-space-sm">
+                  Snap or drop high-res image. Geofence checks location &amp; timestamp automatically.
+                </p>
+<div class="flex items-center gap-1.5 text-label-badge font-label-badge bg-surface-container-high text-on-secondary-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+                  STAMP: GPS ± 5m REQUIRED
+                </div>
+</div>
+</div>
+</div>
+<!-- MATERIALS & RESOURCE CONSUMPTION LOG -->
+<div class="space-y-space-sm pt-space-xs">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Materials &amp; Resource Consumption Log</h3>
+<p class="text-body-sm font-body-sm text-secondary">Declare all municipal raw ingredients and machinery units expended for accurate inventory ledger</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Asphalt Tons Used -->
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface mb-1 font-medium">
+                  Hot Asphalt Batch (Metric Tons)
+                </label>
+<div class="relative">
+<input class="w-full h-11 bg-surface-container-low border border-surface-container-highest rounded-lg px-3 pr-10 text-on-surface font-label-code focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" step="0.1" type="number" value="2.8">
+<span class="absolute right-3 top-3 text-secondary text-xs font-semibold">Tons</span>
+</div>
+</div>
+<!-- Crew Labor Hours Logged -->
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface mb-1 font-medium">
+                  Crew Field Hours Logged
+                </label>
+<div class="relative">
+<input class="w-full h-11 bg-surface-container-low border border-surface-container-highest rounded-lg px-3 pr-10 text-on-surface font-label-code focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" step="0.5" type="number" value="3.5">
+<span class="absolute right-3 top-3 text-secondary text-xs font-semibold">Hrs</span>
+</div>
+</div>
+<!-- Primary Compaction Equipment Deployed -->
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface mb-1 font-medium">
+                  Equipment Deployed
+                </label>
+<select class="w-full h-11 bg-surface-container-low border border-surface-container-highest rounded-lg px-3 text-on-surface text-body-md focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
+<option selected="">Caterpillar Vibratory Roller (CB2.7)</option>
+<option>Cold Milling Machine (W 100 Fi)</option>
+<option>Bitumen Distributor Spray Truck</option>
+<option>Pneumatic Breaker &amp; Compactor Crew</option>
+</select>
+</div>
+</div>
+</div>
+<!-- SUPERVISOR NOTES & CLOSEOUT SIGN-OFF -->
+<div class="space-y-space-xs">
+<label class="block text-headline-sm font-headline-sm text-on-surface">
+              Field Supervisor Closeout Notes &amp; Quality Assurance
+            </label>
+<textarea class="w-full bg-surface-container-low border border-surface-container-highest rounded-lg p-space-sm text-on-surface text-body-md focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Detail base stabilization, seal edge emulsion, and traffic clearance timestamp..." rows="3">Sub-base reinforced with crushed granite aggregate and compacted to municipal grade spec. Applied 60/70 penetration asphalt overlay. Surface cooled and traffic cones ready for removal.</textarea>
+<p class="text-body-sm font-body-sm text-secondary text-right">Signed digitally under Officer ID #NIG-LAG-WORKS-4091</p>
+</div>
+<!-- PRIMARY ACTION DISPATCH CONTROLS -->
+<div class="pt-space-md border-t border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<button class="w-full sm:w-auto px-space-md py-2.5 rounded-lg border border-surface-container-highest bg-surface hover:bg-surface-container-high text-[#172B4D] font-action-btn text-action-btn flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">build_circle</span>
+              Request Emergency Re-routing / Specialized Equipment
+            </button>
+<button class="w-full sm:w-auto px-space-xl py-3 rounded-lg bg-[#D35400] hover:bg-[#B94600] text-white font-action-btn text-action-btn flex items-center justify-center gap-2 shadow-civic-2 transition-all active:scale-[0.98]" onclick="submitResolution()" type="button">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+              Submit Resolution Evidence for Admin Verification
+            </button>
+</div>
+<!-- Success banner placeholder -->
+<div class="hidden p-space-md bg-[#EAFAF1] border border-[#A9DFBF] rounded-lg text-[#1E8449] flex items-center justify-between" id="resolutionToast">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] material-symbols-fill">verified</span>
+<span class="font-medium text-body-md">Resolution packet STF-2026-004892 dispatched successfully to HQ Central Audit Queue. Status updated to 'PENDING VERIFICATION'.</span>
+</div>
+<span class="text-label-code font-label-code text-xs">TX-ID: 99482-LGS</span>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- FOOTER (Shared Component Anchor) -->
+<section class="w-full bg-[#D8FA64] text-[#132E20] py-space-md px-margin border-t border-b border-[#C8E665] mt-space-2xl">
+<div class="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left">
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-full bg-[#132E20] text-[#D8FA64] flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">support_agent</span>
+</div>
+<div>
+<p class="font-bold text-headline-sm text-[#132E20] tracking-tight">Lagos Civic Works Dispatch &amp; Emergency Field Hotline</p>
+<p class="font-body-sm text-[#132E20]/80 text-xs">Direct line to Central Routing Operations, heavy machinery haulers, and field traffic marshals.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-code text-[22px] md:text-[26px] font-extrabold tracking-tight text-[#132E20]">01 227 0000</span>
+<a class="bg-[#132E20] text-white hover:bg-[#183D2A] px-space-md py-2.5 rounded-lg font-action-btn text-action-btn font-semibold flex items-center gap-1.5 transition-colors shadow-sm" href="tel:012270000">
+<span class="material-symbols-outlined text-[18px]">call</span>
+        Call Control
+      </a>
+</div>
+</div>
+</section><footer class="w-full py-space-lg px-margin flex flex-col md:flex-row justify-between items-center gap-space-md bg-[#0B231A] text-white border-t border-white/10 mt-0">
+<div class="flex flex-col sm:flex-row items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+
+
+</div>
+<p class="text-body-sm font-body-sm text-white/60 text-center sm:text-left">
+      © 2026 StreetFix Lagos Civic Infrastructure Operations. All rights reserved.
+    </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-space-md">
+<a class="text-white/75 hover:text-[#D8FA64] font-body-sm text-body-sm transition-colors" href="#dashboard">Public Accountability Dashboard</a>
+<a class="text-white/75 hover:text-[#D8FA64] font-body-sm text-body-sm transition-colors" href="#sla">Service Level Agreements</a>
+<a class="text-white/75 hover:text-[#D8FA64] font-body-sm text-body-sm transition-colors" href="#vulnerability">Report Vulnerability</a>
+<a class="text-white/75 hover:text-[#D8FA64] font-body-sm text-body-sm transition-colors" href="#gis">Lagos GIS Hub</a>
+<a class="text-white/75 hover:text-[#D8FA64] font-body-sm text-body-sm transition-colors" href="#privacy">Privacy Notice</a>
+</div>
+</footer>
+<!-- Light Vanilla Script for Contextual Interactive Feedback -->
+<script>
+    function logCheckIn() {
+      const notif = document.getElementById('checkInNotification');
+      const btn = document.getElementById('checkInBtn');
+      notif.classList.remove('hidden');
+      btn.classList.add('bg-[#1E8449]', 'border-emerald-600');
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">done_all</span><span>Checked In at Job Site</span>`;
+    }
+
+    function submitResolution() {
+      const toast = document.getElementById('resolutionToast');
+      toast.classList.remove('hidden');
+      toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+
+
+</body></html>

@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-nav: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-evergreen-deep: #0B231A;
+  --color-evergreen-base: #132E20;
+  --color-evergreen-light: #183D2A;
+  --color-lime-accent: #D8FA64;
+  --color-lime-muted: #C8E665;
+  --color-terracotta: #E06236;
+  --color-terracotta-hover: #D35400;
+  --color-canvas-light: #F8FAF5;
+  --color-canvas-pure: #FFFFFF;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #F8FAF5;
+    color: #1A1D1A;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.civic-grid-bg {
+  background-size: 36px 36px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+}
+
+.cadastre-dark-grid {
+  background-size: 28px 28px;
+  background-image:
+    linear-gradient(to right, rgba(216, 250, 100, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(216, 250, 100, 0.06) 1px, transparent 1px);
+}
+
+.road-perspective-container {
+  perspective: 750px;
+  transform-style: preserve-3d;
+}
+
+.road-plane {
+  transform: rotateZ(-26deg) rotateX(24deg) skewX(-12deg);
+  box-shadow: -20px 25px 40px rgba(0, 0, 0, 0.45);
+}
+
+.ops-telemetry-grid {
+  background-size: 28px 28px;
+  background-image:
+    linear-gradient(to right, rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.07) 1px, transparent 1px);
+}

@@ -1,0 +1,7 @@
+{
+  "exifStrict": true,
+  "autoRoutePotholes": true,
+  "autoEscalateSla": true,
+  "openLedger": true,
+  "slaTargetHours": "48"
+}

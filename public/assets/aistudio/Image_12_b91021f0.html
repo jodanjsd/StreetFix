@@ -1,0 +1,843 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 1542px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>StreetFix | Resident &amp; Official Authentication Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary": "#2d0700",
+            "surface-container-high": "#e7e9e3",
+            "on-error-container": "#93000a",
+            "surface-evergreen-light": "#183D2A",
+            "inverse-surface": "#2e312e",
+            "surface-variant": "#e1e3de",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#171e00",
+            "on-primary-container": "#799784",
+            "surface-dim": "#d9dbd5",
+            "on-primary-fixed-variant": "#314d3d",
+            "on-background": "#191c19",
+            "surface-container-highest": "#e1e3de",
+            "text-secondary-dark": "#4A5568",
+            "error": "#ba1a1a",
+            "primary": "#00190d",
+            "tertiary-container": "#501400",
+            "on-tertiary-fixed-variant": "#832600",
+            "outline": "#727973",
+            "on-primary": "#ffffff",
+            "text-on-dark-muted": "#A3B899",
+            "surface-container": "#edeee9",
+            "background": "#f8faf5",
+            "on-tertiary-container": "#ea693c",
+            "surface-bright": "#f8faf5",
+            "accent-terracotta-hover": "#D35400",
+            "tertiary-fixed": "#ffdbd0",
+            "tertiary-fixed-dim": "#ffb59d",
+            "on-primary-fixed": "#052013",
+            "text-primary-dark": "#1A1D1A",
+            "surface-container-low": "#f3f4ef",
+            "secondary": "#526600",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "accent-lime": "#D8FA64",
+            "surface-evergreen-deep": "#0B231A",
+            "on-secondary-container": "#576c00",
+            "surface-evergreen-base": "#132E20",
+            "on-error": "#ffffff",
+            "text-on-dark": "#FFFFFF",
+            "border-subtle-dark": "rgba(255, 255, 255, 0.12)",
+            "border-subtle-light": "#E2E8F0",
+            "accent-terracotta": "#E06236",
+            "on-secondary-fixed-variant": "#3d4c00",
+            "on-surface-variant": "#424843",
+            "inverse-primary": "#afceb9",
+            "inverse-on-surface": "#f0f1ec",
+            "primary-fixed-dim": "#afceb9",
+            "primary-container": "#132e20",
+            "surface-tint": "#496554",
+            "primary-fixed": "#cbead5",
+            "surface": "#f8faf5",
+            "secondary-fixed": "#cef05b",
+            "secondary-container": "#cef05b",
+            "on-surface": "#191c19",
+            "surface-canvas-light": "#F9FAF9",
+            "on-tertiary-fixed": "#390b00",
+            "outline-variant": "#c2c8c2",
+            "accent-lime-muted": "#C8E665",
+            "surface-canvas-pure": "#FFFFFF",
+            "secondary-fixed-dim": "#b3d341",
+            "surface-container-lowest": "#ffffff"
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+            manrope: ['"Manrope"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-sans antialiased min-h-screen flex flex-col selection:bg-accent-lime selection:text-surface-evergreen-base">
+<!-- 1. Top Navigation: Dark Evergreen (#132E20) Bar -->
+<header class="w-full bg-surface-evergreen-base text-text-on-dark border-b border-border-subtle-dark sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Logo & Hub Tagline -->
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2 group" href="#home"></a>
+<span class="hidden sm:inline-block text-xs px-2.5 py-0.5 rounded-full bg-surface-evergreen-light text-text-on-dark-muted border border-border-subtle-dark font-manrope">
+          Federal &amp; Municipal Gateway
+        </span>
+</div>
+<!-- Quick Nav Links -->
+<nav class="flex items-center gap-2 sm:gap-6 font-manrope text-sm font-medium">
+<a class="hidden md:flex items-center gap-1.5 text-text-on-dark-muted hover:text-accent-lime transition-colors" href="tel:012270000">
+<span class="material-symbols-outlined text-[17px] text-accent-lime">phone_in_talk</span>
+<span>Call office: <strong class="text-text-on-dark font-semibold">01 227 0000</strong></span>
+</a>
+<a class="text-text-on-dark-muted hover:text-text-on-dark transition-colors text-xs sm:text-sm" href="#admin">
+          Admin portal
+        </a>
+<button class="text-text-on-dark-muted hover:text-text-on-dark transition-colors text-xs sm:text-sm" onclick="switchMode('signin')">
+          Log in
+        </button>
+<button class="px-3.5 py-1.5 rounded-lg bg-accent-lime text-surface-evergreen-deep hover:bg-accent-lime-muted font-bold text-xs sm:text-sm transition-all shadow-sm" onclick="switchMode('register')">
+          Sign up
+        </button>
+</nav>
+</div>
+</header>
+<!-- 2. Main Content Canvas: Off-white background, Asymmetric Dual Column -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<!-- LEFT COLUMN: Civic Telemetry Showcase & Real-Time Impact Bento -->
+<section class="lg:col-span-5 flex flex-col gap-6">
+<!-- Eyebrow & Hero Header -->
+<div class="flex flex-col gap-3">
+<div class="inline-flex items-center gap-2 text-surface-evergreen-base font-manrope text-xs font-bold tracking-wider uppercase">
+<span class="w-2 h-2 rounded-full bg-accent-terracotta"></span>
+<span>Civic Telemetry &amp; Ward Dispatch</span>
+</div>
+<h1 class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-text-primary-dark tracking-tight leading-[1.15]">
+            Fixing Nigeria together, street by street.
+          </h1>
+<p class="text-text-secondary-dark text-base sm:text-lg leading-relaxed">
+            Connect directly with municipal public works crews, monitor repair work orders in your ward, or access authorized telemetry dispatch tools.
+          </p>
+</div>
+<!-- Telemetry Key Metrics Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="p-5 rounded-xl bg-surface-canvas-pure border border-border-subtle-light shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-mono font-semibold text-text-secondary-dark tracking-wider">FIXED_METRICS</span>
+<span class="material-symbols-outlined text-surface-evergreen-base text-[20px]">task_alt</span>
+</div>
+<div class="text-3xl font-bold text-text-primary-dark tracking-tight">14,829+</div>
+<p class="text-xs text-text-secondary-dark mt-1">Public infrastructure hazards resolved across 36 states</p>
+</div>
+<div class="p-5 rounded-xl bg-surface-canvas-pure border border-border-subtle-light shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-mono font-semibold text-text-secondary-dark tracking-wider">DISPATCH_SLA</span>
+<span class="material-symbols-outlined text-accent-terracotta text-[20px]">schedule</span>
+</div>
+<div class="text-3xl font-bold text-text-primary-dark tracking-tight">4.2 hrs</div>
+<p class="text-xs text-text-secondary-dark mt-1">Average first-response crew triage &amp; inspection SLA</p>
+</div>
+</div>
+<!-- Real-Time Activity Feed -->
+<div class="p-5 rounded-xl bg-surface-canvas-pure border border-border-subtle-light shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-border-subtle-light">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="text-xs font-bold font-manrope text-text-primary-dark uppercase tracking-wider">Live Municipal Activity Stream</span>
+</div>
+<span class="text-xs font-mono font-semibold text-surface-evergreen-base bg-surface-container px-2 py-0.5 rounded">OPS-RADAR</span>
+</div>
+<!-- Activity Item 1 -->
+<div class="flex items-start gap-3 p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-surface-evergreen-deep flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[19px]">cleaning_services</span>
+</div>
+<div class="flex flex-col flex-grow min-w-0">
+<div class="flex justify-between items-baseline gap-2">
+<span class="text-sm font-semibold text-text-primary-dark truncate">LAWMA Rapid Clearing Team</span>
+<span class="text-xs font-mono text-text-secondary-dark whitespace-nowrap">14m ago</span>
+</div>
+<p class="text-xs text-text-secondary-dark mt-0.5">Drainage desilting &amp; debris clear-out finalized on Ahmadu Bello Way, VI.</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold font-manrope bg-[#EBF7EE] text-[#1E8449] border border-[#BCE7C6]">RESOLVED</span>
+<span class="text-[11px] font-mono text-text-secondary-dark">#REF-LAW-8941</span>
+</div>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-start gap-3 p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high text-surface-evergreen-deep flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[19px]">construction</span>
+</div>
+<div class="flex flex-col flex-grow min-w-0">
+<div class="flex justify-between items-baseline gap-2">
+<span class="text-sm font-semibold text-text-primary-dark truncate">Ikeja Asphalt Paving Unit</span>
+<span class="text-xs font-mono text-text-secondary-dark whitespace-nowrap">52m ago</span>
+</div>
+<p class="text-xs text-text-secondary-dark mt-0.5">Pothole cold-mix patching completed along Allen Avenue junction.</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-bold font-manrope bg-[#EBF7EE] text-[#1E8449] border border-[#BCE7C6]">RESOLVED</span>
+<span class="text-[11px] font-mono text-text-secondary-dark">#REF-IKJ-2204</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Verified Testimonial Card with Avatar -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-border-subtle-light flex items-center gap-4">
+<img alt="Chief Adeyemi Bakare" class="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALUIf18Vb2STIxqzOga3qm5mRrbVX0yiC8ay0b4VF5Ydf9GwZFSWPCYeoJwMZGl89ZfwfU5IONjK092FYs6y4iFv0xpT_SRkcUqA9TyL77QsYm6ixUVNH2xr-mUdalapHXkc5hZrhPMKRQl995Wkk6PqcqOq51tOqjtLzgawYn17dHjGRp7Ps1Lsh2PlykgRXucpcMK2TuiYn-EL3XTnMEXkkpM5NNEBqA4wc9cw">
+<div class="flex flex-col">
+<p class="text-xs sm:text-sm text-text-primary-dark italic leading-snug">
+              "We logged a collapsed culvert on our street on Monday morning. By Wednesday noon, the Works crew had poured fresh reinforcement. The live SMS alerts kept our whole CDA reassured."
+            </p>
+<div class="mt-1.5 flex flex-wrap items-center gap-1.5">
+<span class="text-xs font-bold text-surface-evergreen-base font-manrope">Chief Adeyemi Bakare</span>
+<span class="text-xs text-text-secondary-dark">• Ikeja GRA Residents Association</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Clean White Elevated Card Auth Terminal -->
+<section class="lg:col-span-7 w-full">
+<div class="bg-surface-canvas-pure rounded-2xl border border-border-subtle-light shadow-sm p-6 sm:p-8 flex flex-col gap-6">
+<!-- Segmented Clearance Persona Toggle -->
+<div class="flex flex-col gap-2">
+<label class="text-[11px] font-bold font-manrope text-text-secondary-dark uppercase tracking-wider">Select Access Clearance Persona</label>
+<div class="grid grid-cols-2 p-1 bg-surface-container rounded-xl gap-1">
+<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-semibold font-manrope transition-all bg-surface-canvas-pure text-surface-evergreen-base shadow-sm" id="btn-persona-resident" onclick="switchPersona('resident')" type="button">
+<span class="material-symbols-outlined text-[19px]">person</span>
+<span>Resident / Citizen</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium font-manrope text-text-secondary-dark hover:text-text-primary-dark transition-all" id="btn-persona-staff" onclick="switchPersona('staff')" type="button">
+<span class="material-symbols-outlined text-[19px]">badge</span>
+<span>Municipal / Field Staff</span>
+</button>
+</div>
+</div>
+<!-- Tab Switch: Sign In vs Create Account / Register -->
+<div class="flex border-b border-border-subtle-light pb-1 gap-6">
+<button class="border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-manrope text-sm pb-2 font-medium transition-all" id="tab-signin" onclick="switchMode('signin')" type="button">
+              Sign In
+            </button>
+<button class="border-b-2 border-surface-evergreen-base text-surface-evergreen-base font-manrope text-sm pb-2 font-bold transition-all" id="tab-register" onclick="switchMode('register')" type="button">
+              Create Account / Register
+            </button>
+</div>
+<!-- 1. RESIDENT REGISTRATION FORM (ACTIVE DEFAULT) -->
+<div class="flex flex-col gap-5" id="section-resident-register">
+<div class="flex flex-col gap-1">
+<h2 class="text-xl font-bold text-text-primary-dark tracking-tight">Join Nigeria Civic Watch &amp; Neighborhood Dispatch</h2>
+<p class="text-xs sm:text-sm text-text-secondary-dark">Register with your residential jurisdiction to receive hyper-local emergency dispatches, track CDA projects, and upvote repairs in your ward.</p>
+</div>
+<form class="flex flex-col gap-4" onsubmit="event.preventDefault();">
+<!-- Full Legal Name -->
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-primary-dark">Full Legal Name</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all placeholder:text-gray-400" placeholder="e.g. Babatunde Fashola" type="text" value="Babatunde Fashola">
+</div>
+<!-- Contact Credentials -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-primary-dark">Mobile Phone Number (WhatsApp Enabled)</label>
+<div class="relative flex items-center">
+<div class="absolute left-3 flex items-center gap-1 text-text-secondary-dark pointer-events-none">
+<span class="text-xs font-mono font-semibold">+234</span>
+<span class="h-4 w-px bg-border-subtle-light ml-1"></span>
+</div>
+<input class="w-full pl-16 pr-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all" placeholder="803 123 4567" type="tel" value="803 123 4567">
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-primary-dark">Email Address</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all placeholder:text-gray-400" placeholder="babatunde@example.com" type="email" value="babatunde@example.com">
+</div>
+</div>
+<!-- Dedicated Residential Geographic Jurisdiction Cascading Block -->
+<div class="p-4 bg-surface-container-low rounded-xl border border-border-subtle-light flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-surface-evergreen-base">
+<span class="material-symbols-outlined text-[19px]">pin_drop</span>
+<span class="text-xs font-bold font-manrope uppercase tracking-wider">Residential Geographic Jurisdiction</span>
+</div>
+<span class="text-[11px] font-mono text-text-secondary-dark">CADASTRE_SYNC</span>
+</div>
+<p class="text-xs text-text-secondary-dark -mt-1">Pins your civic profile to your local municipal ward to auto-route fault reports to nearby public works crews.</p>
+<!-- State & LGA Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-text-primary-dark">State of Residence (36 States + FCT)</label>
+<select class="w-full px-3 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all font-sans" id="reg-state-select" onchange="handleStateChange(this.value)">
+<option selected="" value="lagos">Lagos State</option>
+<option value="abuja">Federal Capital Territory (Abuja)</option>
+<option value="abia">Abia</option>
+<option value="adamawa">Adamawa</option>
+<option value="akwa_ibom">Akwa Ibom</option>
+<option value="anambra">Anambra</option>
+<option value="bauchi">Bauchi</option>
+<option value="bayelsa">Bayelsa</option>
+<option value="benue">Benue</option>
+<option value="borno">Borno</option>
+<option value="cross_river">Cross River</option>
+<option value="delta">Delta</option>
+<option value="ebonyi">Ebonyi</option>
+<option value="edo">Edo</option>
+<option value="ekiti">Ekiti</option>
+<option value="enugu">Enugu</option>
+<option value="gombe">Gombe</option>
+<option value="imo">Imo</option>
+<option value="jigawa">Jigawa</option>
+<option value="kaduna">Kaduna</option>
+<option value="kano">Kano</option>
+<option value="katsina">Katsina</option>
+<option value="kebbi">Kebbi</option>
+<option value="kogi">Kogi</option>
+<option value="kwara">Kwara</option>
+<option value="nasarawa">Nasarawa</option>
+<option value="niger">Niger</option>
+<option value="ogun">Ogun</option>
+<option value="ondo">Ondo</option>
+<option value="osun">Osun</option>
+<option value="oyo">Oyo</option>
+<option value="plateau">Plateau</option>
+<option value="rivers">Rivers</option>
+<option value="sokoto">Sokoto</option>
+<option value="taraba">Taraba</option>
+<option value="yobe">Yobe</option>
+<option value="zamfara">Zamfara</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-text-primary-dark">Local Government Area (LGA)</label>
+<select class="w-full px-3 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all font-sans" id="reg-lga-select" onchange="handleLgaChange(this.value)"><option value="ikeja">Ikeja LGA</option><option value="eti_osa">Eti-Osa LGA</option><option value="surulere">Surulere LGA</option><option value="alimosho">Alimosho LGA</option></select>
+</div>
+</div>
+<!-- LCDA / Ward Selector -->
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center justify-between gap-1">
+<label class="text-xs font-medium text-text-primary-dark">LCDA / Ward / Neighborhood CDA</label>
+<span class="text-[11px] font-mono text-surface-evergreen-base font-semibold" id="reg-ward-badge">Assigned Ward Dispatch: Ikeja Central Public Works</span>
+</div>
+<select class="w-full px-3 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all font-sans" id="reg-ward-select"><option value="ward_04__allen___opebi_corridor_">Ward 04 (Allen / Opebi Corridor)</option><option value="ward_01__alausa___secretariat_">Ward 01 (Alausa / Secretariat)</option><option value="onigbongbo_lcda__maryland___mobolaji_">Onigbongbo LCDA (Maryland / Mobolaji)</option><option value="ojodu_lcda__agidingbi___berger_">Ojodu LCDA (Agidingbi / Berger)</option><option value="ward_02__anifowoshe___ikeja_gra_">Ward 02 (Anifowoshe / Ikeja GRA)</option></select>
+</div>
+<!-- Primary Residential Street -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="text-xs font-medium text-text-primary-dark">Primary Residential Street / Thoroughfare</label>
+<span class="text-[11px] px-2 py-0.5 rounded bg-surface-container font-mono text-surface-evergreen-base font-medium" id="reg-street-count-badge">10 streets loaded for Ikeja LGA</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all" id="reg-street-input" list="reg-street-list" placeholder="Search or select your street name..." type="text" value="Isaac John Street">
+<datalist id="reg-street-list"><option value="Isaac John Street"></option><option value="Mobolaji Bank Anthony Way"></option><option value="Allen Avenue"></option><option value="Toyin Street"></option><option value="Awolowo Way"></option><option value="Oba Akran Avenue"></option><option value="Opebi Road"></option><option value="Aromire Avenue"></option><option value="Kodesoh Street"></option><option value="Secretariat Road"></option></datalist>
+<span class="material-symbols-outlined absolute right-3 text-text-secondary-dark text-[18px] pointer-events-none">edit_road</span>
+</div>
+</div>
+<!-- House Number & Nearest Landmark -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-text-primary-dark">House / Plot Number</label>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all" id="reg-house-no" placeholder="e.g. Plot 14 / No. 32B" type="text" value="Plot 14">
+<span class="material-symbols-outlined absolute right-3 text-text-secondary-dark text-[18px] pointer-events-none">home</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-medium text-text-primary-dark">Nearest Landmark / Bus Stop</label>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2 rounded-lg border border-border-subtle-light bg-surface-canvas-pure focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-xs sm:text-sm outline-none transition-all" id="reg-landmark" placeholder="e.g. Near Archbishop Vining Cathedral" type="text" value="Near Archbishop Vining Cathedral">
+<span class="material-symbols-outlined absolute right-3 text-text-secondary-dark text-[18px] pointer-events-none">flag</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Password Field with Visibility Toggle -->
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-primary-dark">Choose Account Password</label>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all" id="reg-password-input" placeholder="At least 8 characters with numbers &amp; symbols" type="password" value="StreetFixNigeria2026!">
+<button class="absolute right-3 text-text-secondary-dark hover:text-text-primary-dark" onclick="togglePasswordVisibility('reg-password-input', this)" type="button">
+<span class="material-symbols-outlined text-[19px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Instant Dispatch Advisory Checkbox -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-border-subtle-light flex items-start gap-2.5">
+<input checked="" class="mt-0.5 w-4 h-4 rounded text-surface-evergreen-base focus:ring-surface-evergreen-base border-border-subtle-light" id="chk-alerts" type="checkbox">
+<label class="text-xs text-text-secondary-dark leading-relaxed cursor-pointer" for="chk-alerts">
+                  Send me instant WhatsApp &amp; SMS dispatch advisories when public works crews or municipal emergency responders are operating in my ward.
+                </label>
+</div>
+<!-- Primary Submit Button: Warm Terracotta CTA -->
+<button class="w-full h-12 bg-accent-terracotta hover:bg-accent-terracotta-hover text-white font-manrope font-bold text-sm rounded-xl shadow transition-all flex items-center justify-center gap-2 mt-1" type="submit">
+<span class="material-symbols-outlined text-[19px]">how_to_reg</span>
+<span>Create Resident Account &amp; Verify Ward</span>
+</button>
+</form>
+</div>
+<!-- 2. RESIDENT SIGN-IN FORM -->
+<div class="flex flex-col gap-5 hidden" id="section-resident-signin">
+<div class="flex flex-col gap-1">
+<h2 class="text-xl font-bold text-text-primary-dark tracking-tight">Welcome back to StreetFix</h2>
+<p class="text-xs sm:text-sm text-text-secondary-dark">Access your reported civic incidents, track neighborhood fixes, and upvote repairs.</p>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366]/10 text-[#075E54] border border-[#25D366]/30 font-manrope font-semibold text-sm hover:bg-[#25D366]/20 transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span>One-Click WhatsApp OTP Login</span>
+</button>
+<div class="flex items-center my-0.5 gap-3">
+<div class="h-px bg-border-subtle-light flex-grow"></div>
+<span class="text-[11px] font-mono text-text-secondary-dark uppercase tracking-wider">OR USE CREDENTIALS</span>
+<div class="h-px bg-border-subtle-light flex-grow"></div>
+</div>
+<form class="flex flex-col gap-4" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-primary-dark">Phone Number or Email</label>
+<div class="relative flex items-center">
+<div class="absolute left-3 flex items-center gap-1 text-text-secondary-dark pointer-events-none">
+<span class="text-xs font-mono font-semibold">+234</span>
+<span class="h-4 w-px bg-border-subtle-light ml-1"></span>
+</div>
+<input class="w-full pl-16 pr-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all" placeholder="803 000 0000 / resident@domain.com" type="text">
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="text-xs font-semibold text-text-primary-dark">Password or OTP Key</label>
+<a class="text-xs text-accent-terracotta hover:underline font-medium" href="#reset">Forgot password?</a>
+</div>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 focus:bg-white focus:border-surface-evergreen-base focus:ring-2 focus:ring-surface-evergreen-base/20 text-sm outline-none transition-all" id="signin-password-input" placeholder="Enter secure password" type="password">
+<button class="absolute right-3 text-text-secondary-dark hover:text-text-primary-dark" onclick="togglePasswordVisibility('signin-password-input', this)" type="button">
+<span class="material-symbols-outlined text-[19px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-text-secondary-dark">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-surface-evergreen-base focus:ring-surface-evergreen-base border-border-subtle-light" type="checkbox">
+<span>Stay logged in on this browser</span>
+</label>
+</div>
+<button class="w-full h-12 bg-surface-evergreen-base hover:bg-surface-evergreen-deep text-white font-manrope font-bold text-sm rounded-xl shadow transition-all flex items-center justify-center gap-2" type="submit">
+<span>Sign In to Resident Hub</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<div class="pt-3 border-t border-border-subtle-light text-center">
+<a class="text-xs font-semibold text-surface-evergreen-base hover:text-accent-terracotta inline-flex items-center gap-1 group" href="#guest-report">
+<span>Prefer to report without an account? Submit anonymous incident</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">trending_flat</span>
+</a>
+</div>
+</div>
+<!-- 3. OFFICIAL / FIELD STAFF AUTHENTICATION -->
+<div class="flex flex-col gap-4 hidden" id="section-staff-auth">
+<div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-2.5">
+<span class="material-symbols-outlined text-accent-terracotta text-[20px] shrink-0 mt-0.5">lock_person</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold font-manrope text-surface-evergreen-base uppercase">Restricted Government Operatives Portal</span>
+<span class="text-xs text-text-secondary-dark mt-0.5 leading-relaxed">
+                  Official Secrets Act applies. All active sessions are cryptographically logged with IP address, departmental token, and GPS telemetry.
+                </span>
+</div>
+</div>
+<form class="flex flex-col gap-3.5" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-text-primary-dark">Operating Department / Agency</label>
+<select class="w-full px-3 py-2 rounded-lg border border-border-subtle-light bg-surface-container-low/50 text-xs sm:text-sm outline-none">
+<option value="works">Federal / State Ministry of Works &amp; Infrastructure</option>
+<option value="lawma">LAWMA - Waste Management Authority</option>
+<option value="drainage">Emergency Drainage &amp; Flood Command</option>
+<option value="electrical">Electricity Board (Streetlight Dispatch)</option>
+<option value="traffic">Traffic Management &amp; Incident Wing</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-text-primary-dark">Government Service ID or .gov.ng Email</label>
+<div class="relative flex items-center">
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 font-mono text-xs sm:text-sm outline-none" placeholder="FED-WRK-2026-9811 or officer@gov.ng" type="text">
+<span class="material-symbols-outlined absolute right-3 text-text-secondary-dark text-[19px]">badge</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-text-primary-dark">Master Key</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 text-xs sm:text-sm outline-none" placeholder="••••••••••••" type="password">
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-xs font-semibold text-text-primary-dark">Hardware / FIDO 2FA PIN</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-border-subtle-light bg-surface-container-low/50 font-mono text-center tracking-widest text-xs sm:text-sm outline-none" maxlength="6" placeholder="000000" type="text">
+</div>
+</div>
+<button class="w-full h-12 bg-surface-evergreen-base hover:bg-surface-evergreen-deep text-white font-manrope font-bold text-sm rounded-xl shadow transition-all flex items-center justify-center gap-2 mt-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Authorize &amp; Enter Ops Command Rail</span>
+</button>
+</form>
+</div>
+<!-- Trust Badges Footer inside Card -->
+<div class="flex flex-wrap items-center justify-between pt-4 border-t border-border-subtle-light text-xs text-text-secondary-dark font-manrope">
+<div class="flex items-center gap-1.5 font-medium">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">verified</span>
+<span>100% Photo-verified audits</span>
+</div>
+<div class="flex items-center gap-1.5 font-medium">
+<span class="material-symbols-outlined text-surface-evergreen-base text-[18px]">hub</span>
+<span>Public GIS Hub live</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- 3. Prominent Contact Strip: Vibrant Chartreuse Lime (#D8FA64) -->
+<section class="w-full bg-accent-lime text-surface-evergreen-deep py-4 border-y border-[#C4E654]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+<div class="flex items-center gap-2.5">
+<span class="w-8 h-8 rounded-full bg-surface-evergreen-deep text-accent-lime flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[19px]">headset_mic</span>
+</span>
+<div>
+<span class="font-bold uppercase tracking-wider text-xs font-manrope">Prefer to speak to someone?</span>
+<p class="text-xs sm:text-sm text-surface-evergreen-deep/90">
+            Call the StreetFix office directly: <strong class="font-extrabold text-surface-evergreen-base">01 227 0000</strong> (Available Monday–Friday, 8am–5pm)
+          </p>
+</div>
+</div>
+<a class="px-5 py-2 rounded-lg bg-surface-evergreen-deep hover:bg-surface-evergreen-base text-accent-lime font-manrope font-bold text-xs sm:text-sm tracking-wide shadow-sm transition-all whitespace-nowrap" href="tel:012270000">
+        Call office
+      </a>
+</div>
+</section>
+<!-- 4. Dark Evergreen Footer: StreetFix Vision & Links -->
+<footer class="w-full bg-surface-evergreen-deep text-text-on-dark-muted border-t border-border-subtle-dark py-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-center md:justify-start gap-2"></div>
+<p class="text-xs text-text-on-dark-muted">
+          Making every street safer, one report at a time. © 2026 StreetFix Infrastructure Operations.
+        </p>
+</div>
+<nav class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs font-manrope">
+<a class="text-text-on-dark-muted hover:text-accent-lime transition-colors" href="#accountability">Public Accountability Dashboard</a>
+<a class="text-text-on-dark-muted hover:text-accent-lime transition-colors" href="#sla">Service Level Agreements</a>
+<a class="text-text-on-dark-muted hover:text-accent-lime transition-colors" href="#gis">Lagos GIS Hub</a>
+<a class="text-text-on-dark-muted hover:text-accent-lime transition-colors" href="#privacy">Privacy Notice</a>
+</nav>
+</div>
+</footer>
+<!-- Cascading Nigerian Geography & Interactive Logic -->
+<script>
+    // State LGAs and Street Database
+    const NIGERIAN_CADASTRE = {
+      lagos: {
+        name: "Lagos State",
+        lgas: {
+          ikeja: {
+            name: "Ikeja LGA",
+            dispatch: "Assigned Ward Dispatch: Ikeja Central Public Works",
+            wards: [
+              "Ward 04 (Allen / Opebi Corridor)",
+              "Ward 01 (Alausa / Secretariat)",
+              "Onigbongbo LCDA (Maryland / Mobolaji)",
+              "Ojodu LCDA (Agidingbi / Berger)",
+              "Ward 02 (Anifowoshe / Ikeja GRA)"
+            ],
+            streets: [
+              "Isaac John Street",
+              "Mobolaji Bank Anthony Way",
+              "Allen Avenue",
+              "Toyin Street",
+              "Awolowo Way",
+              "Oba Akran Avenue",
+              "Opebi Road",
+              "Aromire Avenue",
+              "Kodesoh Street",
+              "Secretariat Road"
+            ]
+          },
+          eti_osa: {
+            name: "Eti-Osa LGA",
+            dispatch: "Assigned Ward Dispatch: Eti-Osa Coastal & Drainage Unit",
+            wards: [
+              "Victoria Island West",
+              "Lekki Phase 1 / Admiralty",
+              "Ikoyi / Obalende LCDA",
+              "Eti-Osa East LCDA (Ajah)"
+            ],
+            streets: [
+              "Admiralty Way",
+              "Ozumba Mbadiwe Avenue",
+              "Adeola Odeku Street",
+              "Ahmadu Bello Way",
+              "Bourdillon Road",
+              "Lekki-Epe Expressway"
+            ]
+          },
+          surulere: {
+            name: "Surulere LGA",
+            dispatch: "Assigned Ward Dispatch: Surulere Municipal Works Depot",
+            wards: [
+              "Surulere Central (Bode Thomas / Adeniran)",
+              "Coker-Aguda LCDA",
+              "Itire-Ikate LCDA",
+              "Iponri Axis"
+            ],
+            streets: [
+              "Bode Thomas Street",
+              "Adeniran Ogunsanya",
+              "Ogunlana Drive",
+              "Akerele Street",
+              "Funsho Williams Avenue"
+            ]
+          },
+          alimosho: {
+            name: "Alimosho LGA",
+            dispatch: "Assigned Ward Dispatch: Alimosho Heavy Drainage Command",
+            wards: [
+              "Egbeda / Akowonjo LCDA",
+              "Idimu / Isheri Olofin LCDA",
+              "Igando / Ikotun LCDA"
+            ],
+            streets: [
+              "Akowonjo Road",
+              "Egbeda-Idimu Road",
+              "LASU-Iba Expressway",
+              "Shasha Road"
+            ]
+          }
+        }
+      },
+      abuja: {
+        name: "Federal Capital Territory",
+        lgas: {
+          abuja_municipal: {
+            name: "Abuja Municipal Area Council (AMAC)",
+            dispatch: "Assigned Ward Dispatch: FCDA Infrastructure Maintenance Unit",
+            wards: ["Garki Ward", "Wuse Ward", "Maitama / Asokoro", "Central Business District"],
+            streets: ["Ahmadu Bello Way", "Shehu Shagari Way", "Adetokunbo Ademola Crescent", "Constitution Avenue"]
+          },
+          gwagwalada: {
+            name: "Gwagwalada Area Council",
+            dispatch: "Assigned Ward Dispatch: Gwagwalada Zonal Works Depot",
+            wards: ["Gwagwalada Central", "Dobi Ward", "Zuba Ward"],
+            streets: ["University Road", "Abuja-Lokoja Expressway", "Park Road"]
+          }
+        }
+      },
+      rivers: {
+        name: "Rivers State",
+        lgas: {
+          port_harcourt: {
+            name: "Port Harcourt LGA",
+            dispatch: "Assigned Ward Dispatch: Port Harcourt City Works Authority",
+            wards: ["Old GRA Ward", "Diobu Mile 1-3", "Township Ward", "D-Line Axis"],
+            streets: ["Aba Road", "Olu Obasanjo Road", "Ikwerre Road", "Trans-Amadi Boulevard"]
+          },
+          obio_akpor: {
+            name: "Obio-Akpor LGA",
+            dispatch: "Assigned Ward Dispatch: Greater Port Harcourt Development Unit",
+            wards: ["Rumuokoro Ward", "Rumuola Axis", "Choba / Uniport"],
+            streets: ["East-West Road", "NTA Road", "Rumuokwuta Road"]
+          }
+        }
+      },
+      kano: {
+        name: "Kano State",
+        lgas: {
+          kano_municipal: {
+            name: "Kano Municipal LGA",
+            dispatch: "Assigned Ward Dispatch: Kano Urban Planning & Development Authority",
+            wards: ["Fagge Ward", "Nassarawa Ward", "Dala Ward", "Gwale Ward"],
+            streets: ["Bompai Road", "Murtala Mohammed Way", "State Road", "Kano-Zaria Road"]
+          }
+        }
+      },
+      oyo: {
+        name: "Oyo State",
+        lgas: {
+          ibadan_north: {
+            name: "Ibadan North LGA",
+            dispatch: "Assigned Ward Dispatch: Ibadan Metropolitan Works Depot",
+            wards: ["Bodija / Agodi Ward", "Sango / Mokola", "UI / Agbowo Ward"],
+            streets: ["Secretariat Road", "Queen Elizabeth Road", "Bodija Express", "Mokola Hill Road"]
+          }
+        }
+      }
+    };
+
+    let currentPersona = 'resident';
+    let currentMode = 'register';
+
+    function switchPersona(persona) {
+      currentPersona = persona;
+      const btnResident = document.getElementById('btn-persona-resident');
+      const btnStaff = document.getElementById('btn-persona-staff');
+      const tabRegister = document.getElementById('tab-register');
+      const tabSignIn = document.getElementById('tab-signin');
+
+      if (persona === 'resident') {
+        btnResident.className = "flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-semibold font-manrope transition-all bg-surface-canvas-pure text-surface-evergreen-base shadow-sm";
+        btnStaff.className = "flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium font-manrope text-text-secondary-dark hover:text-text-primary-dark transition-all";
+        tabRegister.classList.remove('hidden');
+        tabSignIn.innerText = 'Sign In';
+        updateVisibility();
+      } else {
+        btnStaff.className = "flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-semibold font-manrope transition-all bg-surface-canvas-pure text-surface-evergreen-base shadow-sm";
+        btnResident.className = "flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium font-manrope text-text-secondary-dark hover:text-text-primary-dark transition-all";
+        tabRegister.classList.add('hidden');
+        tabSignIn.innerText = 'Staff Clearance Login';
+        currentMode = 'signin';
+        updateVisibility();
+      }
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      const tabSignIn = document.getElementById('tab-signin');
+      const tabRegister = document.getElementById('tab-register');
+
+      if (mode === 'signin') {
+        tabSignIn.className = "border-b-2 border-surface-evergreen-base text-surface-evergreen-base font-manrope text-sm pb-2 font-bold transition-all";
+        tabRegister.className = "border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-manrope text-sm pb-2 font-medium transition-all";
+      } else {
+        tabRegister.className = "border-b-2 border-surface-evergreen-base text-surface-evergreen-base font-manrope text-sm pb-2 font-bold transition-all";
+        tabSignIn.className = "border-b-2 border-transparent text-text-secondary-dark hover:text-text-primary-dark font-manrope text-sm pb-2 font-medium transition-all";
+      }
+      updateVisibility();
+    }
+
+    function updateVisibility() {
+      const secResSignIn = document.getElementById('section-resident-signin');
+      const secResRegister = document.getElementById('section-resident-register');
+      const secStaffAuth = document.getElementById('section-staff-auth');
+
+      secResSignIn.classList.add('hidden');
+      secResRegister.classList.add('hidden');
+      secStaffAuth.classList.add('hidden');
+
+      if (currentPersona === 'resident') {
+        if (currentMode === 'signin') {
+          secResSignIn.classList.remove('hidden');
+        } else {
+          secResRegister.classList.remove('hidden');
+        }
+      } else {
+        secStaffAuth.classList.remove('hidden');
+      }
+    }
+
+    function handleStateChange(stateKey) {
+      const lgaSelect = document.getElementById('reg-lga-select');
+      lgaSelect.innerHTML = '';
+
+      const stateData = NIGERIAN_CADASTRE[stateKey];
+      if (stateData && stateData.lgas) {
+        Object.keys(stateData.lgas).forEach((lgaKey, idx) => {
+          const opt = document.createElement('option');
+          opt.value = lgaKey;
+          opt.textContent = stateData.lgas[lgaKey].name;
+          if (idx === 0) opt.selected = true;
+          lgaSelect.appendChild(opt);
+        });
+        handleLgaChange(lgaSelect.value, stateKey);
+      } else {
+        // Fallback for other states
+        const opt = document.createElement('option');
+        opt.value = "central_lga";
+        opt.textContent = "Central Municipal District";
+        lgaSelect.appendChild(opt);
+        
+        const wardSelect = document.getElementById('reg-ward-select');
+        wardSelect.innerHTML = '<option value="ward_1">Ward 01 (Metropolitan Central)</option>';
+        document.getElementById('reg-ward-badge').textContent = 'Assigned Ward Dispatch: Zonal Federal Public Works Depot';
+        document.getElementById('reg-street-count-badge').textContent = 'Standard cadastre loaded';
+      }
+    }
+
+    function handleLgaChange(lgaKey, stateKey = null) {
+      if (!stateKey) {
+        stateKey = document.getElementById('reg-state-select').value;
+      }
+      const stateData = NIGERIAN_CADASTRE[stateKey];
+      if (!stateData || !stateData.lgas || !stateData.lgas[lgaKey]) return;
+
+      const data = stateData.lgas[lgaKey];
+
+      // Update Wards Dropdown
+      const wardSelect = document.getElementById('reg-ward-select');
+      wardSelect.innerHTML = '';
+      data.wards.forEach((ward, index) => {
+        const opt = document.createElement('option');
+        opt.value = ward.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        opt.textContent = ward;
+        if (index === 0) opt.selected = true;
+        wardSelect.appendChild(opt);
+      });
+
+      // Update Dispatch Badge
+      const wardBadge = document.getElementById('reg-ward-badge');
+      if (wardBadge) {
+        wardBadge.textContent = data.dispatch;
+      }
+
+      // Update Streets Datalist
+      const streetList = document.getElementById('reg-street-list');
+      streetList.innerHTML = '';
+      data.streets.forEach(street => {
+        const opt = document.createElement('option');
+        opt.value = street;
+        streetList.appendChild(opt);
+      });
+
+      // Update Street Count Badge
+      const countBadge = document.getElementById('reg-street-count-badge');
+      if (countBadge) {
+        countBadge.textContent = `${data.streets.length} streets loaded for ${data.name}`;
+      }
+    }
+
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      handleStateChange('lagos');
+      switchMode('register');
+    });
+  </script>
+
+
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
